@@ -13,3 +13,5 @@ Miembros:
   Ángela Mancheño Sánchez 1°GIC testing/Programación
   
   Álvaro Barragán Codesal, 1º GII, programación, testeador y sonido
+
+  Ángel Luis Jiménez Coronado, 4º FAU, Diseño Web / Desarrollo Web
