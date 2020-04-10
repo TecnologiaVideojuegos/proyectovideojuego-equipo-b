@@ -1,5 +1,6 @@
 # proyectovideojuego-equipo-b
 proyectovideojuego-equipo-b created by GitHub Classroom
+
 Miembros:
 
   Mateusz Roman Kolakowski, 2° GII, Jefatura de proyecto/Programador/Desarrollo web
@@ -15,3 +16,15 @@ Miembros:
   Álvaro Barragán Codesal, 1º GII, programación, testeador y sonido
 
   Ángel Luis Jiménez Coronado, 4º FAU, Diseño Web / Desarrollo Web
+
+
+Programadores:
+
+  -Crear pruebas con las diferentes animaciones para emular el movimiento del personaje principal en el juego. Andar, solo requerira moverse en el eje x, saltar en el y, y atacar nada. 
+
+Musicos:
+  -Musica adaptada a la sombria tematica del videojuego
+
+Desarrollador Web:
+  
+  -Esperar a sber como desarrollar la web
