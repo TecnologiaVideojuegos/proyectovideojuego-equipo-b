@@ -3,7 +3,7 @@ import arcade
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 SCREEN_TITLE = "Sprite animated walking"
-MOVEMENT_SPEED = 7
+MOVEMENT_SPEED = 5
 SPRITE_SCALE=1
 
 class MyGame(arcade.Window):
@@ -17,35 +17,23 @@ class MyGame(arcade.Window):
         self.player = None
 
     def setup(self):
-        "El archivo walkingX.png lo metí directamente en la carpeta del proyecto de PyCharm"
+        "El archivo WalkingX.png lo metí directamente en la carpeta del proyecto de PyCharm"
         self.player_list = arcade.SpriteList()
         self.player = arcade.AnimatedWalkingSprite()
 
         self.player.stand_right_textures=[]
-        self.player.stand_right_textures.append(arcade.load_texture("walkingX.png", x=0, y=0, width=240, height=520))
+        self.player.stand_right_textures.append(arcade.load_texture("WalkingX.png", x=0, y=0, width=240, height=520))
 
         self.player.stand_left_textures = []
-        self.player.stand_left_textures.append(arcade.load_texture("walkingX.png", x=0, y=0, width=240, height=520,mirrored=True))
+        self.player.stand_left_textures.append(arcade.load_texture("WalkingX.png", x=0, y=0, width=240, height=520,mirrored=True))
 
         self.player.walk_right_textures = []
-        self.player.walk_right_textures.append(arcade.load_texture("walkingX.png", x=0, y=0, width=240, height=520))
-        self.player.walk_right_textures.append(arcade.load_texture("walkingX.png", x=240, y=0, width=240, height=520))
-        self.player.walk_right_textures.append(arcade.load_texture("walkingX.png", x=480, y=0, width=240, height=520))
-        self.player.walk_right_textures.append(arcade.load_texture("walkingX.png", x=720, y=0, width=230, height=520))
-        self.player.walk_right_textures.append(arcade.load_texture("walkingX.png", x=960, y=0, width=229, height=520))
-        self.player.walk_right_textures.append(arcade.load_texture("walkingX.png", x=1200, y=0, width=220, height=520))
-        self.player.walk_right_textures.append(arcade.load_texture("walkingX.png", x=1415, y=0, width=215, height=520))
-        self.player.walk_right_textures.append(arcade.load_texture("walkingX.png", x=1655, y=0, width=240, height=520))
+        for i in range(7):
+            self.player.walk_right_textures.append(arcade.load_texture("WalkingX.png", x=i*236, y=0, width=240, height=522))
 
         self.player.walk_left_textures = []
-        self.player.walk_left_textures.append(arcade.load_texture("walkingX.png", x=0, y=0, width=240, height=520,mirrored=True))
-        self.player.walk_left_textures.append(arcade.load_texture("walkingX.png", x=240, y=0, width=240, height=520,mirrored=True))
-        self.player.walk_left_textures.append(arcade.load_texture("walkingX.png", x=480, y=0, width=240, height=520,mirrored=True))
-        self.player.walk_left_textures.append(arcade.load_texture("walkingX.png", x=720, y=0, width=230, height=520,mirrored=True))
-        self.player.walk_left_textures.append(arcade.load_texture("walkingX.png", x=960, y=0, width=229, height=520,mirrored=True))
-        self.player.walk_left_textures.append(arcade.load_texture("walkingX.png", x=1200, y=0, width=220, height=520,mirrored=True))
-        self.player.walk_left_textures.append(arcade.load_texture("walkingX.png", x=1415, y=0, width=215, height=520,mirrored=True))
-        self.player.walk_left_textures.append(arcade.load_texture("walkingX.png", x=1655, y=0, width=240, height=520,mirrored=True))
+        for i in range(7):
+            self.player.walk_left_textures.append(arcade.load_texture("WalkingX.png", x=i*236, y=0, width=240, height=520, mirrored=True))
 
         self.player.center_x= SCREEN_WIDTH//2
         self.player.center_y=SCREEN_HEIGHT//2
@@ -76,7 +64,7 @@ class MyGame(arcade.Window):
 
 def main():
     """ Main method """
-    window = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT,"My game")
+    window = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT,SCREEN_TITLE)
     window.setup()
     arcade.run()
 
