@@ -3,12 +3,12 @@ import arcade
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 SCREEN_TITLE = "Sprite animated walking"
-SPRITE_SCALE = 0.5
+SPRITE_SCALE = 0.25
 
 # Movement speed of player, in pixels per frame
-MOVEMENT_SPEED = 5
-GRAVITY = 1
-PLAYER_JUMP_SPEED = 20
+MOVEMENT_SPEED = 2
+GRAVITY = 0.98
+PLAYER_JUMP_SPEED = 10
 
 class MyGame(arcade.Window):
     """Inicializador"""
