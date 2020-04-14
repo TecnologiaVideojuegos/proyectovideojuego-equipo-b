@@ -3,7 +3,7 @@ import arcade
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 SCREEN_TITLE = "Sprite animated walking"
-SPRITE_SCALE=0.5
+SPRITE_SCALE = 0.5
 
 # Movement speed of player, in pixels per frame
 MOVEMENT_SPEED = 5
@@ -75,9 +75,9 @@ class MyGame(arcade.Window):
 
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player,self.wall_list,GRAVITY)
 
-        self.player.center_x= SCREEN_WIDTH//2
-        self.player.center_y=SCREEN_HEIGHT//2
-        self.player.scale=SPRITE_SCALE
+        self.player.center_x = SCREEN_WIDTH//2
+        self.player.center_y = SCREEN_HEIGHT//2
+        self.player.scale = SPRITE_SCALE
 
         self.player_list.append(self.player)
 
@@ -86,13 +86,13 @@ class MyGame(arcade.Window):
         self.wall_list.draw()
         self.player_list.draw()
 
-    def on_update(self,delta_time):
+    def on_update(self, delta_time):
 
         self.physics_engine.update()
         self.player_list.update()
         self.player_list.update_animation()
 
-    def on_key_press(self,key,modifiers):
+    def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
 
         if key == arcade.key.UP or key == arcade.key.W:
@@ -103,7 +103,7 @@ class MyGame(arcade.Window):
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.change_x = MOVEMENT_SPEED
 
-    def on_key_release(self,key,modifiers):
+    def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
         if key == arcade.key.LEFT or key == arcade.key.A:
             self.player.change_x = 0
