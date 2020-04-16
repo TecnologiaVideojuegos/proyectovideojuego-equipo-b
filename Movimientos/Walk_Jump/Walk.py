@@ -3,7 +3,7 @@ import arcade
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 SCREEN_TITLE = "Sprite animated walking"
-SPRITE_SCALE = 0.25
+SPRITE_SCALE = 0.5
 
 # Movement speed of player, in pixels per frame
 MOVEMENT_SPEED = 2
@@ -33,22 +33,22 @@ class MyGame(arcade.Window):
         self.wall_list = arcade.SpriteList()
         self.player = arcade.AnimatedWalkingSprite()
 
-        #Stand Right Sprites
+        # Stand Right Sprites
         self.player.stand_right_textures = []
         self.player.stand_right_textures.append(arcade.load_texture("JumpingX.png", x=0, y=0, width=240, height=520))
 
-        #Stand left sprites
+        # Stand left sprites
         self.player.stand_left_textures = []
         self.player.stand_left_textures.append(
             arcade.load_texture("JumpingX.png", x=0, y=0, width=240, height=520, mirrored=True))
 
-        #Jump Sprites
+        # Jump Sprites
         self.player.walk_up_textures = []
         for i in range(9):
             self.player.walk_up_textures.append(
                 arcade.load_texture("JumpingX.png", x=i * 236, y=0, width=220, height=522))
 
-        #Fall Sprites
+        # Fall Sprites
         self.player.walk_down_textures = []
         for i in range(9):
             self.player.walk_down_textures.append(
@@ -73,8 +73,7 @@ class MyGame(arcade.Window):
                 self.wall_list.append(wall)
 
 
-        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player,self.wall_list,GRAVITY)
-
+        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, GRAVITY)
         self.player.center_x = SCREEN_WIDTH//2
         self.player.center_y = SCREEN_HEIGHT//2
         self.player.scale = SPRITE_SCALE
