@@ -108,6 +108,14 @@ class MyGame(arcade.Window):
                 wall.center_x = 1728 + column * GRID_PIXEL_SIZE
                 self.wall_list.append(wall)
 
+        # Create a stair
+        for row in range(10):
+            for column in range(row, 0, -1):
+                wall = arcade.Sprite(":resources:images/tiles/grassMid.png", SPRITE_SCALE)
+                wall.bottom = + column * GRID_PIXEL_SIZE
+                wall.center_x = 2520 + row * GRID_PIXEL_SIZE
+                self.wall_list.append(wall)
+
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, GRAVITY)
         self.player.center_x = SCREEN_WIDTH // 2
         self.player.center_y = SCREEN_HEIGHT // 2
