@@ -4,7 +4,8 @@ SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 SCREEN_TITLE = "Sprite animated walking"
 SPRITE_PIXEL_SIZE = 128
-SPRITE_SCALE = 0.5
+SPRITE_SCALE = 0.5  # Wall sacale
+PLAYER_SCALE = 0.25  # Player scale
 GRID_PIXEL_SIZE = (SPRITE_PIXEL_SIZE * SPRITE_SCALE)
 
 # Movement speed of player, in pixels per frame
@@ -100,17 +101,17 @@ class MyGame(arcade.Window):
                 self.wall_list.append(wall)
 
         # Create a stair
-            for row in range(7):
-                for column in range(7 - (row + 1)):
-                    wall = arcade.Sprite(":resources:images/tiles/grassMid.png", SPRITE_SCALE)
-                    wall.bottom = GRID_PIXEL_SIZE + row * GRID_PIXEL_SIZE
-                    wall.center_x = 1728 + column * GRID_PIXEL_SIZE
-                    self.wall_list.append(wall)
+        for row in range(7):
+            for column in range(7 - (row + 1)):
+                wall = arcade.Sprite(":resources:images/tiles/grassMid.png", SPRITE_SCALE)
+                wall.bottom = GRID_PIXEL_SIZE + row * GRID_PIXEL_SIZE
+                wall.center_x = 1728 + column * GRID_PIXEL_SIZE
+                self.wall_list.append(wall)
 
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, GRAVITY)
         self.player.center_x = SCREEN_WIDTH // 2
         self.player.center_y = SCREEN_HEIGHT // 2
-        self.player.scale = SPRITE_SCALE
+        self.player.scale = PLAYER_SCALE
 
         self.player_list.append(self.player)
 
