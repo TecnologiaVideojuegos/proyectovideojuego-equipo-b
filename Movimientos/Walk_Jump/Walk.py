@@ -134,6 +134,14 @@ class MyGame(arcade.Window):
         self.wall_list.draw()
         self.player_list.draw()
 
+        # Put the text on the screen.
+        # Adjust the text position based on the viewport so that we don't
+        # scroll the text too.
+        distance = self.player.right
+        output = f"Distance: {distance}"
+        arcade.draw_text(output, self.view_left + 10, self.view_bottom + 20,
+                         arcade.color.BLACK, 14)
+
     def on_update(self, delta_time):
 
         self.physics_engine.update()
