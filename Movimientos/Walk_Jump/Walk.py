@@ -42,7 +42,7 @@ class MyGame(arcade.Window):
         self.end_of_map = 0
 
         # Cargar archivo de sonido caminar
-        self.caminar = arcade.load_sound("StepsC.wav")
+        # self.caminar = arcade.load_sound("StepsC.wav")
 
     def setup(self):
         "El archivo WalkingX.png lo metí directamente en la carpeta del proyecto de PyCharm"
@@ -196,9 +196,9 @@ class MyGame(arcade.Window):
         if key == arcade.key.UP or key == arcade.key.W:
             if self.physics_engine.can_jump():
                 self.player.change_y = PLAYER_JUMP_SPEED
-        elif (key == arcade.key.LEFT or key == arcade.key.A) and not key == arcade.key.UP:
+        elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player.change_x = -MOVEMENT_SPEED
-            arcade.play_sound(self.caminar)
+            # arcade.play_sound(self.caminar)
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.change_x = MOVEMENT_SPEED
 
