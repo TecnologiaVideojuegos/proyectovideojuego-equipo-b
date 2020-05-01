@@ -62,6 +62,7 @@ class MyGame(arcade.Window):
         self.view_bottom = 0
         self.end_of_map = 0
         self.game_over = False
+        self.caminar = arcade.load_sound("StepsC.wav")
 
     def setup(self):
         """ Set up the game and initialize the variables. """
@@ -179,8 +180,10 @@ class MyGame(arcade.Window):
                 self.player_sprite.change_y = JUMP_SPEED
         elif key == arcade.key.A:
             self.player_sprite.change_x = -MOVEMENT_SPEED
+            arcade.play_sound(self.caminar)
         elif key == arcade.key.D:
             self.player_sprite.change_x = MOVEMENT_SPEED
+            arcade.play_sound(self.caminar)
 
     def on_key_release(self, key, modifiers):
         """
@@ -188,6 +191,7 @@ class MyGame(arcade.Window):
         """
         if key == arcade.key.A or key == arcade.key.D:
             self.player_sprite.change_x = 0
+            arcade.stop_sound(self.caminar)
 
     def on_update(self, delta_time):
         """ Movement and game logic """

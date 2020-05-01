@@ -1,5 +1,6 @@
-Walking_Sprite="Main_character\Sprites\WalkingX.png"
-Jumping_Sprite="Main_character\Sprites\JumpingX.png"
-Walk_sound="Main_character\StepsC"
+import os
+Walking_Sprite = "Main_character" + os.path.sep + "Sprites" + os.path.sep + "WalkingX.png"
+Jumping_Sprite = "Main_character" + os.path.sep + "Sprites" + os.path.sep + "JumpingX.png"
+Walk_sound = "Main_character" + os.path.sep + "StepsC"
 
-asss=1
+asss = 1
