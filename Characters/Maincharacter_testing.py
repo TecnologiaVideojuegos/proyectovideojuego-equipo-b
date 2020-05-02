@@ -1,27 +1,29 @@
-from Main_character import Main_character
-import sprite_paths
 import arcade
-from Characters.Main_character.Main_character import Main_Character
-
-SCREEN_TITLE = "Sprite animated walking"
-SCREEN_WIDTH = 1080
-SCREEN_HEIGHT = 720
-SPRITE_PIXEL_SIZE = 128
-SPRITE_SCALE = 0.5  # Wall scale
-GRID_PIXEL_SIZE = (SPRITE_PIXEL_SIZE * SPRITE_SCALE)
-
+from Characters.Main_character.Main_character import *
+from Characters.Variables import *
 
 class Schenario(arcade.Window):
+    """ Main application class. """
+
     def __init__(self, width, height, title):
         super().__init__(width, height, title)
 
-        arcade.set_background_color(arcade.color.CADET_GREY)
+        # Our physics engine
+        self.physics_engine = None
+        self.game_over = False
+
+        self.player=None
+
+
         self.wall_list = None
 
     def setup(self):
+        self.player = Main_Character()
+        self.player.setup()
 
         self.wall_list = arcade.SpriteList()
 
+        # -- Set up the walls
         # Create the ground
         for i in range(100):
             wall = arcade.Sprite(":resources:images/tiles/grassMid.png", SPRITE_SCALE)
@@ -61,19 +63,50 @@ class Schenario(arcade.Window):
                 wall.center_x = 2520 + row * GRID_PIXEL_SIZE
                 self.wall_list.append(wall)
 
+        # Set the physics_engine
+        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player.player_sprite, self.wall_list, GRAVITY)
+
+        # Set the background color
+        arcade.set_background_color(arcade.color.CADET_GREY)
+
+
+    def on_update(self, delta_time):
+
+
+        self.player.on_update(delta_time)
+
+        self.physics_engine.update()
+
     def on_draw(self):
         arcade.start_render()
         self.wall_list.draw()
+        self.player.player_list.draw()
 
         distance = self.player.right
         output = f"Distance: {distance}"
         arcade.draw_text(output, self.view_left + 10, self.view_bottom + 20,
                          arcade.color.BLACK, 14)
+
+    def on_key_press(self, key, modifiers):
+        """Called whenever a key is pressed. """
+        if key == arcade.key.UP or key == arcade.key.W:
+            self.player.on_key_press_move_up()
+        elif key == arcade.key.LEFT or key == arcade.key.A:
+            self.player.on_key_press_move_left()
+        elif key == arcade.key.RIGHT or key == arcade.key.D:
+            self.player.on_key_press_move_right()
+
+    def on_key_release(self, key, modifiers):
+        """Called when the user releases a key. """
+        if key == arcade.key.LEFT or key == arcade.key.A:
+            self.player.on_key_release_move_left()
+        elif key == arcade.key.RIGHT or key == arcade.key.D:
+            self.player.on_key_release_move_right()
+
 def main():
     """ Main method """
     window = Schenario(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_TITLE)
     window.setup()
-    player = Main_Character(sprite_paths.Walking_Sprite,sprite_paths.Jumping_Sprite, sprite_paths.Walk_sound,window.wall_list)
-    player.setup()
     arcade.run()
+
 main()
