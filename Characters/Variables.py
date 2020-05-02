@@ -18,6 +18,6 @@ RIGHT_MARGIN = 4 * SPRITE_PIXEL_SIZE * SPRITE_SCALE
 
 
 #Sprites
-Walking_Sprite="Main_character"+os.path.sep+ "Sprites"+ os.path.sep +"WalkingX.png"
-Jumping_Sprite="Main_character"+os.path.sep+ "Sprites"+ os.path.sep +"JumpingX.png"
-Walk_sound="Main_character"+os.path.sep+ "StepsC"
+Walking_Sprite = "Main_character"+os.path.sep + "Sprites" + os.path.sep + "WalkingX.png"
+Jumping_Sprite = "Main_character"+os.path.sep + "Sprites" + os.path.sep + "JumpingX.png"
+Walk_sound = "Main_character"+os.path.sep + "StepsC.wav"

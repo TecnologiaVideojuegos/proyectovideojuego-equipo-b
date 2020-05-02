@@ -11,10 +11,7 @@ class Schenario(arcade.Window):
         # Our physics engine
         self.physics_engine = None
         self.game_over = False
-
-        self.player=None
-
-
+        self.player = None
         self.wall_list = None
 
     def setup(self):
@@ -25,6 +22,7 @@ class Schenario(arcade.Window):
 
         # -- Set up the walls
         # Create the ground
+
         for i in range(100):
             wall = arcade.Sprite(":resources:images/tiles/grassMid.png", SPRITE_SCALE)
             wall.bottom = 0
@@ -69,12 +67,9 @@ class Schenario(arcade.Window):
         # Set the background color
         arcade.set_background_color(arcade.color.CADET_GREY)
 
-
     def on_update(self, delta_time):
 
-
         self.player.on_update(delta_time)
-
         self.physics_engine.update()
 
     def on_draw(self):
@@ -82,9 +77,9 @@ class Schenario(arcade.Window):
         self.wall_list.draw()
         self.player.player_list.draw()
 
-        distance = self.player.right
+        distance = self.player.player_sprite.right
         output = f"Distance: {distance}"
-        arcade.draw_text(output, self.view_left + 10, self.view_bottom + 20,
+        arcade.draw_text(output, self.player.view_left + 10, self.player.view_bottom + 20,
                          arcade.color.BLACK, 14)
 
     def on_key_press(self, key, modifiers):
@@ -105,8 +100,9 @@ class Schenario(arcade.Window):
 
 def main():
     """ Main method """
-    window = Schenario(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_TITLE)
+    window = Schenario(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
     window.setup()
     arcade.run()
+
 
 main()
