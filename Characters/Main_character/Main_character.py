@@ -132,23 +132,23 @@ class Main_Character():
                                 self.view_bottom,
                                 SCREEN_HEIGHT + self.view_bottom)
     #on key press
-    def on_key_press_move_up(self):
-        if self.physics_engine.can_jump():
-            self.player.change_y = PLAYER_JUMP_SPEED
-    def on_key_press_move_right(self):
-        self.player.change_x = -MOVEMENT_SPEED
-        arcade.play_sound(self.caminar)
+    def on_key_press_move_up(self,physics_engine):
+        if physics_engine.can_jump():
+            self.player_sprite.change_y = PLAYER_JUMP_SPEED
     def on_key_press_move_left(self):
-        self.player.change_x = MOVEMENT_SPEED
+        self.player_sprite.change_x = -MOVEMENT_SPEED
+        arcade.play_sound(self.caminar)
+    def on_key_press_move_right(self):
+        self.player_sprite.change_x = MOVEMENT_SPEED
         arcade.play_sound(self.caminar)
 
     #on key release
     def on_key_release_move_left(self):
-        self.player.change_x = 0
+        self.player_sprite.change_x = 0
         arcade.stop_sound(self.caminar)
 
-    def on_key_release_move_left(self):
-        self.player.change_x = 0
+    def on_key_release_move_right(self):
+        self.player_sprite.change_x = 0
         arcade.stop_sound(self.caminar)
 
 
