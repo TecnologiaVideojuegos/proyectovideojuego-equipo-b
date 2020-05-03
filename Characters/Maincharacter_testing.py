@@ -84,7 +84,7 @@ class Schenario(arcade.Window):
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
-        if key == arcade.key.UP or key == arcade.key.W:
+        if key == arcade.key.UP or key == arcade.key.W or key == arcade.key.SPACE:
             self.player.on_key_press_move_up(self.physics_engine)
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player.on_key_press_move_left()
@@ -97,6 +97,7 @@ class Schenario(arcade.Window):
             self.player.on_key_release_move_left()
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.on_key_release_move_right()
+
 
 def main():
     """ Main method """
