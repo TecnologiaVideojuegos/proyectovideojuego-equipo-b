@@ -1,6 +1,8 @@
 import arcade
 from Variables import *
 
+
+
 class Main_Character():
     """Inicializador"""
 
@@ -29,9 +31,11 @@ class Main_Character():
         # Cargar archivo de sonido caminar
         self.caminar = arcade.load_sound(Walk_sound)
 
+        self.RIGHT_FACING = True
 
     def setup(self):
         "El archivo WalkingX.png lo metí directamente en la carpeta del proyecto de PyCharm"
+
         self.player_list = arcade.SpriteList()
         self.player_sprite = arcade.AnimatedWalkingSprite()
 
@@ -46,10 +50,16 @@ class Main_Character():
             arcade.load_texture(Walking_Sprite, x=0, y=0, width=240, height=520, mirrored=True))
 
         # Jump Right Sprites
-        self.player_sprite.walk_up_textures = []
+        self.player_sprite.walk_upr_textures = []
         for i in range(9):
-            self.player_sprite.walk_up_textures.append(
+            self.player_sprite.walk_upr_textures.append(
                 arcade.load_texture(Jumping_Sprite, x=i * 236, y=0, width=220, height=522))
+
+        # Jump Left Sprites
+        self.player_sprite.walk_upl_textures = []
+        for i in range(9):
+            self.player_sprite.walk_upl_textures.append(
+                arcade.load_texture(Jumping_Sprite, x=i * 236, y=0, width=220, height=522, mirrored=True))
 
         # Fall Right Sprites
         self.player_sprite.walk_down_textures = []
@@ -94,7 +104,6 @@ class Main_Character():
     def on_update(self, delta_time):
         self.player_list.update()
         self.player_list.update_animation()
-    
 
     def on_draw(self):
 
@@ -104,16 +113,24 @@ class Main_Character():
         # Draw all the sprites.
         self.player_list.draw()
 
-    #on key press
-    def on_key_press_move_up(self,physics_engine):
+    # on key press
+    def on_key_press_move_up(self, physics_engine):
         if physics_engine.can_jump():
-            self.player_sprite.change_y = PLAYER_JUMP_SPEED
+            if self.RIGHT_FACING:
+                self.player_sprite.change_y = PLAYER_JUMP_SPEED
+            else:
+                self.player_sprite.change_y = PLAYER_JUMP_SPEED
+
+
     def on_key_press_move_left(self):
         self.player_sprite.change_x = -MOVEMENT_SPEED
         arcade.play_sound(self.caminar)
+        self.RIGHT_FACING = False
+
     def on_key_press_move_right(self):
         self.player_sprite.change_x = MOVEMENT_SPEED
         arcade.play_sound(self.caminar)
+        self.RIGHT_FACING = True
 
     #on key release
     def on_key_release_move_left(self):
@@ -123,6 +140,7 @@ class Main_Character():
     def on_key_release_move_right(self):
         self.player_sprite.change_x = 0
         arcade.stop_sound(self.caminar)
+
     def on_key_release_attack(self):
         self.is_attacking=True
 

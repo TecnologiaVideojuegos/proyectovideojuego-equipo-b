@@ -60,9 +60,6 @@ class Schenario(arcade.Window):
         self.wall_list.draw()
         self.player.player_list.draw()
 
-
-
-
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
         if key == arcade.key.UP or key == arcade.key.W or key == arcade.key.SPACE:
