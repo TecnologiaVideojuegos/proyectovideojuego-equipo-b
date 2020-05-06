@@ -145,21 +145,16 @@ class Main_Character():
     # on key press
     def on_key_press_move_up(self, physics_engine):
         if physics_engine.can_jump():
-            if self.RIGHT_FACING:
-                self.player_sprite.change_y = PLAYER_JUMP_SPEED
-            else:
-                self.player_sprite.change_y = PLAYER_JUMP_SPEED
+            self.player_sprite.change_y = PLAYER_JUMP_SPEED
 
 
     def on_key_press_move_left(self):
         self.player_sprite.change_x = -MOVEMENT_SPEED
         arcade.play_sound(self.caminar)
-        self.RIGHT_FACING = False
 
     def on_key_press_move_right(self):
         self.player_sprite.change_x = MOVEMENT_SPEED
         arcade.play_sound(self.caminar)
-        self.RIGHT_FACING = True
 
     #on key release
     def on_key_release_move_left(self):
@@ -171,7 +166,7 @@ class Main_Character():
         arcade.stop_sound(self.caminar)
 
     def on_key_release_attack(self):
-        self.is_attacking=True
+        self.is_attacking = True
 
 
 
