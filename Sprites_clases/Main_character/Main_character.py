@@ -1,6 +1,5 @@
 import arcade
-
-from Characters.Variables import *
+from Variables import *
 
 class Main_Character():
     """Inicializador"""
@@ -14,12 +13,22 @@ class Main_Character():
         self.player_sprite = None
         self.physics_engine = None
 
-        self.view_left = 0
-        self.view_bottom = 0
-        self.end_of_map = 0
+        # Default to face-right
+        self.character_face_direction = RIGHT_FACING
+
+        # Used for flipping between image sequences
+        self.cur_texture = 0
+        self.attack_texture = 0
+
+        # Track our state
+        self.jumping = False
+        self.climbing = False
+        self.is_on_ladder = False
+        self.is_attacking = False
 
         # Cargar archivo de sonido caminar
         self.caminar = arcade.load_sound(Walk_sound)
+
 
     def setup(self):
         "El archivo WalkingX.png lo metí directamente en la carpeta del proyecto de PyCharm"
@@ -36,13 +45,13 @@ class Main_Character():
         self.player_sprite.stand_left_textures.append(
             arcade.load_texture(Walking_Sprite, x=0, y=0, width=240, height=520, mirrored=True))
 
-        # Jump Sprites
+        # Jump Right Sprites
         self.player_sprite.walk_up_textures = []
         for i in range(9):
             self.player_sprite.walk_up_textures.append(
                 arcade.load_texture(Jumping_Sprite, x=i * 236, y=0, width=220, height=522))
 
-        # Fall Sprites
+        # Fall Right Sprites
         self.player_sprite.walk_down_textures = []
         for i in range(9):
             self.player_sprite.walk_down_textures.append(
@@ -60,6 +69,14 @@ class Main_Character():
             self.player_sprite.walk_left_textures.append(
                 arcade.load_texture(Walking_Sprite, x=i * 236 + 50, y=0, width=220, height=520, mirrored=True))
 
+        #Attack Sprites
+        self.player_sprite.attack_textures = []
+        for i in range(10):
+            self.player_sprite.attack_textures.append(
+                arcade.load_texture(Attack_Sprite, x=i * 236 + 50, y=0, width=900, height=600, mirrored=True))
+
+
+
         # Set up the player position
 
         self.player_sprite.center_x = SCREEN_WIDTH // 2
@@ -74,6 +91,11 @@ class Main_Character():
         self.view_bottom = 0
         self.game_over = False
 
+    def on_update(self, delta_time):
+        self.player_list.update()
+        self.player_list.update_animation()
+    
+
     def on_draw(self):
 
         # This command has to happen before we start drawing
@@ -82,55 +104,6 @@ class Main_Character():
         # Draw all the sprites.
         self.player_list.draw()
 
-        # Put the text on the screen.
-        # Adjust the text position based on the viewport so that we don't
-        # scroll the text too.
-        distance = self.player_sprite.right
-        output = f"Distance: {distance}"
-        arcade.draw_text(output, self.view_left + 10, self.view_bottom + 20,
-                         arcade.color.BLACK, 14)
-
-    def on_update(self, delta_time):
-
-        self.player_list.update()
-        self.player_list.update_animation()
-
-        # --- Manage Scrolling ---
-
-        # Track if we need to change the viewport
-
-        changed = False
-
-        # Scroll left
-        left_boundary = self.view_left + VIEWPORT_MARGIN
-        if self.player_sprite.left < left_boundary:
-            self.view_left -= left_boundary - self.player_sprite.left
-            changed = True
-
-        # Scroll right
-        right_boundary = self.view_left + SCREEN_WIDTH - RIGHT_MARGIN
-        if self.player_sprite.right > right_boundary:
-            self.view_left += self.player_sprite.right - right_boundary
-            changed = True
-
-        # Scroll up
-        top_boundary = self.view_bottom + SCREEN_HEIGHT - VIEWPORT_MARGIN
-        if self.player_sprite.top > top_boundary:
-            self.view_bottom += self.player_sprite.top - top_boundary
-            changed = True
-
-        # Scroll down
-        bottom_boundary = self.view_bottom + VIEWPORT_MARGIN
-        if self.player_sprite.bottom < bottom_boundary:
-            self.view_bottom -= bottom_boundary - self.player_sprite.bottom
-            changed = True
-
-        # If we need to scroll, go ahead and do it.
-        if changed:
-            arcade.set_viewport(self.view_left,
-                                SCREEN_WIDTH + self.view_left,
-                                self.view_bottom,
-                                SCREEN_HEIGHT + self.view_bottom)
     #on key press
     def on_key_press_move_up(self,physics_engine):
         if physics_engine.can_jump():
@@ -150,6 +123,8 @@ class Main_Character():
     def on_key_release_move_right(self):
         self.player_sprite.change_x = 0
         arcade.stop_sound(self.caminar)
+    def on_key_release_attack(self):
+        self.is_attacking=True
 
 
 

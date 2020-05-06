@@ -1,6 +1,8 @@
+# https://stackoverflow.com/questions/59341396/cant-get-attack-animation-to-work-for-arcade-library-with-python
 import arcade
-from Characters.Main_character.Main_character import *
-from Characters.Variables import *
+from Sprites_clases.Main_character.Main_character import *
+from Variables import *
+
 
 class Schenario(arcade.Window):
     """ Main application class. """
@@ -8,6 +10,7 @@ class Schenario(arcade.Window):
     def __init__(self, width, height, title):
         super().__init__(width, height, title)
 
+        self.background = None
         # Our physics engine
         self.physics_engine = None
         self.game_over = False
@@ -21,51 +24,27 @@ class Schenario(arcade.Window):
         self.wall_list = arcade.SpriteList()
 
         # -- Set up the walls
-        # Create the ground
 
-        for i in range(100):
-            wall = arcade.Sprite(":resources:images/tiles/grassMid.png", SPRITE_SCALE)
+        # Create the ground
+        for i in range(20):
+            wall = arcade.Sprite(":resources:images/tiles/stone.png", SPRITE_SCALE)
             wall.bottom = 0
             wall.center_x = i * GRID_PIXEL_SIZE
             self.wall_list.append(wall)
 
-        # Create a stair
-        for row in range(5):
-            for column in range(5 - (row + 1)):
-                wall = arcade.Sprite(":resources:images/tiles/grassMid.png", SPRITE_SCALE)
-                wall.bottom = GRID_PIXEL_SIZE + row * GRID_PIXEL_SIZE
-                wall.center_x = 300 + column * GRID_PIXEL_SIZE
-                self.wall_list.append(wall)
-
-        # Create a stair
-        for row in range(7):
-            for column in range(row, 0, -1):
-                wall = arcade.Sprite(":resources:images/tiles/grassMid.png", SPRITE_SCALE)
-                wall.bottom = + column * GRID_PIXEL_SIZE
-                wall.center_x = 1280 + row * GRID_PIXEL_SIZE
-                self.wall_list.append(wall)
-
-        # Create a stair
-        for row in range(7):
-            for column in range(7 - (row + 1)):
-                wall = arcade.Sprite(":resources:images/tiles/grassMid.png", SPRITE_SCALE)
-                wall.bottom = GRID_PIXEL_SIZE + row * GRID_PIXEL_SIZE
-                wall.center_x = 1728 + column * GRID_PIXEL_SIZE
-                self.wall_list.append(wall)
-
-        # Create a stair
-        for row in range(10):
-            for column in range(row, 0, -1):
-                wall = arcade.Sprite(":resources:images/tiles/grassMid.png", SPRITE_SCALE)
-                wall.bottom = + column * GRID_PIXEL_SIZE
-                wall.center_x = 2520 + row * GRID_PIXEL_SIZE
+        # Create the Wall
+        for posy in [0, 20]:
+            for i in range(10):
+                wall = arcade.Sprite(":resources:images/tiles/stone.png", SPRITE_SCALE)
+                wall.bottom = 0
+                wall.center_y = i * GRID_PIXEL_SIZE
+                wall.center_x = posy * GRID_PIXEL_SIZE
                 self.wall_list.append(wall)
 
         # Set the physics_engine
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player.player_sprite, self.wall_list, GRAVITY)
-
-        # Set the background color
-        arcade.set_background_color(arcade.color.CADET_GREY)
+        # Load the background image
+        self.background = arcade.load_texture(Schenario_sprite)
 
     def on_update(self, delta_time):
 
@@ -74,13 +53,15 @@ class Schenario(arcade.Window):
 
     def on_draw(self):
         arcade.start_render()
+        # Draw the background texture
+        arcade.draw_lrwh_rectangle_textured(0, 0,
+                                            SCREEN_WIDTH, SCREEN_HEIGHT,
+                                            self.background)
         self.wall_list.draw()
         self.player.player_list.draw()
 
-        distance = self.player.player_sprite.right
-        output = f"Distance: {distance}"
-        arcade.draw_text(output, self.player.view_left + 10, self.player.view_bottom + 20,
-                         arcade.color.BLACK, 14)
+
+
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
