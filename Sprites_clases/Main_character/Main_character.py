@@ -1,7 +1,9 @@
 import arcade
 from Variables import *
 
-
+# Constants used to track if the player is facing left or right
+RIGHT_FACING = 0
+LEFT_FACING = 1
 
 class Main_Character():
     """Inicializador"""
@@ -31,7 +33,7 @@ class Main_Character():
         # Cargar archivo de sonido caminar
         self.caminar = arcade.load_sound(Walk_sound)
 
-        self.RIGHT_FACING = True
+
 
     def setup(self):
         "El archivo WalkingX.png lo metí directamente en la carpeta del proyecto de PyCharm"
@@ -104,6 +106,33 @@ class Main_Character():
     def on_update(self, delta_time):
         self.player_list.update()
         self.player_list.update_animation()
+
+    def update_animation(self, delta_time: float = 1 / 60):
+
+        # Figure out if we need to flip face left or right
+        if self.change_x < 0 and self.character_face_direction == RIGHT_FACING:
+            self.character_face_direction = LEFT_FACING
+        elif self.change_x > 0 and self.character_face_direction == LEFT_FACING:
+            self.character_face_direction = RIGHT_FACING
+
+        # Idle animation
+        if self.change_x == 0 and self.change_y == 0:
+            self.texture = self.idle_texture_pair[self.character_face_direction]
+            return
+
+        # Walking animation
+        self.cur_texture += 1
+        if self.cur_texture > 5 * UPDATES_PER_FRAME:
+            self.cur_texture = 0
+        self.texture = self.walk_textures[self.cur_texture // UPDATES_PER_FRAME][self.character_face_direction]
+
+        # Attacking animation
+        if self.is_attacking:
+            self.cur_texture += 1
+            if self.cur_texture > 9 * UPDATES_PER_FRAME:
+                self.cur_texture = 0
+                self.is_attacking = False
+            self.texture = self.attack_textures[self.cur_texture // UPDATES_PER_FRAME][self.character_face_direction]
 
     def on_draw(self):
 
