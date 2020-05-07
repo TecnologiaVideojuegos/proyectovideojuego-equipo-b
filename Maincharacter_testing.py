@@ -13,15 +13,28 @@ class Schenario(arcade.Window):
         self.background = None
         # Our physics engine
         self.physics_engine = None
-        self.game_over = False
+
+        # Set up the player
         self.player = None
+
+
+        # Sprite lists
+        self.player_list = None
         self.wall_list = None
 
     def setup(self):
+        #Set up the Sprites
+        self.player_list = arcade.SpriteList()
+        self.wall_list = arcade.SpriteList()
+        # Set up the player
         self.player = Main_Character()
         self.player.setup()
+        # Set up the player position
+        self.player.center_x = SCREEN_WIDTH // 2
+        self.player.center_y = SCREEN_HEIGHT // 2
+        self.player.scale = PLAYER_SCALE
 
-        self.wall_list = arcade.SpriteList()
+        self.player_list.append(self.player)
 
         # -- Set up the walls
 
@@ -42,23 +55,24 @@ class Schenario(arcade.Window):
                 self.wall_list.append(wall)
 
         # Set the physics_engine
-        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player.player_sprite, self.wall_list, GRAVITY)
+        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, GRAVITY)
         # Load the background image
         self.background = arcade.load_texture(Schenario_sprite)
 
+
     def on_update(self, delta_time):
 
-        self.player.on_update(delta_time)
+        self.player_list.update()
+        self.player_list.update_animation()
         self.physics_engine.update()
 
     def on_draw(self):
         arcade.start_render()
         # Draw the background texture
-        arcade.draw_lrwh_rectangle_textured(0, 0,
-                                            SCREEN_WIDTH, SCREEN_HEIGHT,
-                                            self.background)
+        arcade.draw_lrwh_rectangle_textured(0, 0,SCREEN_WIDTH, SCREEN_HEIGHT,self.background)
         self.wall_list.draw()
-        self.player.player_list.draw()
+        self.player_list.draw()
+
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """

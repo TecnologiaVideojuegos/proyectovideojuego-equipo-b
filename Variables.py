@@ -9,9 +9,18 @@ PLAYER_SCALE = 0.25  # Player scale
 GRID_PIXEL_SIZE = (SPRITE_PIXEL_SIZE * SPRITE_SCALE)
 
 # Movement speed of player, in pixels per frame
+<<<<<<< HEAD
+MOVEMENT_SPEED = 3
+UPDATES_PER_FRAME = 3
+GRAVITY = 1.5
+=======
 MOVEMENT_SPEED = 5
 UPDATES_PER_FRAME = 7
-GRAVITY = 1.5
+GRAVITY = 0.4
+<<<<<<< HEAD
+>>>>>>> 991a36518561df2d8dfcaeab393a79b0ffbacb64
+=======
+>>>>>>> 4e6e2c6bbedc8bd5116872c635f88f86c2621c6f
 PLAYER_JUMP_SPEED = 10
 
 VIEWPORT_MARGIN = SPRITE_PIXEL_SIZE * SPRITE_SCALE
@@ -22,15 +31,15 @@ RIGHT_FACING = 0
 LEFT_FACING = 1
 
 #Sprites
-    #Schenario
-Schenario_sprite="Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "ESCENARIO1.png"
+#Schenario
+Schenario_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "ESCENARIO1.png"
 
-    #Main_Character
+#Main_Character
 Walking_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "WalkingX.png"
 Jumping_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "JumpingX.png"
 Walk_sound = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "StepsC.wav"
 Attack_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "AttackX.png"
 
-    #Enemie_1
+#Enemie_1
 Walking_Enemie_1 = "Sprites_clases" + os.path.sep + "Enemie_1" + os.path.sep + "Sprites" + os.path.sep + "Walking1.png"
 Lightning_Enemie_1 = "Sprites_clases" + os.path.sep + "Enemie_1" + os.path.sep + "Sprites" + os.path.sep + "Lighting1.png"
