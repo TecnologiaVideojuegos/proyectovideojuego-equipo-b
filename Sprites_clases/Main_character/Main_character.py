@@ -147,7 +147,6 @@ class Main_Character():
         if physics_engine.can_jump():
             self.player_sprite.change_y = PLAYER_JUMP_SPEED
 
-
     def on_key_press_move_left(self):
         self.player_sprite.change_x = -MOVEMENT_SPEED
         arcade.play_sound(self.caminar)

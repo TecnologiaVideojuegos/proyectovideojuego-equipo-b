@@ -11,7 +11,7 @@ GRID_PIXEL_SIZE = (SPRITE_PIXEL_SIZE * SPRITE_SCALE)
 # Movement speed of player, in pixels per frame
 MOVEMENT_SPEED = 5
 UPDATES_PER_FRAME = 7
-GRAVITY = 1.5
+GRAVITY = 0.4
 PLAYER_JUMP_SPEED = 10
 
 VIEWPORT_MARGIN = SPRITE_PIXEL_SIZE * SPRITE_SCALE
@@ -23,7 +23,7 @@ LEFT_FACING = 1
 
 #Sprites
     #Schenario
-Schenario_sprite="Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "ESCENARIO1.png"
+Schenario_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "ESCENARIO1.png"
 
     #Main_Character
 Walking_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "WalkingX.png"
