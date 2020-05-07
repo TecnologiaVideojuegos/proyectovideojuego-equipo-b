@@ -10,10 +10,10 @@ GRID_PIXEL_SIZE = (SPRITE_PIXEL_SIZE * SPRITE_SCALE)
 
 # Movement speed of player, in pixels per frame
 MOVEMENT_SPEED = 3
-UPDATES_PER_FRAME = 3
+UPDATES_PER_FRAME = 7
 GRAVITY = 1.5
 MOVEMENT_SPEED = 5
-UPDATES_PER_FRAME = 7
+UPDATES_PER_FRAME = 10
 GRAVITY = 0.4
 
 PLAYER_JUMP_SPEED = 10
@@ -32,8 +32,8 @@ Schenario_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "
 #Main_Character
 Walking_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "WalkingX.png"
 Jumping_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "JumpingX.png"
-Walk_sound = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "StepsC.wav"
 Attack_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "AttackX.png"
+Walk_sound = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "StepsC.wav"
 
 #Enemie_1
 Walking_Enemie_1 = "Sprites_clases" + os.path.sep + "Enemie_1" + os.path.sep + "Sprites" + os.path.sep + "Walking1.png"

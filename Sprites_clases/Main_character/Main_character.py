@@ -21,10 +21,14 @@ class Main_Character(arcade.Sprite):
         # Used for flipping between image sequences
         self.cur_texture = 0
 
+        # Keep the actual x and y position
+        self.x=0
+        self.y=0
         # Track our state
         self.is_jumping = False
         self.is_falling = False
         self.is_attacking = False
+        self.is_walking = False
 
         # Cargar archivo de sonido caminar
         self.caminar = arcade.load_sound(Walk_sound)
@@ -43,10 +47,10 @@ class Main_Character(arcade.Sprite):
         self.player_sprite.stand_textures = []
             # Stand right sprites
         self.player_sprite.stand_textures.append(
-            arcade.load_texture(Walking_Sprite, x=0, y=0, width=240, height=520))
+            arcade.load_texture(Jumping_Sprite, x=0, y=0, width=240, height=520))
           # Stand left sprites
         self.player_sprite.stand_textures.append(
-            arcade.load_texture(Walking_Sprite, x=0, y=0, width=240, height=520, mirrored=True))
+            arcade.load_texture(Jumping_Sprite, x=0, y=0, width=240, height=520, mirrored=True))
 
         # Jump Sprites
         self.player_sprite.walk_up_textures = []
@@ -68,7 +72,6 @@ class Main_Character(arcade.Sprite):
         self.player_sprite.walk_down_textures = []
         # Fall Right Sprites
         texturas = []
-
         for i in range(5,9):
             texturas.append(
                 arcade.load_texture(Jumping_Sprite, x=i * 236, y=0, width=220, height=520))
@@ -96,14 +99,19 @@ class Main_Character(arcade.Sprite):
                 arcade.load_texture(Walking_Sprite, x=i * 236 + 50, y=0, width=220, height=520, mirrored=True))
         self.player_sprite.walk_textures.append(texturas)
 
-
         #Attack Sprites
         self.player_sprite.attack_textures = []
+        # Attack Right Sprites
+        texturas = []
+        for i in range(4 ):
+            texturas.append(
+                arcade.load_texture(Attack_Sprite, x=i * 1063, y=0, width=1063, height=600))
+        self.player_sprite.attack_textures.append(texturas)
         # Attack Left Sprites
         texturas = []
-        for i in range(10):
+        for i in range(4):
             texturas.append(
-                arcade.load_texture(Attack_Sprite, x=i * 236 + 50, y=0, width=900, height=600, mirrored=True))
+                arcade.load_texture(Attack_Sprite, x=i * 1063 , y=0, width=1063, height=600, mirrored=True))
         self.player_sprite.attack_textures.append(texturas)
 
 
@@ -115,7 +123,7 @@ class Main_Character(arcade.Sprite):
         self.view_bottom = 0
         self.game_over = False
 
-    def update_animation(self, delta_time: float = 1 / 60):
+    def update_animation(self, delta_time):
 
         # Figure out if we need to flip face left or right
         if self.change_x < 0 and self.character_face_direction == RIGHT_FACING:
@@ -123,66 +131,87 @@ class Main_Character(arcade.Sprite):
         elif self.change_x > 0 and self.character_face_direction == LEFT_FACING:
             self.character_face_direction = RIGHT_FACING
 
-        # Idle animation
-        if self.change_x == 0 and self.change_y == 0:
-            self.texture = self.player_sprite.stand_textures[self.character_face_direction]
-            return
-
         # Walking animation
         self.cur_texture +=1
 
 
+
+        # Attacking animation
         if self.is_attacking:
-            if self.cur_texture >= 10 * UPDATES_PER_FRAME:
+            self.set_to_false()
+            self.is_attacking=True
+            if self.cur_texture >= 4 * UPDATES_PER_FRAME:
                 self.cur_texture = 0
 
             self.texture=self.player_sprite.attack_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME]
 
-        if self.is_jumping :
+        # Jumping animation
+        elif self.is_jumping :
+            self.set_to_false()
+            self.is_jumping = True
             if self.cur_texture >= 5 * UPDATES_PER_FRAME:
                 self.cur_texture = 0
             self.texture = self.player_sprite.walk_up_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME]
 
-        if self.is_falling:
-            if self.cur_texture >= 5 * UPDATES_PER_FRAME:
+        # Falling animation
+        elif self.is_falling:
+            #####################
+            if self.cur_texture >= 4 * UPDATES_PER_FRAME:
                 self.cur_texture = 0
-            self.texture = self.player_sprite.walk_down_textures[self.character_face_direction][
-                (self.cur_texture+4) // UPDATES_PER_FRAME]
 
-        else:
+            self.texture = self.player_sprite.walk_down_textures[self.character_face_direction][
+                self.cur_texture // UPDATES_PER_FRAME]
+
+        #Attacking animation
+        elif self.is_walking:
+            self.set_to_false()
+            self.is_walking = True
             if self.cur_texture >= 7 * UPDATES_PER_FRAME:
                 self.cur_texture = 0
             self.texture = self.player_sprite.walk_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME]
+        else:
+            self.texture = self.player_sprite.stand_textures[self.character_face_direction]
+
+
 
     # on key press
     def on_key_press_move_up(self, physics_engine):
-        if physics_engine.can_jump():
-
-            self.is_jumping = True
-            self.change_y = PLAYER_JUMP_SPEED
-
-            self.player_sprite.change_y = PLAYER_JUMP_SPEED
-
+        print(self.change_y)
+        print(self.center_y)
+        self.is_jumping = True
+        self.change_y = PLAYER_JUMP_SPEED
 
     def on_key_press_move_left(self):
-        self.change_x = -MOVEMENT_SPEED
-        arcade.play_sound(self.caminar)
+        if (not self.is_attacking):
+            self.is_walking = True
+            self.change_x = -MOVEMENT_SPEED
 
     def on_key_press_move_right(self):
-        self.change_x = MOVEMENT_SPEED
-        arcade.play_sound(self.caminar)
+        if (not self.is_attacking):
+            self.is_walking = True
+            self.change_x = MOVEMENT_SPEED
+
+    def on_key_press_attack(self):
+        if not self.is_walking:
+            self.is_attacking = True
 
     #on key release
     def on_key_release_move_left(self):
-        self.change_x = 0
-        arcade.stop_sound(self.caminar)
+       arcade.stop_sound(self.caminar)
 
     def on_key_release_move_right(self):
         self.change_x = 0
-        arcade.stop_sound(self.caminar)
+
 
     def on_key_release_attack(self):
-        self.is_attacking = True
+        self.is_attacking = False
+
+
+    def set_to_false(self):
+        self.is_jumping = False
+        self.is_falling = False
+        self.is_attacking = False
+        self.is_walking = False
