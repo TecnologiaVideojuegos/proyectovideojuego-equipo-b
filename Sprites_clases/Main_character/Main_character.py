@@ -166,8 +166,3 @@ class Main_Character():
 
     def on_key_release_attack(self):
         self.is_attacking = True
-
-
-
-
-

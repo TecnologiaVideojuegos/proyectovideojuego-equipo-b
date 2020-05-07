@@ -22,15 +22,15 @@ RIGHT_FACING = 0
 LEFT_FACING = 1
 
 #Sprites
-    #Schenario
+#Schenario
 Schenario_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "ESCENARIO1.png"
 
-    #Main_Character
+#Main_Character
 Walking_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "WalkingX.png"
 Jumping_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "JumpingX.png"
 Walk_sound = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "StepsC.wav"
 Attack_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "AttackX.png"
 
-    #Enemie_1
+#Enemie_1
 Walking_Enemie_1 = "Sprites_clases" + os.path.sep + "Enemie_1" + os.path.sep + "Sprites" + os.path.sep + "Walking1.png"
 Lightning_Enemie_1 = "Sprites_clases" + os.path.sep + "Enemie_1" + os.path.sep + "Sprites" + os.path.sep + "Lighting1.png"
