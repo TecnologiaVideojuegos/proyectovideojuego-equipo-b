@@ -160,12 +160,12 @@ class Main_Character(arcade.Sprite):
     # on key press
     def on_key_press_move_up(self, physics_engine):
         if physics_engine.can_jump():
-<<<<<<< HEAD
+
             self.is_jumping = True
             self.change_y = PLAYER_JUMP_SPEED
-=======
+
             self.player_sprite.change_y = PLAYER_JUMP_SPEED
->>>>>>> 4e6e2c6bbedc8bd5116872c635f88f86c2621c6f
+
 
     def on_key_press_move_left(self):
         self.change_x = -MOVEMENT_SPEED
