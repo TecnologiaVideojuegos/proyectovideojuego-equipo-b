@@ -30,6 +30,8 @@ class Main_Character(arcade.Sprite):
         self.is_attacking = False
         self.is_walking = False
 
+        self.jump_needs_reset = False
+
         # Cargar archivo de sonido caminar
         self.caminar = arcade.load_sound(Walk_sound)
 
@@ -181,8 +183,10 @@ class Main_Character(arcade.Sprite):
     def on_key_press_move_up(self, physics_engine):
         print(self.change_y)
         print(self.center_y)
-        self.is_jumping = True
-        self.change_y = PLAYER_JUMP_SPEED
+        if self.physics_engine.can_jump() and not self.jump_needs_reset:
+            self.is_jumping = True
+            self.change_y = PLAYER_JUMP_SPEED
+            self.jump_needs_reset = True
 
     def on_key_press_move_left(self):
         if (not self.is_attacking):

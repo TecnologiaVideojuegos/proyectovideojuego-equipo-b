@@ -22,6 +22,8 @@ class Schenario(arcade.Window):
         self.player_list = None
         self.wall_list = None
 
+        self.jump_needs_reset = False
+
     def setup(self):
         #Set up the Sprites
         self.player_list = arcade.SpriteList()
@@ -78,9 +80,11 @@ class Schenario(arcade.Window):
         if key == arcade.key.SPACE :
             self.player.on_key_press_attack()
 
-        elif key == arcade.key.UP or key == arcade.key.W :
-            self.player.is_jumping = True
-            self.player.change_y = PLAYER_JUMP_SPEED
+        elif key == arcade.key.UP or key == arcade.key.W:
+            if self.physics_engine.can_jump() and not self.jump_needs_reset:
+                self.player.is_jumping = True
+                self.player.change_y = PLAYER_JUMP_SPEED
+                self.jump_needs_reset = False
 
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player.on_key_press_move_left()
@@ -99,6 +103,7 @@ class Schenario(arcade.Window):
         elif key == arcade.key.UP or key == arcade.key.W :
             self.player.is_jumping = False
             self.player.is_falling = True
+            self.jump_needs_reset = False
         elif key == arcade.key.SPACE :
             self.player.is_attacking = False
 
