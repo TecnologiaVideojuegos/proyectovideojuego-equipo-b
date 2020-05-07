@@ -134,9 +134,7 @@ class Main_Character(arcade.Sprite):
             self.character_face_direction = RIGHT_FACING
 
         # Walking animation
-        self.cur_texture +=1
-
-
+        self.cur_texture += 1
 
         # Attacking animation
         if self.is_attacking:
@@ -177,8 +175,6 @@ class Main_Character(arcade.Sprite):
         else:
             self.texture = self.player_sprite.stand_textures[self.character_face_direction]
 
-
-
     # on key press
     def on_key_press_move_up(self, physics_engine):
         print(self.change_y)
@@ -189,12 +185,12 @@ class Main_Character(arcade.Sprite):
             self.jump_needs_reset = True
 
     def on_key_press_move_left(self):
-        if (not self.is_attacking):
+        if not self.is_attacking:
             self.is_walking = True
             self.change_x = -MOVEMENT_SPEED
 
     def on_key_press_move_right(self):
-        if (not self.is_attacking):
+        if not self.is_attacking:
             self.is_walking = True
             self.change_x = MOVEMENT_SPEED
 
