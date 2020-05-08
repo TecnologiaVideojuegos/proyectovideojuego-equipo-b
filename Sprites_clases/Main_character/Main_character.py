@@ -119,6 +119,11 @@ class Main_Character(arcade.Sprite):
 
         self.player_list.append(self.player_sprite)
 
+
+        self.center_x = SCREEN_WIDTH // 2
+        self.center_y = SCREEN_HEIGHT // 2
+        self.scale = PLAYER_SCALE
+
         # Set the viewport boundaries
         # These numbers set where we have 'scrolled' to.
         self.view_left = 0

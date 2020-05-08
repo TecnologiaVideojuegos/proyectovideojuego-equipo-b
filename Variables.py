@@ -27,7 +27,7 @@ LEFT_FACING = 1
 
 #Sprites
 #Schenario
-Schenario_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "ESCENARIO1.png"
+Scenario_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "ESCENARIO1.png"
 
 #Main_Character
 Walking_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "WalkingX.png"
