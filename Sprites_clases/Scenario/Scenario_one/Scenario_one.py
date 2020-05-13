@@ -57,11 +57,8 @@ class Scenario(arcade.Window):
         # Set the physics_engine
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, GRAVITY)
         # Load the background image
-<<<<<<< HEAD:Sprites_clases/Scenario/Scenario_one/Scenario_one.py
         self.background = arcade.load_texture(Scenario_sprite)
-=======
-        self.background = arcade.load_texture(Schenario_sprite)
->>>>>>> e4411403ee9a25b4482f43282a73bba2a1734d33:Maincharacter_testing.py
+        self.background = arcade.load_texture(Scenario_sprite)
 
     def on_update(self, delta_time):
         self.player.is_falling = self.player.change_y < 0
