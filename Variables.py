@@ -1,8 +1,14 @@
 import os.path
 
+
+#Varialbles for character movements and sprites
+
+#Screen Variables
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 SCREEN_TITLE = "Sprite animated walking"
+
+
 SPRITE_PIXEL_SIZE = 128
 SPRITE_SCALE = 0.5  # Wall scale
 PLAYER_SCALE = 0.25  # Player scale

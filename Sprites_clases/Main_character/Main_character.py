@@ -21,9 +21,6 @@ class Main_Character(arcade.Sprite):
         # Used for flipping between image sequences
         self.cur_texture = 0
 
-        # Keep the actual x and y position
-        self.x=0
-        self.y=0
         # Track our state
         self.is_jumping = False
         self.is_falling = False
@@ -162,7 +159,6 @@ class Main_Character(arcade.Sprite):
 
         # Falling animation
         elif self.is_falling:
-            #####################
             if self.cur_texture >= 4 * UPDATES_PER_FRAME:
                 self.cur_texture = 0
 
@@ -182,7 +178,6 @@ class Main_Character(arcade.Sprite):
 
     # on key press
     def on_key_press_move_up(self, physics_engine):
-        print(self.change_y)
         print(self.center_y)
         if self.physics_engine.can_jump() and not self.jump_needs_reset:
             self.is_jumping = True
