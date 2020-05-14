@@ -15,6 +15,7 @@ class Scenario(arcade.Window):
 
         # Set up the player
         self.player = None
+
         # Sprite lists
         self.player_list = None
         self.wall_list = None
@@ -69,14 +70,6 @@ class Scenario(arcade.Window):
         arcade.draw_lrwh_rectangle_textured(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, self.background)
         self.wall_list.draw()
         self.player_list.draw()
-
-    def collision(self):
-        pass
-        # hit_list = arcade.check_for_collision_with_list(self.player, self.enemie1)
-        # for self.enemie1 in hit_list:
-            # decrease the character's life
-            # if is attacking:
-                # kill enemie1
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
