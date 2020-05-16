@@ -84,6 +84,13 @@ class Scenario(arcade.Window):
         self.enemy1_list.update_animation()
         self.physics_engine.update()
 
+        hit_list = arcade.check_for_collision_with_list(self.player, self.enemy1_list)
+        for self.enemy1 in hit_list:
+            # decrease the character's life
+            if self.player.is_attacking:
+                self.enemy1.kill()
+                print("Enemigo muerto")
+
     def on_draw(self):
         arcade.start_render()
         # Draw the background texture
@@ -92,13 +99,7 @@ class Scenario(arcade.Window):
         self.player_list.draw()
         self.enemy1_list.draw()
 
-    def collision(self):
-        pass
-        # hit_list = arcade.check_for_collision_with_list(self.player, self.enemie1)
-        # for self.enemie1 in hit_list:
-            # decrease the character's life
-            # if is attacking:
-                # kill enemie1
+
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
