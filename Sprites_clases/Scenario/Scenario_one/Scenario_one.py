@@ -1,6 +1,7 @@
 # https://stackoverflow.com/questions/59341396/cant-get-attack-animation-to-work-for-arcade-library-with-python
 import arcade
 from Sprites_clases.Main_character.Main_character import *
+from Sprites_clases.Enemie_1.Enemie_1 import *
 from Variables import *
 
 class Scenario(arcade.Window):
@@ -15,6 +16,9 @@ class Scenario(arcade.Window):
 
         # Set up the player
         self.player = None
+        # Set up the enemies
+        self.enemy_1 = None
+        self.enemy_2 = None
         # Sprite lists
         self.player_list = None
         self.wall_list = None
@@ -25,6 +29,7 @@ class Scenario(arcade.Window):
         #Set up the Sprites
         self.player_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
+
         # Set up the player
         self.player = Main_Character()
         self.player.setup()
@@ -34,6 +39,12 @@ class Scenario(arcade.Window):
         self.player.scale = PLAYER_SCALE
 
         self.player_list.append(self.player)
+
+        # Set up the enemy_1                                
+        self.enemy_1 = Enemie_1()
+        self.enemy_1.setup()
+
+        self.player_list.append(self.enemy_1)
 
         # -- Set up the walls
 
@@ -54,7 +65,7 @@ class Scenario(arcade.Window):
                 self.wall_list.append(wall)
 
         # Set the physics_engine
-        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, GRAVITY)
+        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player_list, self.wall_list, GRAVITY)
         # Load the background image
         self.background = arcade.load_texture(Scenario_sprite)
 
@@ -108,5 +119,3 @@ class Scenario(arcade.Window):
             self.jump_needs_reset = False
         elif key == arcade.key.SPACE:
             self.player.is_attacking = False
-
-
