@@ -48,8 +48,8 @@ class Scenario(arcade.Window):
         self.player_list.append(self.player)
 
         # Set up the enemy1 position
-        self.enemy1.center_x = self.enemy1.summon_x
-        self.enemy1.center_y = self.enemy1.summon_y
+        self.enemy1.center_x = 300
+        self.enemy1.center_y = 130
         self.enemy1.scale = PLAYER_SCALE
 
         self.enemy1_list.append(self.enemy1)
