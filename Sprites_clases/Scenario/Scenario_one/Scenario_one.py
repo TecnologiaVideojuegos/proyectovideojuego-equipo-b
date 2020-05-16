@@ -4,6 +4,7 @@ from Sprites_clases.Main_character.Main_character import *
 from Sprites_clases.Enemie_1.Enemie_1 import *
 from Variables import *
 
+
 class Scenario(arcade.Window):
     """ Main application class. """
 
@@ -16,11 +17,11 @@ class Scenario(arcade.Window):
 
         # Set up the player
         self.player = None
-        # Set up the enemies
-        self.enemy_1 = None
-        self.enemy_2 = None
+        # Set up the enemy1
+        self.enemy1 = None
         # Sprite lists
         self.player_list = None
+        self.enemy1_list = None
         self.wall_list = None
 
         self.jump_needs_reset = False
@@ -28,11 +29,17 @@ class Scenario(arcade.Window):
     def setup(self):
         #Set up the Sprites
         self.player_list = arcade.SpriteList()
+        self.enemy1_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
 
         # Set up the player
         self.player = Main_Character()
         self.player.setup()
+
+        # Set up the enemy1
+        self.enemy1 = Enemie_1()
+        self.enemy1.setup()
+
         # Set up the player position
         self.player.center_x = SCREEN_WIDTH // 2
         self.player.center_y = SCREEN_HEIGHT // 2
@@ -40,11 +47,13 @@ class Scenario(arcade.Window):
 
         self.player_list.append(self.player)
 
-        # Set up the enemy_1                                
-        self.enemy_1 = Enemie_1()
-        self.enemy_1.setup()
+        # Set up the enemy1 position
+        self.enemy1.center_x = 300
+        self.enemy1.center_y = 130
+        self.enemy1.scale = PLAYER_SCALE
 
-        self.player_list.append(self.enemy_1)
+        self.enemy1_list.append(self.enemy1)
+
 
         # -- Set up the walls
 
@@ -65,13 +74,14 @@ class Scenario(arcade.Window):
                 self.wall_list.append(wall)
 
         # Set the physics_engine
-        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player_list, self.wall_list, GRAVITY)
+        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, GRAVITY)
         # Load the background image
         self.background = arcade.load_texture(Scenario_sprite)
 
     def on_update(self, delta_time):
         self.player.is_falling = self.player.change_y < 0
         self.player_list.update_animation()
+        self.enemy1_list.update_animation()
         self.physics_engine.update()
 
     def on_draw(self):
@@ -80,6 +90,7 @@ class Scenario(arcade.Window):
         arcade.draw_lrwh_rectangle_textured(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, self.background)
         self.wall_list.draw()
         self.player_list.draw()
+        self.enemy1_list.draw()
 
     def collision(self):
         pass

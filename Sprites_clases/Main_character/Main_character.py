@@ -44,10 +44,10 @@ class Main_Character(arcade.Sprite):
 
         # Stand Sprites
         self.player_sprite.stand_textures = []
-            # Stand right sprites
+        # Stand right sprites
         self.player_sprite.stand_textures.append(
             arcade.load_texture(Jumping_Sprite, x=0, y=0, width=240, height=520))
-          # Stand left sprites
+        # Stand left sprites
         self.player_sprite.stand_textures.append(
             arcade.load_texture(Jumping_Sprite, x=0, y=0, width=240, height=520, mirrored=True))
 
@@ -71,13 +71,13 @@ class Main_Character(arcade.Sprite):
         self.player_sprite.walk_down_textures = []
         # Fall Right Sprites
         texturas = []
-        for i in range(5,9):
+        for i in range(5, 9):
             texturas.append(
                 arcade.load_texture(Jumping_Sprite, x=i * 236, y=0, width=220, height=520))
         self.player_sprite.walk_down_textures.append(texturas)
         # Fall Left Sprites
         texturas = []
-        for i in range(5,9):
+        for i in range(5, 9):
             texturas.append(
                 arcade.load_texture(Jumping_Sprite, x=i * 236, y=0, width=220, height=520, mirrored=True))
         self.player_sprite.walk_down_textures.append(texturas)
@@ -102,7 +102,7 @@ class Main_Character(arcade.Sprite):
         self.player_sprite.attack_textures = []
         # Attack Right Sprites
         texturas = []
-        for i in range(4 ):
+        for i in range(4):
             texturas.append(
                 arcade.load_texture(Attack_Sprite, x=i * 1063, y=0, width=1063, height=600))
         self.player_sprite.attack_textures.append(texturas)
@@ -141,7 +141,7 @@ class Main_Character(arcade.Sprite):
         # Attacking animation
         if self.is_attacking:
             self.set_to_false()
-            self.is_attacking=True
+            self.is_attacking = True
             if self.cur_texture >= 4 * UPDATES_PER_FRAME:
                 self.cur_texture = 0
 
@@ -149,7 +149,7 @@ class Main_Character(arcade.Sprite):
                 self.cur_texture // UPDATES_PER_FRAME]
 
         # Jumping animation
-        elif self.is_jumping :
+        elif self.is_jumping:
             self.set_to_false()
             self.is_jumping = True
             if self.cur_texture >= 5 * UPDATES_PER_FRAME:
@@ -205,10 +205,8 @@ class Main_Character(arcade.Sprite):
     def on_key_release_move_right(self):
         self.change_x = 0
 
-
     def on_key_release_attack(self):
         self.is_attacking = False
-
 
     def set_to_false(self):
         self.is_jumping = False
