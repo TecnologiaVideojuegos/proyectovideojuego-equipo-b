@@ -132,9 +132,5 @@ class Scenario(arcade.Window):
         hit_list = arcade.check_for_collision_with_list(self.player, self.enemy1_list)
         for self.enemy1 in hit_list:
             # decrease the character's life
-            print("Bajar vida del jugador")
             if self.player.is_attacking:
-                self.enemy1.kill()
-                print("Enemigo eliminado")
-
-
+                self.enemy1.dead = True

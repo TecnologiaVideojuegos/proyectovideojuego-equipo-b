@@ -34,6 +34,8 @@ class Enemie_1(arcade.Sprite):
         self.position_x = Main_Character.center_x
         self.position_y = Main_Character.center_y
 
+        self.dead = False
+
     def setup(self):
         "El archivo WalkingX.png lo metí directamente en la carpeta del proyecto de PyCharm"
         self.enemy1_list = arcade.SpriteList()
@@ -61,6 +63,20 @@ class Enemie_1(arcade.Sprite):
             self.enemy1_sprite.walk_left_textures.append(
                 arcade.load_texture(Walking_Enemie_1, x=i * 236 + 50, y=0, width=220, height=520, mirrored=True))
 
+        # Jump Sprites
+        self.enemy1_sprite.dead_textures = []
+        # Dead Right Sprites
+        texturas = []
+        for i in range(9):
+            texturas.append(
+                arcade.load_texture(Lightning_Enemie_1, x=i * 236, y=0, width=220, height=520))
+        self.enemy1_sprite.dead_textures.append(texturas)
+        # Dead Left Sprites
+        texturas = []
+        for i in range(9):
+            texturas.append(
+                arcade.load_texture(Lightning_Enemie_1, x=i * 236, y=0, width=220, height=520, mirrored=True))
+        self.enemy1_sprite.dead_textures.append(texturas)
         self.enemy1_list.append(self.enemy1_sprite)
         # Set up the player position
 
@@ -113,8 +129,13 @@ class Enemie_1(arcade.Sprite):
 
         self.texture = self.enemy1_sprite.stand_right_textures[self.character_face_direction]
 
-
-
-
+        # Dead animation
+        if self.dead:
+            if self.cur_texture >= 90:
+                self.kill()
+            if self.cur_texture >= 9 * UPDATES_PER_FRAME:
+                self.cur_texture = 0
+            self.texture = self.enemy1_sprite.dead_textures[self.character_face_direction][
+                self.cur_texture // UPDATES_PER_FRAME]
 
 

@@ -56,8 +56,8 @@ class Main_Character(arcade.Sprite):
         # Jump Right Sprites
         texturas=[]
         for i in range(5):
-                texturas.append(
-                    arcade.load_texture(Jumping_Sprite, x=i * 236, y=0, width=220, height=522))
+            texturas.append(
+                arcade.load_texture(Jumping_Sprite, x=i * 236, y=0, width=220, height=522))
         self.player_sprite.walk_up_textures.append(texturas)
 
         # Jump Left Sprites
@@ -144,7 +144,6 @@ class Main_Character(arcade.Sprite):
             self.is_attacking = True
             if self.cur_texture >= 4 * UPDATES_PER_FRAME:
                 self.cur_texture = 0
-
             self.texture = self.player_sprite.attack_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME]
 
