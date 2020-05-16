@@ -145,7 +145,7 @@ class Main_Character(arcade.Sprite):
             if self.cur_texture >= 4 * UPDATES_PER_FRAME:
                 self.cur_texture = 0
 
-            self.texture=self.player_sprite.attack_textures[self.character_face_direction][
+            self.texture = self.player_sprite.attack_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME]
 
         # Jumping animation
@@ -165,7 +165,7 @@ class Main_Character(arcade.Sprite):
             self.texture = self.player_sprite.walk_down_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME]
 
-        #Attacking animation
+        # Walking animation
         elif self.is_walking:
             self.set_to_false()
             self.is_walking = True
@@ -177,8 +177,7 @@ class Main_Character(arcade.Sprite):
             self.texture = self.player_sprite.stand_textures[self.character_face_direction]
 
     # on key press
-    def on_key_press_move_up(self, physics_engine):
-        print(self.center_y)
+    def on_key_press_move_up(self):
         if self.physics_engine.can_jump() and not self.jump_needs_reset:
             self.is_jumping = True
             self.change_y = PLAYER_JUMP_SPEED

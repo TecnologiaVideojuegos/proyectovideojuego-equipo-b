@@ -4,7 +4,7 @@ from Variables import *
 from Sprites_clases.Main_character.Main_character import *
 
 
-class Enemie_1(arcade.Sprite):
+class Enemie_2(arcade.Sprite):
     """Inicializador"""
 
     def __init__(self):
