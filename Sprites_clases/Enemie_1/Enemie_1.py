@@ -94,6 +94,8 @@ class Enemie_1(arcade.Sprite):
         self.enemy1_list.update()
         self.enemy1_list.update_animation()
 
+        self.change_x + 1
+
         # --- Manage Scrolling ---
 
         # Track if we need to change the viewport

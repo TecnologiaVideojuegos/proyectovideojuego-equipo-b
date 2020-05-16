@@ -14,6 +14,7 @@ class Scenario(arcade.Window):
         self.background = None
         # Our physics engine
         self.physics_engine = None
+        self.physics_engine_enemy1 = None
 
         # Set up the player
         self.player = None
@@ -25,6 +26,7 @@ class Scenario(arcade.Window):
         self.wall_list = None
 
         self.jump_needs_reset = False
+
 
     def setup(self):
         #Set up the Sprites
@@ -48,8 +50,8 @@ class Scenario(arcade.Window):
         self.player_list.append(self.player)
 
         # Set up the enemy1 position
-        self.enemy1.center_x = 300
-        self.enemy1.center_y = 130
+        self.enemy1.center_x = SCREEN_WIDTH // 4
+        self.enemy1.center_y = SCREEN_HEIGHT // 2
         self.enemy1.scale = PLAYER_SCALE
 
         self.enemy1_list.append(self.enemy1)
@@ -75,6 +77,7 @@ class Scenario(arcade.Window):
 
         # Set the physics_engine
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, GRAVITY)
+        self.physics_engine_enemy1 = arcade.PhysicsEnginePlatformer(self.enemy1, self.wall_list, GRAVITY)
         # Load the background image
         self.background = arcade.load_texture(Scenario_sprite)
 
@@ -83,13 +86,9 @@ class Scenario(arcade.Window):
         self.player_list.update_animation()
         self.enemy1_list.update_animation()
         self.physics_engine.update()
+        self.physics_engine_enemy1.update()
+        self.collisions()
 
-        hit_list = arcade.check_for_collision_with_list(self.player, self.enemy1_list)
-        for self.enemy1 in hit_list:
-            # decrease the character's life
-            if self.player.is_attacking:
-                self.enemy1.kill()
-                print("Enemigo muerto")
 
     def on_draw(self):
         arcade.start_render()
@@ -103,7 +102,6 @@ class Scenario(arcade.Window):
         """Called whenever a key is pressed. """
         if key == arcade.key.SPACE:
             self.player.on_key_press_attack()
-
         elif key == arcade.key.UP or key == arcade.key.W:
             if self.physics_engine.can_jump() and not self.jump_needs_reset:
                 # self.player.is_jumping = True
@@ -129,3 +127,14 @@ class Scenario(arcade.Window):
             self.jump_needs_reset = False
         elif key == arcade.key.SPACE:
             self.player.is_attacking = False
+
+    def collisions(self):
+        hit_list = arcade.check_for_collision_with_list(self.player, self.enemy1_list)
+        for self.enemy1 in hit_list:
+            # decrease the character's life
+            print("Bajar vida del jugador")
+            if self.player.is_attacking:
+                self.enemy1.kill()
+                print("Enemigo eliminado")
+
+
