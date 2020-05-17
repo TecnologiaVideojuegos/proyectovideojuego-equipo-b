@@ -44,10 +44,10 @@ class Main_Character(arcade.Sprite):
 
         # Stand Sprites
         self.player_sprite.stand_textures = []
-        # Stand right sprites
+        # Stand right Sprites
         self.player_sprite.stand_textures.append(
             arcade.load_texture(Jumping_Sprite, x=0, y=0, width=240, height=520))
-        # Stand left sprites
+        # Stand left Sprites
         self.player_sprite.stand_textures.append(
             arcade.load_texture(Jumping_Sprite, x=0, y=0, width=240, height=520, mirrored=True))
 

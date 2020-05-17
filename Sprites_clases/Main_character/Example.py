@@ -11,7 +11,7 @@ SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 650
 SCREEN_TITLE = "Platformer"
 
-# Constants used to scale our sprites from their original size
+# Constants used to scale our Sprites from their original size
 TILE_SCALING = 0.5
 CHARACTER_SCALING = TILE_SCALING * 2
 COIN_SCALING = TILE_SCALING
@@ -167,7 +167,7 @@ class MyGame(arcade.Window):
         self.down_pressed = False
         self.jump_needs_reset = False
 
-        # These are 'lists' that keep track of our sprites. Each sprite should
+        # These are 'lists' that keep track of our Sprites. Each sprite should
         # go into a list.
         self.coin_list = None
         self.wall_list = None
@@ -270,7 +270,7 @@ class MyGame(arcade.Window):
         # Clear the screen to the background color
         arcade.start_render()
 
-        # Draw our sprites
+        # Draw our Sprites
         self.wall_list.draw()
         self.background_list.draw()
         self.ladder_list.draw()

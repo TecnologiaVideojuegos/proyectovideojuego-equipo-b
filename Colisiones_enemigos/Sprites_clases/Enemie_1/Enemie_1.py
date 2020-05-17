@@ -29,7 +29,7 @@ class Enemie_1():
         self.player_sprite.stand_right_textures.append(
             arcade.load_texture(Walking_Enemie_1, x=0, y=0, width=240, height=520))
 
-        # Stand left sprites
+        # Stand left Sprites
         self.player_sprite.stand_left_textures = []
         self.player_sprite.stand_left_textures.append(
             arcade.load_texture(Walking_Enemie_1, x=0, y=0, width=240, height=520, mirrored=True))
@@ -74,7 +74,7 @@ class Enemie_1():
         # This command has to happen before we start drawing
         arcade.start_render()
 
-        # Draw all the sprites.
+        # Draw all the Sprites.
         self.player_list.draw()
 
         # Put the text on the screen.

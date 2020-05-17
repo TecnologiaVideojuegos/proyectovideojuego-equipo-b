@@ -1,7 +1,7 @@
 import os.path
 
 
-#Varialbles for character movements and sprites
+#Varialbles for character movements and Sprites
 
 #Screen Variables
 SCREEN_WIDTH = 1280

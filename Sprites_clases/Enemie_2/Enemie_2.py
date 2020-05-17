@@ -15,10 +15,10 @@ class Enemie_2(arcade.Sprite):
         self.summon_x = 100
         self.summon_y = 100
         # Sprite lists
-        self.enemy1_list = None
+        self.enemy2_list = None
 
         # Set up the player
-        self.enemy1_sprite = None
+        self.enemy2_sprite = None
         self.physics_engine = None
 
         # Used for flipping between image sequences
@@ -34,34 +34,54 @@ class Enemie_2(arcade.Sprite):
         self.position_x = Main_Character.center_x
         self.position_y = Main_Character.center_y
 
+        self.dead = False
+
     def setup(self):
         "El archivo WalkingX.png lo metí directamente en la carpeta del proyecto de PyCharm"
-        self.enemy1_list = arcade.SpriteList()
-        self.enemy1_sprite = arcade.AnimatedWalkingSprite()
+        self.enemy2_list = arcade.SpriteList()
+        self.enemy2_sprite = arcade.AnimatedWalkingSprite()
 
         # Stand Right Sprites
-        self.enemy1_sprite.stand_right_textures = []
-        self.enemy1_sprite.stand_right_textures.append(
-            arcade.load_texture(Walking_Enemie_1, x=0, y=0, width=240, height=520))
+        self.enemy2_sprite.stand_right_textures = []
+        self.enemy2_sprite.stand_right_textures.append(
+            arcade.load_texture(Walking_Enemie_2, x=0, y=0, width=240, height=520))
 
-        # Stand left sprites
-        self.enemy1_sprite.stand_left_textures = []
-        self.enemy1_sprite.stand_left_textures.append(
-            arcade.load_texture(Walking_Enemie_1, x=0, y=0, width=240, height=520, mirrored=True))
+        # Stand left Sprites
+        self.enemy2_sprite.stand_left_textures = []
+        self.enemy2_sprite.stand_left_textures.append(
+            arcade.load_texture(Walking_Enemie_2, x=0, y=0, width=240, height=520, mirrored=True))
 
         # Walk Right Sprites
-        self.enemy1_sprite.walk_right_textures = []
+        self.enemy2_sprite.walk_right_textures = []
         for i in range(7):
-            self.enemy1_sprite.walk_right_textures.append(
-                arcade.load_texture(Walking_Enemie_1, x=i * 236 + 50, y=0, width=220, height=522))
+            self.enemy2_sprite.walk_right_textures.append(
+                arcade.load_texture(Walking_Enemie_2, x=i * 236 + 50, y=0, width=220, height=522))
 
         # Walk Left Sprites
-        self.enemy1_sprite.walk_left_textures = []
+        self.enemy2_sprite.walk_left_textures = []
         for i in range(7):
-            self.enemy1_sprite.walk_left_textures.append(
-                arcade.load_texture(Walking_Enemie_1, x=i * 236 + 50, y=0, width=220, height=520, mirrored=True))
+            self.enemy2_sprite.walk_left_textures.append(
+                arcade.load_texture(Walking_Enemie_2, x=i * 236 + 50, y=0, width=220, height=520, mirrored=True))
 
-        self.enemy1_list.append(self.enemy1_sprite)
+        self.enemy2_list.append(self.enemy2_sprite)
+
+        self.enemy2_sprite.dead_textures = []
+        # Dead Right Sprites
+        texturas = []
+        for i in range(9):
+            texturas.append(
+                arcade.load_texture(Lightning_Enemie_2, x=i * 236, y=0, width=220, height=520))
+        self.enemy2_sprite.dead_textures.append(texturas)
+        # Dead Left Sprites
+        texturas = []
+        for i in range(9):
+            texturas.append(
+                arcade.load_texture(Lightning_Enemie_2, x=i * 236, y=0, width=220, height=520, mirrored=True))
+        self.enemy2_sprite.dead_textures.append(texturas)
+
+
+        self.enemy2_list.append(self.enemy2_sprite)
+
         # Set up the player position
 
         self.center_x = self.summon_x
@@ -82,8 +102,8 @@ class Enemie_2(arcade.Sprite):
         # This command has to happen before we start drawing
         arcade.start_render()
 
-        # Draw all the sprites.
-        self.enemy1_list.draw()
+        # Draw all the Sprites.
+        self.enemy2_list.draw()
 
         # Put the text on the screen.
         # Adjust the text position based on the viewport so that we don't
@@ -91,8 +111,8 @@ class Enemie_2(arcade.Sprite):
 
     def on_update(self):
 
-        self.enemy1_list.update()
-        self.enemy1_list.update_animation()
+        self.enemy2_list.update()
+        self.enemy2_list.update_animation()
 
         # --- Manage Scrolling ---
 
@@ -109,10 +129,13 @@ class Enemie_2(arcade.Sprite):
         # Walking animation
         self.cur_texture += 1
 
-        self.texture = self.enemy1_sprite.stand_right_textures[self.character_face_direction]
+        self.texture = self.enemy2_sprite.stand_right_textures[self.character_face_direction]
 
-
-
-
-
-
+        # Dead animation
+        if self.dead:
+            if self.cur_texture == 90:
+                self.kill()
+            if self.cur_texture >= 9 * UPDATES_PER_FRAME:
+                self.cur_texture = 0
+            self.texture = self.enemy2_sprite.dead_textures[self.character_face_direction][
+                self.cur_texture // UPDATES_PER_FRAME]

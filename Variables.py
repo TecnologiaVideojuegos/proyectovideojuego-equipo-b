@@ -1,7 +1,7 @@
 import os.path
 
 
-#Varialbles for character movements and sprites
+#Varialbles for character movements and Sprites
 
 #Screen Variables
 SCREEN_WIDTH = 1280
@@ -44,3 +44,7 @@ Walk_sound = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "
 #Enemie_1
 Walking_Enemie_1 = "Sprites_clases" + os.path.sep + "Enemie_1" + os.path.sep + "Sprites" + os.path.sep + "Walking1.png"
 Lightning_Enemie_1 = "Sprites_clases" + os.path.sep + "Enemie_1" + os.path.sep + "Sprites" + os.path.sep + "Lighting1.png"
+
+#Enemie_1
+Walking_Enemie_2 = "Sprites_clases" + os.path.sep + "Enemie_2" + os.path.sep + "Sprites" + os.path.sep + "Walking2.png"
+Lightning_Enemie_2 = "Sprites_clases" + os.path.sep + "Enemie_2" + os.path.sep + "Sprites" + os.path.sep + "Lighting2.png"

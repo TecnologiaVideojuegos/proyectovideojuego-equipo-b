@@ -158,7 +158,7 @@ class MyGame(arcade.Window):
         # This command has to happen before we start drawing
         arcade.start_render()
 
-        # Draw the sprites.
+        # Draw the Sprites.
         self.static_wall_list.draw()
         self.moving_wall_list.draw()
         self.player_list.draw()
@@ -196,7 +196,7 @@ class MyGame(arcade.Window):
     def on_update(self, delta_time):
         """ Movement and game logic """
 
-        # Call update on all sprites
+        # Call update on all Sprites
         self.physics_engine.update()
 
         # --- Manage Scrolling ---
