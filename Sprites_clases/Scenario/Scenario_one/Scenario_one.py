@@ -31,6 +31,8 @@ class Scenario(arcade.Window):
 
         self.lista = []
 
+        self.valor_vida = 200
+
     def setup(self):
         #Set up the Sprites
         self.player_list = arcade.SpriteList()
@@ -116,6 +118,10 @@ class Scenario(arcade.Window):
         self.enemy1_list.draw()
         self.enemy2_list.draw()
 
+        score_text = f"Vida: {self.valor_vida}"
+        arcade.draw_text(score_text, 100, 650,
+                         arcade.csscolor.BLACK, 18)
+
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
         if key == arcade.key.SPACE:
@@ -150,16 +156,20 @@ class Scenario(arcade.Window):
         hit_list1 = arcade.check_for_collision_with_list(self.player, self.enemy1_list)
         hit_list2 = arcade.check_for_collision_with_list(self.player, self.enemy2_list)
         for self.enemy1 in hit_list1:
-            # decrease the character's life
             if self.player.is_attacking:
                 self.enemy1.dead = True
                 self.puzzle(0)
+            if not self.enemy1.dead:
+                # decrease the character's life
+                self.valor_vida -= 0.5
 
         for self.enemy2 in hit_list2:
-            # decrease the character's life
             if self.player.is_attacking:
                 self.enemy2.dead = True
                 self.puzzle(1)
+            if not self.enemy2.dead:
+                # decrease the character's life
+                self.valor_vida -= 0.5
 
     def puzzle(self, id):
         if not self.lista:
@@ -168,5 +178,3 @@ class Scenario(arcade.Window):
         if self.lista[len(self.lista) - 1] != id:
             self.lista.append(id)
             print(self.lista)
-
-
