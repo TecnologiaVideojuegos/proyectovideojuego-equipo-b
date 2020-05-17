@@ -1,1 +1,61 @@
 
+#Una secuencia binaria desbloqueara el cambio de fase/pantalla/boss
+#Esa secuencia se realizara al eliminar enemigos
+
+import arcade 
+
+
+class puzzle:
+    enemy_kill1 = False
+    enemy_kill2 = False
+    enemy_1 = 0
+    enemy_2 = 1
+    
+    
+    def __init__(self):
+        self.enemy_kill1 = False
+        self.enemy_kill2 = False
+        self.enemy_1 = id(puzzle.enemy_1)
+        self.enemy_2 = id(puzzle.enemy_2)
+        self.secuencia = []
+        self.secuenciaf = [id(puzzle.enemy_1), id(puzzle.enemy_2), id(puzzle.enemy_1), id(puzzle.enemy_2) ]
+#kill() se usara para determinar cuando un enemigo es matado
+    def kill(self):
+        puzzle.enemy_kill1 == True
+#imprimir() solo sirve para pruebas
+    def imprimir(self):
+        print("boolean:", self.enemy_kill1, self.enemy_kill2)
+        print("id:", self.enemy_1, self.enemy_2)
+        print("secuencia:", self.secuencia)
+#Las funciones id son las encargadas de meter la id de los enemigos en la secuencia 
+    def id_1(self):
+        if self.enemy_kill1 == True:
+            puzzle.secuencia.append(id(puzzle.enemy_1))
+            
+    def id_2(self):
+        if self.enemy_kill2 == True:
+            puzzle.secuencia.append(id(puzzle.enemy_2))
+        
+ #comparar() compara secuencia y secuenciaf de forma que sean totalmente iguales           
+    def comparar(self):
+        if self.secuencia == self.secuenciaf:
+            return True
+        else:
+            return False
+
+    
+
+
+    
+    
+puzzle1=puzzle()
+puzzle1.kill()
+puzzle1.id_1()
+
+puzzle1.imprimir()
+print(puzzle1.comparar())
+
+
+    
+        
+    
