@@ -161,8 +161,12 @@ class Scenario(arcade.Window):
                 self.enemy2.dead = True
                 self.puzzle(1)
 
-    def puzzle (self, id):
-        self.lista.append(id)
-        print(self.lista)
+    def puzzle(self, id):
+        if not self.lista:
+            self.lista.append(id)
+            print(self.lista)
+        if self.lista[len(self.lista) - 1] != id:
+            self.lista.append(id)
+            print(self.lista)
 
 
