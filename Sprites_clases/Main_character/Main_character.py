@@ -59,7 +59,6 @@ class Main_Character(arcade.Sprite):
             texturas.append(
                 arcade.load_texture(Jumping_Sprite, x=i * 236, y=0, width=220, height=522))
         self.player_sprite.walk_up_textures.append(texturas)
-
         # Jump Left Sprites
         texturas = []
         for i in range(5):
@@ -135,6 +134,7 @@ class Main_Character(arcade.Sprite):
         elif self.change_x > 0 and self.character_face_direction == LEFT_FACING:
             self.character_face_direction = RIGHT_FACING
 
+
         # Walking animation
         self.cur_texture += 1
 
@@ -149,7 +149,7 @@ class Main_Character(arcade.Sprite):
 
         # Jumping animation
         elif self.is_jumping:
-            self.set_to_false()
+            # self.set_to_false()
             self.is_jumping = True
             if self.cur_texture >= 5 * UPDATES_PER_FRAME:
                 self.cur_texture = 0
@@ -175,6 +175,7 @@ class Main_Character(arcade.Sprite):
         else:
             self.texture = self.player_sprite.stand_textures[self.character_face_direction]
 
+
     # on key press
     def on_key_press_move_up(self):
         if self.physics_engine.can_jump() and not self.jump_needs_reset:
@@ -198,7 +199,8 @@ class Main_Character(arcade.Sprite):
 
     #on key release
     def on_key_release_move_left(self):
-       arcade.stop_sound(self.caminar)
+        self.change_x = 0
+        arcade.stop_sound(self.caminar)
 
     def on_key_release_move_right(self):
         self.change_x = 0

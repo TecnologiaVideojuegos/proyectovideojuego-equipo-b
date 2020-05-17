@@ -131,7 +131,7 @@ class Enemie_1(arcade.Sprite):
 
         # Dead animation
         if self.dead:
-            if self.cur_texture >= 90:
+            if self.cur_texture == 90:
                 self.kill()
             if self.cur_texture >= 9 * UPDATES_PER_FRAME:
                 self.cur_texture = 0

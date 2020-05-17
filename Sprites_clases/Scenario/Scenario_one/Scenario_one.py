@@ -25,7 +25,6 @@ class Scenario(arcade.Window):
         self.enemy1_list = None
         self.wall_list = None
 
-        self.jump_needs_reset = False
 
 
     def setup(self):
@@ -76,8 +75,8 @@ class Scenario(arcade.Window):
                 self.wall_list.append(wall)
 
         # Set the physics_engine
-        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, GRAVITY)
-        self.physics_engine_enemy1 = arcade.PhysicsEnginePlatformer(self.enemy1, self.wall_list, GRAVITY)
+        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, gravity_constant=GRAVITY)
+        self.physics_engine_enemy1 = arcade.PhysicsEnginePlatformer(self.enemy1, self.wall_list, gravity_constant=GRAVITY)
         # Load the background image
         self.background = arcade.load_texture(Scenario_sprite)
 
@@ -88,7 +87,6 @@ class Scenario(arcade.Window):
         self.physics_engine.update()
         self.physics_engine_enemy1.update()
         self.collisions()
-
 
     def on_draw(self):
         arcade.start_render()
@@ -103,11 +101,10 @@ class Scenario(arcade.Window):
         if key == arcade.key.SPACE:
             self.player.on_key_press_attack()
         elif key == arcade.key.UP or key == arcade.key.W:
-            if self.physics_engine.can_jump() and not self.jump_needs_reset:
-                # self.player.is_jumping = True
+            if self.physics_engine.can_jump() and not self.player.jump_needs_reset:
+                self.player.is_jumping = True
                 self.player.change_y = PLAYER_JUMP_SPEED
-                self.jump_needs_reset = False
-
+                self.player.jump_needs_reset = False
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player.on_key_press_move_left()
         elif key == arcade.key.RIGHT or key == arcade.key.D:
@@ -122,11 +119,12 @@ class Scenario(arcade.Window):
             self.player.change_x = 0
             self.player.is_walking = False
         elif key == arcade.key.UP or key == arcade.key.W:
-            # self.player.is_jumping = False
-            # self.player.is_falling = True
-            self.jump_needs_reset = False
+            self.player.is_jumping = False
+            self.player.is_falling = True
+            self.player.jump_needs_reset = False
         elif key == arcade.key.SPACE:
             self.player.is_attacking = False
+
 
     def collisions(self):
         hit_list = arcade.check_for_collision_with_list(self.player, self.enemy1_list)
