@@ -173,8 +173,9 @@ class Scenario(arcade.Window):
         self.enemy1_list.draw()
         self.enemy2_list.draw()
 
+
         score_text = f"Vida: {self.valor_vida}"
-        arcade.draw_text(score_text, 100, 650,
+        arcade.draw_text(score_text, self.view_left + 10, self.view_bottom + 600,
                          arcade.csscolor.BLACK, 18)
 
     def on_key_press(self, key, modifiers):
@@ -203,9 +204,6 @@ class Scenario(arcade.Window):
             self.player.is_jumping = False
             self.player.is_falling = True
             self.player.jump_needs_reset = False
-        #elif key == arcade.key.SPACE:
-            #self.player.is_attacking = False
-
 
     def collisions(self):
         hit_list1 = arcade.check_for_collision_with_list(self.player, self.enemy1_list)
