@@ -203,8 +203,8 @@ class Scenario(arcade.Window):
             self.player.is_jumping = False
             self.player.is_falling = True
             self.player.jump_needs_reset = False
-        elif key == arcade.key.SPACE:
-            self.player.is_attacking = False
+        #elif key == arcade.key.SPACE:
+            #self.player.is_attacking = False
 
 
     def collisions(self):

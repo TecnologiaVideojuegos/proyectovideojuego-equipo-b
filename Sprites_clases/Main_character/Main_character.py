@@ -142,10 +142,13 @@ class Main_Character(arcade.Sprite):
         if self.is_attacking:
             self.set_to_false()
             self.is_attacking = True
+            if self.cur_texture == 40:
+                self.is_attacking = False
             if self.cur_texture >= 4 * UPDATES_PER_FRAME:
                 self.cur_texture = 0
             self.texture = self.player_sprite.attack_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME]
+
 
         # Jumping animation
         elif self.is_jumping:
