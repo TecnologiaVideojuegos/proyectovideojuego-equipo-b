@@ -7,16 +7,17 @@ from Sprites_clases.Main_character.Main_character import *
 class Enemie_2(arcade.Sprite):
     """Inicializador"""
 
-    def __init__(self, summon_x, summon_y):
+    def __init__(self):
 
         # Set up parent class
         super().__init__()
 
-        self.summon_x = summon_x
-        self.summon_y = summon_y
+        self.summon_x = 100
+        self.summon_y = 100
         # Sprite lists
         self.enemy2_list = None
 
+        self.id=1
         # Set up the player
         self.enemy2_sprite = None
         self.physics_engine = None
@@ -34,9 +35,10 @@ class Enemie_2(arcade.Sprite):
         self.position_x = Main_Character.center_x
         self.position_y = Main_Character.center_y
 
-        self.dead = False
 
     def setup(self):
+        self.dead = False
+
         "El archivo WalkingX.png lo metí directamente en la carpeta del proyecto de PyCharm"
         self.enemy2_list = arcade.SpriteList()
         self.enemy2_sprite = arcade.AnimatedWalkingSprite()

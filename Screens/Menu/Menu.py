@@ -1,7 +1,6 @@
 import arcade
 from Screens.Variables import *
 from Sprites_clases.Scenario.Scenario_one.Scenario_one import *
-import pyglet
 
 
 class Menu(arcade.Window):

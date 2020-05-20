@@ -26,8 +26,7 @@ class Scenario(arcade.Window):
         self.enemy2 = None
         # Sprite lists
         self.player_list = None
-        self.enemy1_list = None
-        self.enemy2_list = None
+        self.enemy_list = None
         self.wall_list = None
 
         self.lista = None
@@ -48,45 +47,21 @@ class Scenario(arcade.Window):
 
         #Set up the Sprites
         self.player_list = arcade.SpriteList()
-        self.enemy1_list = arcade.SpriteList()
-        self.enemy2_list = arcade.SpriteList()
+        self.enemy_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
 
         # Set up the player
         self.player = Main_Character()
         self.player.setup()
 
-        # Set up the enemy1
-        self.enemy1 = Enemie_1(300, 100)
-        self.enemy1.setup()
-
-        # Set up the enemy2
-        self.enemy2 = Enemie_2(100, 100)
-        self.enemy2.setup()
-
         # Set up the player position
         self.player.center_x = SCREEN_WIDTH // 2
-        self.player.center_y = 100
+        self.player.center_y = SCREEN_HEIGHT // 2
         self.player.scale = PLAYER_SCALE
 
         self.player_list.append(self.player)
 
-        # Set up the enemy1 position
-        self.enemy1.center_x = SCREEN_WIDTH // 4
-        self.enemy1.center_y = 100
-        self.enemy1.scale = PLAYER_SCALE
-
-        self.enemy1_list.append(self.enemy1)
-
-        # Set up the enemy1 position
-        self.enemy2.center_x = SCREEN_WIDTH // 1.25
-        self.enemy2.center_y = 100
-        self.enemy2.scale = PLAYER_SCALE
-
-        self.enemy2_list.append(self.enemy2)
-
-
-        # -- Set up the walls
+       # -- Set up the walls
 
         # Create the ground
         for i in range(100):
@@ -106,8 +81,7 @@ class Scenario(arcade.Window):
 
         # Set the physics_engine
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, gravity_constant=GRAVITY)
-        self.physics_engine_enemy1 = arcade.PhysicsEnginePlatformer(self.enemy1, self.wall_list, gravity_constant=GRAVITY)
-        self.physics_engine_enemy2 = arcade.PhysicsEnginePlatformer(self.enemy2, self.wall_list, gravity_constant=GRAVITY)
+
         # Load the background image
         self.background = arcade.load_texture(Scenario_sprite)
 
@@ -119,12 +93,14 @@ class Scenario(arcade.Window):
         else:
             self.player.is_falling = self.player.change_y < 0
             self.player_list.update_animation()
-            self.enemy1_list.update_animation()
-            self.enemy2_list.update_animation()
+            self.enemy_list.update_animation()
             self.physics_engine.update()
-            self.physics_engine_enemy1.update()
-            self.physics_engine_enemy2.update()
+            if self.physics_engine_enemy1 != None :
+                self.physics_engine_enemy1.update()
+            if self.physics_engine_enemy2 != None:
+                self.physics_engine_enemy2.update()
             self.collisions()
+
 
             # --- Manage Scrolling ---
 
@@ -170,12 +146,10 @@ class Scenario(arcade.Window):
         arcade.draw_lrwh_rectangle_textured(-50, 0, 8000, SCREEN_HEIGHT, self.background) #At wall ground length 20 the width is 1280
         #self.wall_list.draw()                                                                   #At wall ground lenght 100 the image witdh is 6450
         self.player_list.draw()
-        self.enemy1_list.draw()
-        self.enemy2_list.draw()
-
+        self.enemy_list.draw()
 
         score_text = f"Vida: {self.valor_vida}"
-        arcade.draw_text(score_text, self.view_left + 10, self.view_bottom + 600,
+        arcade.draw_text(score_text, 100, 650,
                          arcade.csscolor.BLACK, 18)
 
     def on_key_press(self, key, modifiers):
@@ -191,6 +165,8 @@ class Scenario(arcade.Window):
             self.player.on_key_press_move_left()
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.on_key_press_move_right()
+        elif key == arcade.key.X :
+            self.Generate_Enemie(0 , SCREEN_HEIGHT//2 , SCREEN_WIDTH//2)  #posicion valida Screen hight and width //2
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
@@ -204,30 +180,59 @@ class Scenario(arcade.Window):
             self.player.is_jumping = False
             self.player.is_falling = True
             self.player.jump_needs_reset = False
+        #elif key == arcade.key.SPACE:
+
 
     def collisions(self):
-        hit_list1 = arcade.check_for_collision_with_list(self.player, self.enemy1_list)
-        hit_list2 = arcade.check_for_collision_with_list(self.player, self.enemy2_list)
-        for self.enemy1 in hit_list1:
+        hit_list = arcade.check_for_collision_with_list(self.player, self.enemy_list)
+        for enemie in hit_list:
+
             if self.player.is_attacking:
-                self.enemy1.dead = True
-                self.puzzle(0)
-            if not self.enemy1.dead:
+                enemie.dead = True
+                self.puzzle(enemie.id)
+            if not enemie.dead:
                 # decrease the character's life
                 self.valor_vida -= 0.5
-
-        for self.enemy2 in hit_list2:
-            if self.player.is_attacking:
-                self.enemy2.dead = True
-                self.puzzle(1)
-            if not self.enemy2.dead:
-                # decrease the character's life
-                self.valor_vida -= 0.5
-
+            if(enemie.dead):
+                self.enemy_list.remove(enemie)
     def puzzle(self, id):
-        if not self.lista:
-            self.lista.append(id)
-            print(self.lista)
-        if self.lista[len(self.lista) - 1] != id:
-            self.lista.append(id)
-            print(self.lista)
+        self.lista.append(id)
+        print(self.lista)
+
+    def Generate_Enemie(self,numero_de_Portal,pos_x,pos_y):
+
+        if(numero_de_Portal==0):
+            if self.enemy1==None:
+                # Set up the enemy1
+                self.enemy1 = Enemie_1()
+            self.enemy1.setup()
+
+            # Set up the enemy1 position
+            self.enemy1.center_x = pos_x
+            self.enemy1.center_y = pos_y
+            self.enemy1.scale = PLAYER_SCALE
+
+            self.enemy_list.append(self.enemy1)
+
+            self.physics_engine_enemy1 = arcade.PhysicsEnginePlatformer(self.enemy1, self.wall_list,
+                                                                        gravity_constant=GRAVITY)
+
+        elif(numero_de_Portal==1):
+            if self.enemy2 == None:
+                # Set up the enemy2
+                self.enemy2 = Enemie_2()
+            self.enemy2.setup()
+
+            # Set up the enemy1 position
+            self.enemy2.center_x = pos_x
+            self.enemy2.center_y = pos_y
+            self.enemy2.scale = PLAYER_SCALE
+
+            self.enemy_list.append(self.enemy2)
+
+            self.physics_engine_enemy2 = arcade.PhysicsEnginePlatformer(self.enemy2, self.wall_list,
+                                                                        gravity_constant=GRAVITY)
+
+
+
+

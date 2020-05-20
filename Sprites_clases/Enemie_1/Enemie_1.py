@@ -7,13 +7,13 @@ from Sprites_clases.Main_character.Main_character import *
 class Enemie_1(arcade.Sprite):
     """Inicializador"""
 
-    def __init__(self, summon_x, summon_y):
+    def __init__(self):
 
         # Set up parent class
         super().__init__()
 
-        self.summon_x = summon_x
-        self.summon_y = summon_y
+        self.summon_x = 100
+        self.summon_y = 100
         # Sprite lists
         self.enemy1_list = None
 
@@ -24,6 +24,7 @@ class Enemie_1(arcade.Sprite):
         # Used for flipping between image sequences
         self.cur_texture = 0
 
+        self.id=0
         # Default to face-right
         self.character_face_direction = RIGHT_FACING
 
@@ -34,9 +35,10 @@ class Enemie_1(arcade.Sprite):
         self.position_x = Main_Character.center_x
         self.position_y = Main_Character.center_y
 
-        self.dead = False
+
 
     def setup(self):
+        self.dead = False
         "El archivo WalkingX.png lo metí directamente en la carpeta del proyecto de PyCharm"
         self.enemy1_list = arcade.SpriteList()
         self.enemy1_sprite = arcade.AnimatedWalkingSprite()
@@ -131,6 +133,7 @@ class Enemie_1(arcade.Sprite):
 
         # Dead animation
         if self.dead:
+            print("Pas")
             if self.cur_texture == 90:
                 self.kill()
             if self.cur_texture >= 9 * UPDATES_PER_FRAME:

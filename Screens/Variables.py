@@ -9,7 +9,7 @@ SPRITE_SCALE=0.5
 
 
 #Sprites
-#Arrow
+
 
 
 #Schenario
