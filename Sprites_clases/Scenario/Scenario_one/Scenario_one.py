@@ -4,6 +4,7 @@ from Sprites_clases.Main_character.Main_character import *
 from Sprites_clases.Enemie_1.Enemie_1 import *
 from Sprites_clases.Enemie_2.Enemie_2 import *
 from Variables import *
+import time
 
 
 class Scenario(arcade.Window):
@@ -29,11 +30,18 @@ class Scenario(arcade.Window):
         self.enemy2_list = None
         self.wall_list = None
 
-        self.lista = []
+        self.lista = None
 
-        self.valor_vida = 200
+        self.valor_vida = None
+
+        self.Game_over=False
 
     def setup(self):
+
+        self.lista = []
+
+        self.valor_vida = 100
+
         #Set up the Sprites
         self.player_list = arcade.SpriteList()
         self.enemy1_list = arcade.SpriteList()
@@ -77,14 +85,14 @@ class Scenario(arcade.Window):
         # -- Set up the walls
 
         # Create the ground
-        for i in range(20):
+        for i in range(1000):
             wall = arcade.Sprite(":resources:images/tiles/stone.png", SPRITE_SCALE)
             wall.bottom = 0
             wall.center_x = i * GRID_PIXEL_SIZE
             self.wall_list.append(wall)
 
         # Create the Wall
-        for posy in [0, 20]:
+        for posy in [0, 1000]:
             for i in range(10):
                 wall = arcade.Sprite(":resources:images/tiles/stone.png", SPRITE_SCALE)
                 wall.bottom = 0
@@ -99,15 +107,20 @@ class Scenario(arcade.Window):
         # Load the background image
         self.background = arcade.load_texture(Scenario_sprite)
 
+
     def on_update(self, delta_time):
-        self.player.is_falling = self.player.change_y < 0
-        self.player_list.update_animation()
-        self.enemy1_list.update_animation()
-        self.enemy2_list.update_animation()
-        self.physics_engine.update()
-        self.physics_engine_enemy1.update()
-        self.physics_engine_enemy2.update()
-        self.collisions()
+        if(self.valor_vida<=0):
+            self.Game_over=True
+            self.close()
+        else:
+            self.player.is_falling = self.player.change_y < 0
+            self.player_list.update_animation()
+            self.enemy1_list.update_animation()
+            self.enemy2_list.update_animation()
+            self.physics_engine.update()
+            self.physics_engine_enemy1.update()
+            self.physics_engine_enemy2.update()
+            self.collisions()
 
     def on_draw(self):
         arcade.start_render()

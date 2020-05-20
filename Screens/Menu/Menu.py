@@ -1,5 +1,7 @@
 import arcade
 from Screens.Variables import *
+from Sprites_clases.Scenario.Scenario_one.Scenario_one import *
+import pyglet
 
 
 class Menu(arcade.Window):
@@ -10,9 +12,10 @@ class Menu(arcade.Window):
         super().__init__(width, height, title)
 
         self.background = None
-        self.arrow_pos=0
+        self.arrow_pos=None
 
     def setup(self):
+        self.arrow_pos = 0
         self.background=[]
         self.background.append( arcade.load_texture(Menu_sprite_1) )
         self.background.append(arcade.load_texture(Menu_sprite_2))
@@ -25,16 +28,17 @@ class Menu(arcade.Window):
 
     def on_key_press(self, key, modifiers):
         if key == arcade.key.UP or key == arcade.key.W:
-            print("Arriba")
             self.arrow_pos -= 1
             if self.arrow_pos < 0:
                 self.arrow_pos = 2
+            print(self.arrow_pos)
 
         elif key == arcade.key.DOWN or key == arcade.key.S:
-            print("Abajo")
             self.arrow_pos += 1
             if self.arrow_pos >= 3:
                 self.arrow_pos = 0
+            print(self.arrow_pos)
 
         elif key == arcade.key.ENTER:
             print("Seleccion")
+            self.on_close()
