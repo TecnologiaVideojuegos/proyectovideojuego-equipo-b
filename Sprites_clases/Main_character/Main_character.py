@@ -176,6 +176,7 @@ class Main_Character(arcade.Sprite):
             self.texture = self.player_sprite.stand_textures[self.character_face_direction]
 
 
+
     # on key press
     def on_key_press_move_up(self):
         if self.physics_engine.can_jump() and not self.jump_needs_reset:

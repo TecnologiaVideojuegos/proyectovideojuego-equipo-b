@@ -34,7 +34,11 @@ class Scenario(arcade.Window):
 
         self.valor_vida = None
 
-        self.Game_over=False
+        self.Game_over = False
+
+        self.view_left = 0
+        self.view_bottom = 0
+        self.end_of_map = 0
 
     def setup(self):
 
@@ -121,6 +125,44 @@ class Scenario(arcade.Window):
             self.physics_engine_enemy1.update()
             self.physics_engine_enemy2.update()
             self.collisions()
+
+            # --- Manage Scrolling ---
+
+            # Track if we need to change the viewport
+
+            changed = False
+
+            # Scroll left
+            left_boundary = self.view_left + VIEWPORT_MARGIN
+            if self.player.left < left_boundary:
+                self.view_left -= left_boundary - self.player.left
+                changed = True
+
+            # Scroll right
+            right_boundary = self.view_left + SCREEN_WIDTH - RIGHT_MARGIN
+            if self.player.right > right_boundary:
+                self.view_left += self.player.right - right_boundary
+                changed = True
+
+            # Scroll up
+            top_boundary = self.view_bottom + SCREEN_HEIGHT - VIEWPORT_MARGIN
+            if self.player.top > top_boundary:
+                self.view_bottom += self.player.top - top_boundary
+                changed = True
+
+            # Scroll down
+            bottom_boundary = self.view_bottom + VIEWPORT_MARGIN
+            if self.player.bottom < bottom_boundary:
+                self.view_bottom -= bottom_boundary - self.player.bottom
+                changed = True
+
+            # If we need to scroll, go ahead and do it.
+            if changed:
+                arcade.set_viewport(self.view_left,
+                                    SCREEN_WIDTH + self.view_left,
+                                    self.view_bottom,
+                                    SCREEN_HEIGHT + self.view_bottom)
+
 
     def on_draw(self):
         arcade.start_render()
