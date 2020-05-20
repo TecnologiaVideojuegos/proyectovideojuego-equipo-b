@@ -89,14 +89,14 @@ class Scenario(arcade.Window):
         # -- Set up the walls
 
         # Create the ground
-        for i in range(1000):
+        for i in range(100):
             wall = arcade.Sprite(":resources:images/tiles/stone.png", SPRITE_SCALE)
             wall.bottom = 0
             wall.center_x = i * GRID_PIXEL_SIZE
             self.wall_list.append(wall)
 
         # Create the Wall
-        for posy in [0, 1000]:
+        for posy in [0, 100]:
             for i in range(10):
                 wall = arcade.Sprite(":resources:images/tiles/stone.png", SPRITE_SCALE)
                 wall.bottom = 0
@@ -167,8 +167,8 @@ class Scenario(arcade.Window):
     def on_draw(self):
         arcade.start_render()
         # Draw the background texture
-        arcade.draw_lrwh_rectangle_textured(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, self.background)
-        self.wall_list.draw()
+        arcade.draw_lrwh_rectangle_textured(-50, 0, 8000, SCREEN_HEIGHT, self.background) #At wall ground length 20 the width is 1280
+        #self.wall_list.draw()                                                                   #At wall ground lenght 100 the image witdh is 6450
         self.player_list.draw()
         self.enemy1_list.draw()
         self.enemy2_list.draw()
