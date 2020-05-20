@@ -57,11 +57,11 @@ class Scenario(arcade.Window):
         self.player.setup()
 
         # Set up the enemy1
-        self.enemy1 = Enemie_1()
+        self.enemy1 = Enemie_1(300, 100)
         self.enemy1.setup()
 
         # Set up the enemy2
-        self.enemy2 = Enemie_2()
+        self.enemy2 = Enemie_2(100, 100)
         self.enemy2.setup()
 
         # Set up the player position

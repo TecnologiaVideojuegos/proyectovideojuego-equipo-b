@@ -7,13 +7,13 @@ from Sprites_clases.Main_character.Main_character import *
 class Enemie_2(arcade.Sprite):
     """Inicializador"""
 
-    def __init__(self):
+    def __init__(self, summon_x, summon_y):
 
         # Set up parent class
         super().__init__()
 
-        self.summon_x = 100
-        self.summon_y = 100
+        self.summon_x = summon_x
+        self.summon_y = summon_y
         # Sprite lists
         self.enemy2_list = None
 
