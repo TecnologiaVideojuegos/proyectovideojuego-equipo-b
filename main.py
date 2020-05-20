@@ -22,7 +22,7 @@ def main():
 
 
 def Prueba():
-    fin=True
+    fin = True
     window = Menu(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
     window.setup()
     window.set_visible(False)

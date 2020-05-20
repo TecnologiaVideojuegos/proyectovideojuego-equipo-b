@@ -66,21 +66,21 @@ class Scenario(arcade.Window):
 
         # Set up the player position
         self.player.center_x = SCREEN_WIDTH // 2
-        self.player.center_y = SCREEN_HEIGHT // 2
+        self.player.center_y = 100
         self.player.scale = PLAYER_SCALE
 
         self.player_list.append(self.player)
 
         # Set up the enemy1 position
         self.enemy1.center_x = SCREEN_WIDTH // 4
-        self.enemy1.center_y = SCREEN_HEIGHT // 2
+        self.enemy1.center_y = 100
         self.enemy1.scale = PLAYER_SCALE
 
         self.enemy1_list.append(self.enemy1)
 
         # Set up the enemy1 position
         self.enemy2.center_x = SCREEN_WIDTH // 1.25
-        self.enemy2.center_y = SCREEN_HEIGHT // 2
+        self.enemy2.center_y = 100
         self.enemy2.scale = PLAYER_SCALE
 
         self.enemy2_list.append(self.enemy2)
