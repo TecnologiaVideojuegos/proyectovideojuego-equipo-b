@@ -55,13 +55,13 @@ class Main_Character(arcade.Sprite):
         self.player_sprite.walk_up_textures = []
         # Jump Right Sprites
         texturas=[]
-        for i in range(5):
+        for i in range(9):
             texturas.append(
                 arcade.load_texture(Jumping_Sprite, x=i * 236, y=0, width=220, height=522))
         self.player_sprite.walk_up_textures.append(texturas)
         # Jump Left Sprites
         texturas = []
-        for i in range(5):
+        for i in range(9):
             texturas.append(
                 arcade.load_texture(Jumping_Sprite, x=i * 236, y=0, width=220, height=522, mirrored=True))
         self.player_sprite.walk_up_textures.append(texturas)
@@ -153,10 +153,14 @@ class Main_Character(arcade.Sprite):
         elif self.is_jumping:
             # self.set_to_false()
             self.is_jumping = True
-            if self.cur_texture >= 5 * UPDATES_PER_FRAME:
+            if self.cur_texture == 90:
+                self.is_jumping = False
+                #self.jump_needs_reset = True
+            if self.cur_texture >= 9 * UPDATES_PER_FRAME:
                 self.cur_texture = 0
             self.texture = self.player_sprite.walk_up_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME]
+
 
         # Falling animation
         elif self.is_falling:

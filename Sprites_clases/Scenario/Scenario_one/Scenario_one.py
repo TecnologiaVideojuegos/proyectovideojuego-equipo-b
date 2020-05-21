@@ -176,10 +176,10 @@ class Scenario(arcade.Window):
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.change_x = 0
             self.player.is_walking = False
-        elif key == arcade.key.UP or key == arcade.key.W:
-            self.player.is_jumping = False
-            self.player.is_falling = True
-            self.player.jump_needs_reset = False
+        #elif key == arcade.key.UP or key == arcade.key.W:
+            #self.player.is_jumping = False
+            #self.player.is_falling = True
+            #self.player.jump_needs_reset = False
 
 
     def collisions(self):
