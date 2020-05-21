@@ -149,7 +149,7 @@ class Scenario(arcade.Window):
         self.enemy_list.draw()
 
         score_text = f"Vida: {self.valor_vida}"
-        arcade.draw_text(score_text, 100, 650,
+        arcade.draw_text(score_text, self.view_left + 50, self.view_bottom + 650,
                          arcade.csscolor.BLACK, 18)
 
     def on_key_press(self, key, modifiers):
@@ -165,8 +165,8 @@ class Scenario(arcade.Window):
             self.player.on_key_press_move_left()
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.on_key_press_move_right()
-        elif key == arcade.key.X :
-            self.Generate_Enemie(0 , SCREEN_HEIGHT//2 , SCREEN_WIDTH//2)  #posicion valida Screen hight and width //2
+        elif key == arcade.key.X:
+            self.Generate_Enemie(0, SCREEN_HEIGHT//2, SCREEN_WIDTH//2)  #posicion valida Screen hight and width //2
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
@@ -180,7 +180,6 @@ class Scenario(arcade.Window):
             self.player.is_jumping = False
             self.player.is_falling = True
             self.player.jump_needs_reset = False
-        #elif key == arcade.key.SPACE:
 
 
     def collisions(self):
@@ -193,16 +192,17 @@ class Scenario(arcade.Window):
             if not enemie.dead:
                 # decrease the character's life
                 self.valor_vida -= 0.5
-            if(enemie.dead):
-                self.enemy_list.remove(enemie)
     def puzzle(self, id):
-        self.lista.append(id)
-        print(self.lista)
+        if self.lista == []:
+            self.lista.append(id)
+        elif self.lista[len(self.lista) - 1] != id:
+            self.lista.append(id)
+            print(self.lista)
 
-    def Generate_Enemie(self,numero_de_Portal,pos_x,pos_y):
+    def Generate_Enemie(self, numero_de_Portal, pos_x, pos_y):
 
-        if(numero_de_Portal==0):
-            if self.enemy1==None:
+        if(numero_de_Portal == 0):
+            if self.enemy1 == None:
                 # Set up the enemy1
                 self.enemy1 = Enemie_1()
             self.enemy1.setup()
