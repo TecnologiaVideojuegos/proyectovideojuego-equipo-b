@@ -35,6 +35,8 @@ class Enemie_1(arcade.Sprite):
         self.position_x = Main_Character.center_x
         self.position_y = Main_Character.center_y
 
+        self.is_walking = False
+        self.is_attacking = False
 
 
     def setup(self):
@@ -44,26 +46,29 @@ class Enemie_1(arcade.Sprite):
         self.enemy1_sprite = arcade.AnimatedWalkingSprite()
 
         # Stand Right Sprites
-        self.enemy1_sprite.stand_right_textures = []
-        self.enemy1_sprite.stand_right_textures.append(
+        self.enemy1_sprite.stand_textures = []
+        self.enemy1_sprite.stand_textures.append(
             arcade.load_texture(Walking_Enemie_1, x=0, y=0, width=240, height=520))
 
         # Stand left Sprites
-        self.enemy1_sprite.stand_left_textures = []
-        self.enemy1_sprite.stand_left_textures.append(
+        self.enemy1_sprite.stand_textures.append(
             arcade.load_texture(Walking_Enemie_1, x=0, y=0, width=240, height=520, mirrored=True))
 
         # Walk Right Sprites
-        self.enemy1_sprite.walk_right_textures = []
+        self.enemy1_sprite.walk_textures = []
+        texturas = []
         for i in range(7):
-            self.enemy1_sprite.walk_right_textures.append(
-                arcade.load_texture(Walking_Enemie_1, x=i * 236 + 50, y=0, width=220, height=522))
+            texturas.append(
+                arcade.load_texture(Walking_Enemie_1, x=i * 236 + 50, y=0, width=220, height=520))
+        self.enemy1_sprite.walk_textures.append(texturas)
 
         # Walk Left Sprites
-        self.enemy1_sprite.walk_left_textures = []
+        texturas = []
         for i in range(7):
-            self.enemy1_sprite.walk_left_textures.append(
+            texturas.append(
                 arcade.load_texture(Walking_Enemie_1, x=i * 236 + 50, y=0, width=220, height=520, mirrored=True))
+        self.enemy1_sprite.walk_textures.append(texturas)
+
 
         # Jump Sprites
         self.enemy1_sprite.dead_textures = []
@@ -110,9 +115,10 @@ class Enemie_1(arcade.Sprite):
     def on_update(self):
 
         self.enemy1_list.update()
+
         self.enemy1_list.update_animation()
 
-        self.change_x + 1
+
 
         # --- Manage Scrolling ---
 
@@ -126,10 +132,10 @@ class Enemie_1(arcade.Sprite):
         elif self.change_x > 0 and self.character_face_direction == LEFT_FACING:
             self.character_face_direction = RIGHT_FACING
 
-        # Walking animation
+        # Standing animation
         self.cur_texture += 1
 
-        self.texture = self.enemy1_sprite.stand_right_textures[self.character_face_direction]
+        self.texture = self.enemy1_sprite.stand_textures[self.character_face_direction]
 
         # Dead animation
         if self.dead:
@@ -139,5 +145,22 @@ class Enemie_1(arcade.Sprite):
                 self.cur_texture = 0
             self.texture = self.enemy1_sprite.dead_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME]
+
+    def interact(self,x,y):
+        if self.dead:
+            None
+        else:
+            where_x=self.center_x-x
+            where_y=self.center_y-y
+            if -20 < where_x and where_x< 20 and -5<where_y and where_y<5 :
+                self.is_walking = False
+                self.is_attacking = True
+            elif where_x<0:
+                self.is_walking = True
+                self.change_x = MOVEMENT_SPEED_ENEMIE_1
+
+            elif where_x>0:
+                self.is_walking = True
+                self.change_x = -MOVEMENT_SPEED_ENEMIE_1
 
 

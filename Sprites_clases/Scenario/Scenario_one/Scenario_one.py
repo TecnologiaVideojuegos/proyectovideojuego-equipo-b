@@ -91,6 +91,7 @@ class Scenario(arcade.Window):
             self.Game_over=True
             self.close()
         else:
+
             self.player.is_falling = self.player.change_y < 0
             self.player_list.update_animation()
             self.enemy_list.update_animation()
@@ -100,6 +101,8 @@ class Scenario(arcade.Window):
             if self.physics_engine_enemy2 != None:
                 self.physics_engine_enemy2.update()
             self.collisions()
+            self.Trigger_IA()
+
 
 
             # --- Manage Scrolling ---
@@ -185,13 +188,18 @@ class Scenario(arcade.Window):
     def collisions(self):
         hit_list = arcade.check_for_collision_with_list(self.player, self.enemy_list)
         for enemie in hit_list:
-
             if self.player.is_attacking:
                 enemie.dead = True
                 self.puzzle(enemie.id)
-            if not enemie.dead:
+            if not enemie.dead and enemie.is_attacking:
                 # decrease the character's life
                 self.valor_vida -= 0.5
+
+    #Trigger the enemie IA
+    def Trigger_IA(self):
+        for enemie in self.enemy_list:
+            enemie.interact(self.player.center_x,self.player.center_y)
+
     def puzzle(self, id):
         if self.lista == []:
             self.lista.append(id)
