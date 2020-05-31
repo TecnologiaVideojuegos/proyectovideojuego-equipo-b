@@ -20,11 +20,13 @@ Miembros:
 
 Programadores:
 
-  -Crear pruebas con las diferentes animaciones para emular el movimiento del personaje principal en el juego. Andar, solo requerira moverse en el eje x, saltar en el y, y atacar nada. 
+  - Optimizar cargar y fluidez de los niveles. Crear el background del nivel.
+  - Pantalla de PAUSE (?)
+  - Pantalla de Game over
 
 Musicos:
   -Musica adaptada a la sombria tematica del videojuego
 
 Desarrollador Web:
   
-  -Esperar a sber como desarrollar la web
+  - 
