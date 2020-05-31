@@ -94,12 +94,16 @@ class Scenario(arcade.Window):
 
             self.player.is_falling = self.player.change_y < 0
             self.player_list.update_animation()
-            self.enemy_list.update_animation()
+
             self.physics_engine.update()
-            if self.physics_engine_enemy1 != None :
-                self.physics_engine_enemy1.update()
-            if self.physics_engine_enemy2 != None:
-                self.physics_engine_enemy2.update()
+
+            if(len(self.enemy_list)>0):
+                self.enemy_list.update_animation()
+                if self.physics_engine_enemy1 != None :
+                    self.physics_engine_enemy1.update()
+                if self.physics_engine_enemy2 != None:
+                    self.physics_engine_enemy2.update()
+
             self.collisions()
             self.Trigger_IA()
 
