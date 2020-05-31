@@ -41,18 +41,17 @@ class Enemie_1(arcade.Sprite):
 
     def setup(self):
         self.dead = False
-        "El archivo WalkingX.png lo metí directamente en la carpeta del proyecto de PyCharm"
         self.enemy1_list = arcade.SpriteList()
         self.enemy1_sprite = arcade.AnimatedWalkingSprite()
 
         # Stand Right Sprites
         self.enemy1_sprite.stand_textures = []
         self.enemy1_sprite.stand_textures.append(
-            arcade.load_texture(Walking_Enemie_1, x=0, y=0, width=240, height=520))
+            arcade.load_texture(Lightning_Enemie_1, x=0, y=0, width=240, height=520))
 
         # Stand left Sprites
         self.enemy1_sprite.stand_textures.append(
-            arcade.load_texture(Walking_Enemie_1, x=0, y=0, width=240, height=520, mirrored=True))
+            arcade.load_texture(Lightning_Enemie_1, x=0, y=0, width=240, height=520, mirrored=True))
 
         # Walk Right Sprites
         self.enemy1_sprite.walk_textures = []
@@ -70,7 +69,7 @@ class Enemie_1(arcade.Sprite):
         self.enemy1_sprite.walk_textures.append(texturas)
 
 
-        # Jump Sprites
+        # Dead Sprites
         self.enemy1_sprite.dead_textures = []
         # Dead Right Sprites
         texturas = []
@@ -108,9 +107,6 @@ class Enemie_1(arcade.Sprite):
         # Draw all the Sprites.
         self.enemy1_list.draw()
 
-        # Put the text on the screen.
-        # Adjust the text position based on the viewport so that we don't
-        # scroll the text too.
 
     def on_update(self):
 
@@ -118,11 +114,6 @@ class Enemie_1(arcade.Sprite):
 
         self.enemy1_list.update_animation()
 
-
-
-        # --- Manage Scrolling ---
-
-        # Track if we need to change the viewport
 
     def update_animation(self, delta_time):
 
@@ -144,6 +135,12 @@ class Enemie_1(arcade.Sprite):
             if self.cur_texture >= 9 * UPDATES_PER_FRAME:
                 self.cur_texture = 0
             self.texture = self.enemy1_sprite.dead_textures[self.character_face_direction][
+                self.cur_texture // UPDATES_PER_FRAME]
+        # Walking animation
+        elif self.is_walking:
+            if self.cur_texture >= 7 * UPDATES_PER_FRAME:
+                self.cur_texture = 0
+            self.texture = self.enemy1_sprite.walk_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME]
 
     def interact(self,x,y):

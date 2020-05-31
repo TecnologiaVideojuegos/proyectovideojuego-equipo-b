@@ -173,7 +173,7 @@ class Scenario(arcade.Window):
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.on_key_press_move_right()
         elif key == arcade.key.X:
-            self.Generate_Enemie(0, SCREEN_HEIGHT//2, SCREEN_WIDTH//2)  #posicion valida Screen hight and width //2
+            self.Generate_Enemie(1, SCREEN_HEIGHT//2, SCREEN_WIDTH//2)  #posicion valida Screen hight and width //2
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
@@ -190,8 +190,10 @@ class Scenario(arcade.Window):
 
 
     def collisions(self):
+
         hit_list = arcade.check_for_collision_with_list(self.player, self.enemy_list)
         for enemie in hit_list:
+
             if self.player.is_attacking:
                 enemie.dead = True
                 self.puzzle(enemie.id)
