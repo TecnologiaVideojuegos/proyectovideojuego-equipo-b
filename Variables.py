@@ -28,7 +28,7 @@ GRAVITY = 0.4
 PLAYER_JUMP_SPEED = 10
 
 VIEWPORT_MARGIN = SPRITE_PIXEL_SIZE * SPRITE_SCALE
-RIGHT_MARGIN = 4 * SPRITE_PIXEL_SIZE * SPRITE_SCALE
+RIGHT_MARGIN = 4 * SPRITE_PIXEL_SIZE * SPRITE_SCALE*2
 
 # Constants used to track if the player is facing left or right
 RIGHT_FACING = 0
@@ -51,3 +51,8 @@ Lightning_Enemie_1 = "Sprites_clases" + os.path.sep + "Enemie_1" + os.path.sep +
 #Enemie_1
 Walking_Enemie_2 = "Sprites_clases" + os.path.sep + "Enemie_2" + os.path.sep + "Sprites" + os.path.sep + "Walking2.png"
 Lightning_Enemie_2 = "Sprites_clases" + os.path.sep + "Enemie_2" + os.path.sep + "Sprites" + os.path.sep + "Lighting2.png"
+
+#Background Sprites
+Cartel_Gasolinera_Sprite = "Screens" + os.path.sep + "Background_items"+ os.path.sep + "Cartelgasolinera.png"
+Semaforo_Rojo_Sprite = "Screens" + os.path.sep + "Background_items"+ os.path.sep + "semafororojotren.png"
+Señal_Direcciones_Sprite = "Screens" + os.path.sep + "Background_items"+ os.path.sep + "Señaldirecciones.png"

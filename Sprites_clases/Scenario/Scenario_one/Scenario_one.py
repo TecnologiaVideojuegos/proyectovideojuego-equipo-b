@@ -4,7 +4,6 @@ from Sprites_clases.Main_character.Main_character import *
 from Sprites_clases.Enemie_1.Enemie_1 import *
 from Sprites_clases.Enemie_2.Enemie_2 import *
 from Variables import *
-import time
 
 
 class Scenario(arcade.Window):
@@ -28,6 +27,7 @@ class Scenario(arcade.Window):
         self.player_list = None
         self.enemy_list = None
         self.wall_list = None
+        self.background_items_list=None
 
         self.lista = None
 
@@ -49,6 +49,7 @@ class Scenario(arcade.Window):
         self.player_list = arcade.SpriteList()
         self.enemy_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
+        self.background_items_list = arcade.SpriteList()
 
         # Set up the player
         self.player = Main_Character()
@@ -64,20 +65,43 @@ class Scenario(arcade.Window):
        # -- Set up the walls
 
         # Create the ground
-        for i in range(100):
+        for i in range(125):
             wall = arcade.Sprite(":resources:images/tiles/stone.png", SPRITE_SCALE)
             wall.bottom = 0
             wall.center_x = i * GRID_PIXEL_SIZE
             self.wall_list.append(wall)
 
         # Create the Wall
-        for posy in [0, 100]:
+        for posy in [0,5000, 8000]:
             for i in range(10):
                 wall = arcade.Sprite(":resources:images/tiles/stone.png", SPRITE_SCALE)
                 wall.bottom = 0
                 wall.center_y = i * GRID_PIXEL_SIZE
-                wall.center_x = posy * GRID_PIXEL_SIZE
+                wall.center_x = posy
                 self.wall_list.append(wall)
+
+
+
+        #Añadiendo cartel gasolinera
+        item=arcade.Sprite(Cartel_Gasolinera_Sprite,SPRITE_SCALE)
+        item.bottom=0
+        item.center_y=230
+        item.center_x=3200
+        self.background_items_list.append(item)
+        #Añadiendo semaforo rojo
+        item = arcade.Sprite(Semaforo_Rojo_Sprite, SPRITE_SCALE)
+        item.bottom = 0
+        item.center_y = 260
+        item.center_x = 5000
+        self.background_items_list.append(item)
+        #Añadiendo Cartel direcciones
+
+        item = arcade.Sprite(Señal_Direcciones_Sprite, SPRITE_SCALE)
+        item.bottom = 0
+        item.center_y = 95
+        item.center_x = 600
+        self.background_items_list.append(item)
+
 
         # Set the physics_engine
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, gravity_constant=GRAVITY)
@@ -87,6 +111,7 @@ class Scenario(arcade.Window):
 
 
     def on_update(self, delta_time):
+
         if(self.valor_vida<=0):
             self.Game_over=True
             self.close()
@@ -96,6 +121,7 @@ class Scenario(arcade.Window):
             self.player_list.update_animation()
 
             self.physics_engine.update()
+
 
             if(len(self.enemy_list)>0):
                 self.enemy_list.update_animation()
@@ -116,7 +142,7 @@ class Scenario(arcade.Window):
             changed = False
 
             # Scroll left
-            left_boundary = self.view_left + VIEWPORT_MARGIN
+            left_boundary = self.view_left + SCREEN_WIDTH - RIGHT_MARGIN*1.5
             if self.player.left < left_boundary:
                 self.view_left -= left_boundary - self.player.left
                 changed = True
@@ -150,10 +176,11 @@ class Scenario(arcade.Window):
     def on_draw(self):
         arcade.start_render()
         # Draw the background texture
-        arcade.draw_lrwh_rectangle_textured(-50, 0, 8000, SCREEN_HEIGHT, self.background) #At wall ground length 20 the width is 1280
+        arcade.draw_lrwh_rectangle_textured(-1000, 0, 9000, SCREEN_HEIGHT, self.background) #At wall ground length 20 the width is 1280
         #self.wall_list.draw()                                                                   #At wall ground lenght 100 the image witdh is 6450
+        self.background_items_list.draw()
         self.player_list.draw()
-        self.enemy_list.draw()
+
 
         score_text = f"Vida: {self.valor_vida}"
         arcade.draw_text(score_text, self.view_left + 50, self.view_bottom + 650,
@@ -173,7 +200,8 @@ class Scenario(arcade.Window):
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.on_key_press_move_right()
         elif key == arcade.key.X:
-            self.Generate_Enemie(1, SCREEN_HEIGHT//2, SCREEN_WIDTH//2)  #posicion valida Screen hight and width //2
+            self.delete_wall(700)
+            #self.Generate_Enemie(1, SCREEN_HEIGHT//2, SCREEN_WIDTH//2)  #posicion valida Screen hight and width //2
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
@@ -247,6 +275,9 @@ class Scenario(arcade.Window):
             self.physics_engine_enemy2 = arcade.PhysicsEnginePlatformer(self.enemy2, self.wall_list,
                                                                         gravity_constant=GRAVITY)
 
-
+    def delete_wall(self,pos_x):
+        for elem in self.wall_list :
+            if(elem.center_x == pos_x):
+                self.wall_list.remove(elem)
 
 
