@@ -211,7 +211,7 @@ class Scenario(arcade.Window):
             self.player.on_key_press_move_right()
         elif key == arcade.key.X:
             self.delete_wall(700)
-            # self.Generate_Enemie(1, SCREEN_HEIGHT//2, SCREEN_WIDTH//2)  #posicion valida Screen hight and width //2
+            self.Generate_Enemie(1, SCREEN_HEIGHT//2, SCREEN_WIDTH//2)  #posicion valida Screen hight and width //2
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
@@ -291,10 +291,10 @@ class Scenario(arcade.Window):
                 self.wall_list.remove(elem)
 
     def GUI(self):
+        arcade.draw_lrtb_rectangle_filled(self.view_left + 1190, self.view_left + 1210, self.view_bottom + self.valor_vida + 550, self.view_bottom + 470, arcade.color.BLUE)
         self.life_bar.bottom = self.view_bottom + 450
         self.life_bar.center_x = self.view_left + 1200
         self.life_bar_list.draw()
-
 
 
 
