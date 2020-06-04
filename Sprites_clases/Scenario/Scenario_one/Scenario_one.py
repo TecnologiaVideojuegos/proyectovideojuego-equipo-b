@@ -189,6 +189,7 @@ class Scenario(arcade.Window):
         #self.wall_list.draw()                                                                   #At wall ground lenght 100 the image witdh is 6450
         self.background_items_list.draw()
         self.player_list.draw()
+        self.enemy_list.draw()
         self.GUI()
 
         score_text = f"Vida: {self.valor_vida}"
@@ -231,7 +232,6 @@ class Scenario(arcade.Window):
 
         hit_list = arcade.check_for_collision_with_list(self.player, self.enemy_list)
         for enemie in hit_list:
-
             if self.player.is_attacking:
                 enemie.dead = True
                 self.puzzle(enemie.id)
@@ -291,7 +291,7 @@ class Scenario(arcade.Window):
                 self.wall_list.remove(elem)
 
     def GUI(self):
-        arcade.draw_lrtb_rectangle_filled(self.view_left + 1190, self.view_left + 1210, self.view_bottom + self.valor_vida + 550, self.view_bottom + 470, arcade.color.BLUE)
+        arcade.draw_lrtb_rectangle_filled(self.view_left + 1190, self.view_left + 1210, self.view_bottom + self.valor_vida * 1.8 + 480, self.view_bottom + 470, arcade.color.BLUE)
         self.life_bar.bottom = self.view_bottom + 450
         self.life_bar.center_x = self.view_left + 1200
         self.life_bar_list.draw()
