@@ -27,7 +27,7 @@ class Scenario(arcade.Window):
         self.player_list = None
         self.enemy_list = None
         self.wall_list = None
-        self.background_items_list=None
+        self.background_items_list = None
 
         self.lista = None
 
@@ -38,6 +38,9 @@ class Scenario(arcade.Window):
         self.view_left = 0
         self.view_bottom = 0
         self.end_of_map = 0
+
+        # Barra vida
+        self.life_bar_list = None
 
     def setup(self):
 
@@ -50,6 +53,7 @@ class Scenario(arcade.Window):
         self.enemy_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
         self.background_items_list = arcade.SpriteList()
+        self.life_bar_list = arcade.SpriteList()
 
         # Set up the player
         self.player = Main_Character()
@@ -61,6 +65,10 @@ class Scenario(arcade.Window):
         self.player.scale = PLAYER_SCALE
 
         self.player_list.append(self.player)
+
+        # Barra de vida
+        self.life_bar = arcade.Sprite(barra_vida, SPRITE_SCALE)
+        self.life_bar_list.append(self.life_bar)
 
        # -- Set up the walls
 
@@ -83,10 +91,10 @@ class Scenario(arcade.Window):
 
 
         #Añadiendo cartel gasolinera
-        item=arcade.Sprite(Cartel_Gasolinera_Sprite,SPRITE_SCALE)
-        item.bottom=0
-        item.center_y=230
-        item.center_x=3200
+        item = arcade.Sprite(Cartel_Gasolinera_Sprite, SPRITE_SCALE)
+        item.bottom = 0
+        item.center_y = 230
+        item.center_x = 3200
         self.background_items_list.append(item)
         #Añadiendo semaforo rojo
         item = arcade.Sprite(Semaforo_Rojo_Sprite, SPRITE_SCALE)
@@ -95,12 +103,12 @@ class Scenario(arcade.Window):
         item.center_x = 5000
         self.background_items_list.append(item)
         #Añadiendo Cartel direcciones
-
         item = arcade.Sprite(Señal_Direcciones_Sprite, SPRITE_SCALE)
         item.bottom = 0
         item.center_y = 95
         item.center_x = 600
         self.background_items_list.append(item)
+
 
 
         # Set the physics_engine
@@ -112,8 +120,9 @@ class Scenario(arcade.Window):
 
     def on_update(self, delta_time):
 
-        if(self.valor_vida<=0):
-            self.Game_over=True
+
+        if self.valor_vida <= 0:
+            self.Game_over = True
             self.close()
         else:
 
@@ -180,11 +189,12 @@ class Scenario(arcade.Window):
         #self.wall_list.draw()                                                                   #At wall ground lenght 100 the image witdh is 6450
         self.background_items_list.draw()
         self.player_list.draw()
-
+        self.GUI()
 
         score_text = f"Vida: {self.valor_vida}"
         arcade.draw_text(score_text, self.view_left + 50, self.view_bottom + 650,
                          arcade.csscolor.BLACK, 18)
+
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
@@ -201,7 +211,7 @@ class Scenario(arcade.Window):
             self.player.on_key_press_move_right()
         elif key == arcade.key.X:
             self.delete_wall(700)
-            #self.Generate_Enemie(1, SCREEN_HEIGHT//2, SCREEN_WIDTH//2)  #posicion valida Screen hight and width //2
+            # self.Generate_Enemie(1, SCREEN_HEIGHT//2, SCREEN_WIDTH//2)  #posicion valida Screen hight and width //2
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
@@ -232,7 +242,7 @@ class Scenario(arcade.Window):
     #Trigger the enemie IA
     def Trigger_IA(self):
         for enemie in self.enemy_list:
-            enemie.interact(self.player.center_x,self.player.center_y)
+            enemie.interact(self.player.center_x, self.player.center_y)
 
     def puzzle(self, id):
         if self.lista == []:
@@ -259,7 +269,7 @@ class Scenario(arcade.Window):
             self.physics_engine_enemy1 = arcade.PhysicsEnginePlatformer(self.enemy1, self.wall_list,
                                                                         gravity_constant=GRAVITY)
 
-        elif(numero_de_Portal==1):
+        elif numero_de_Portal == 1:
             if self.enemy2 == None:
                 # Set up the enemy2
                 self.enemy2 = Enemie_2()
@@ -275,9 +285,16 @@ class Scenario(arcade.Window):
             self.physics_engine_enemy2 = arcade.PhysicsEnginePlatformer(self.enemy2, self.wall_list,
                                                                         gravity_constant=GRAVITY)
 
-    def delete_wall(self,pos_x):
-        for elem in self.wall_list :
-            if(elem.center_x == pos_x):
+    def delete_wall(self, pos_x):
+        for elem in self.wall_list:
+            if elem.center_x == pos_x:
                 self.wall_list.remove(elem)
+
+    def GUI(self):
+        self.life_bar.bottom = self.view_bottom + 450
+        self.life_bar.center_x = self.view_left + 1200
+        self.life_bar_list.draw()
+
+
 
 

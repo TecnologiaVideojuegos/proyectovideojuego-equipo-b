@@ -109,7 +109,7 @@ class Main_Character(arcade.Sprite):
         texturas = []
         for i in range(4):
             texturas.append(
-                arcade.load_texture(Attack_Sprite, x=i * 1063 , y=0, width=1063, height=600, mirrored=True))
+                arcade.load_texture(Attack_Sprite, x=i * 1063, y=0, width=1063, height=600, mirrored=True))
         self.player_sprite.attack_textures.append(texturas)
 
 

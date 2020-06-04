@@ -53,6 +53,7 @@ Walking_Enemie_2 = "Sprites_clases" + os.path.sep + "Enemie_2" + os.path.sep + "
 Lightning_Enemie_2 = "Sprites_clases" + os.path.sep + "Enemie_2" + os.path.sep + "Sprites" + os.path.sep + "Lighting2.png"
 
 #Background Sprites
-Cartel_Gasolinera_Sprite = "Screens" + os.path.sep + "Background_items"+ os.path.sep + "Cartelgasolinera.png"
-Semaforo_Rojo_Sprite = "Screens" + os.path.sep + "Background_items"+ os.path.sep + "semafororojotren.png"
-Señal_Direcciones_Sprite = "Screens" + os.path.sep + "Background_items"+ os.path.sep + "Señaldirecciones.png"
+Cartel_Gasolinera_Sprite = "Screens" + os.path.sep + "Background_items" + os.path.sep + "Cartelgasolinera.png"
+Semaforo_Rojo_Sprite = "Screens" + os.path.sep + "Background_items" + os.path.sep + "semafororojotren.png"
+Señal_Direcciones_Sprite = "Screens" + os.path.sep + "Background_items" + os.path.sep + "Señaldirecciones.png"
+barra_vida = "Screens" + os.path.sep + "Background_items" + os.path.sep + "barra de vida.png"

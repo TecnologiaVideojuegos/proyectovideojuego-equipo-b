@@ -24,7 +24,7 @@ class Enemie_1(arcade.Sprite):
         # Used for flipping between image sequences
         self.cur_texture = 0
 
-        self.id=0
+        self.id = 0
         # Default to face-right
         self.character_face_direction = RIGHT_FACING
 
@@ -147,8 +147,8 @@ class Enemie_1(arcade.Sprite):
         if self.dead:
             None
         else:
-            where_x=self.center_x-x
-            where_y=self.center_y-y
+            where_x = self.center_x-x
+            where_y = self.center_y-y
             if -20 < where_x and where_x< 20 and -5<where_y and where_y<5 :
                 self.is_walking = False
                 self.is_attacking = True
