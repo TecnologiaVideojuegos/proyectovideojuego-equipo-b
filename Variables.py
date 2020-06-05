@@ -11,13 +11,13 @@ SCREEN_TITLE = "Sprite animated walking"
 
 SPRITE_PIXEL_SIZE = 128
 SPRITE_SCALE = 0.5  # Wall scale
-PLAYER_SCALE = 0.25  # Player scale
+PLAYER_SCALE = 0.5  # Player scale
 GRID_PIXEL_SIZE = (SPRITE_PIXEL_SIZE * SPRITE_SCALE)
 
 # Movement speed of player, in pixels per frame
 MOVEMENT_SPEED = 3
-MOVEMENT_SPEED_ENEMIE_1=2
-MOVEMENT_SPEED_ENEMIE_2=4
+MOVEMENT_SPEED_ENEMIE_1 = 2
+MOVEMENT_SPEED_ENEMIE_2 = 4
 
 UPDATES_PER_FRAME = 7
 GRAVITY = 1.5
@@ -43,6 +43,10 @@ Walking_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep
 Jumping_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "JumpingX.png"
 Attack_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "AttackX.png"
 Walk_sound = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "StepsC.wav"
+
+Walking_Sprite1 = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "WalkingX1.png"
+Jumping_Sprite1 = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "JumpingX1.png"
+Attack_Sprite1 = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "AttackX1.png"
 
 #Enemie_1
 Walking_Enemie_1 = "Sprites_clases" + os.path.sep + "Enemie_1" + os.path.sep + "Sprites" + os.path.sep + "Walking1.png"

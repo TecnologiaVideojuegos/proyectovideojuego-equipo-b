@@ -34,7 +34,7 @@ class Main_Character(arcade.Sprite):
 
         # Adjust the collision box. Default includes too much empty space
         # side-to-side. Box is centered at sprite center, (0, 0)
-        self.points = [[-50, -250], [50, -250], [50, 250], [-50, 250]]
+        self.points = [[-25, -125], [25, -125], [25, 125], [-25, 125]]
 
     def setup(self):
         "El archivo WalkingX.png lo metí directamente en la carpeta del proyecto de PyCharm"
@@ -46,10 +46,10 @@ class Main_Character(arcade.Sprite):
         self.player_sprite.stand_textures = []
         # Stand right Sprites
         self.player_sprite.stand_textures.append(
-            arcade.load_texture(Jumping_Sprite, x=0, y=0, width=240, height=520))
+            arcade.load_texture(Jumping_Sprite1, x=0, y=0, width=120, height=260))
         # Stand left Sprites
         self.player_sprite.stand_textures.append(
-            arcade.load_texture(Jumping_Sprite, x=0, y=0, width=240, height=520, mirrored=True))
+            arcade.load_texture(Jumping_Sprite1, x=0, y=0, width=120, height=260, mirrored=True))
 
         # Jump Sprites
         self.player_sprite.walk_up_textures = []
@@ -57,13 +57,13 @@ class Main_Character(arcade.Sprite):
         texturas=[]
         for i in range(9):
             texturas.append(
-                arcade.load_texture(Jumping_Sprite, x=i * 236, y=0, width=220, height=522))
+                arcade.load_texture(Jumping_Sprite1, x=i * 118, y=0, width=110, height=261))
         self.player_sprite.walk_up_textures.append(texturas)
         # Jump Left Sprites
         texturas = []
         for i in range(9):
             texturas.append(
-                arcade.load_texture(Jumping_Sprite, x=i * 236, y=0, width=220, height=522, mirrored=True))
+                arcade.load_texture(Jumping_Sprite1, x=i * 118, y=0, width=110, height=261, mirrored=True))
         self.player_sprite.walk_up_textures.append(texturas)
 
         # Fall Sprites
@@ -72,13 +72,13 @@ class Main_Character(arcade.Sprite):
         texturas = []
         for i in range(5, 9):
             texturas.append(
-                arcade.load_texture(Jumping_Sprite, x=i * 236, y=0, width=220, height=520))
+                arcade.load_texture(Jumping_Sprite1, x=i * 118, y=0, width=110, height=260))
         self.player_sprite.walk_down_textures.append(texturas)
         # Fall Left Sprites
         texturas = []
         for i in range(5, 9):
             texturas.append(
-                arcade.load_texture(Jumping_Sprite, x=i * 236, y=0, width=220, height=520, mirrored=True))
+                arcade.load_texture(Jumping_Sprite1, x=i * 118, y=0, width=110, height=260, mirrored=True))
         self.player_sprite.walk_down_textures.append(texturas)
 
         # Walk Sprites
@@ -87,14 +87,14 @@ class Main_Character(arcade.Sprite):
         texturas = []
         for i in range(7):
             texturas.append(
-                arcade.load_texture(Walking_Sprite, x=i * 236 + 50, y=0, width=220, height=522))
+                arcade.load_texture(Walking_Sprite1, x=i * 118 + 25, y=0, width=110, height=261))
         self.player_sprite.walk_textures.append(texturas)
 
         # Walk Left Sprites
         texturas = []
         for i in range(7):
             texturas.append(
-                arcade.load_texture(Walking_Sprite, x=i * 236 + 50, y=0, width=220, height=520, mirrored=True))
+                arcade.load_texture(Walking_Sprite1, x=i * 118 + 25, y=0, width=110, height=261, mirrored=True))
         self.player_sprite.walk_textures.append(texturas)
 
         #Attack Sprites
@@ -103,13 +103,13 @@ class Main_Character(arcade.Sprite):
         texturas = []
         for i in range(4):
             texturas.append(
-                arcade.load_texture(Attack_Sprite, x=i * 1063, y=0, width=1063, height=600))
+                arcade.load_texture(Attack_Sprite1, x=i * 531.5, y=0, width=531.5, height=300))
         self.player_sprite.attack_textures.append(texturas)
         # Attack Left Sprites
         texturas = []
         for i in range(4):
             texturas.append(
-                arcade.load_texture(Attack_Sprite, x=i * 1063, y=0, width=1063, height=600, mirrored=True))
+                arcade.load_texture(Attack_Sprite1, x=i * 531.5, y=0, width=531.5, height=300, mirrored=True))
         self.player_sprite.attack_textures.append(texturas)
 
 
@@ -155,7 +155,7 @@ class Main_Character(arcade.Sprite):
             self.is_jumping = True
             if self.cur_texture == 90:
                 self.is_jumping = False
-                #self.jump_needs_reset = True
+                # self.jump_needs_reset = True
             if self.cur_texture >= 9 * UPDATES_PER_FRAME:
                 self.cur_texture = 0
             self.texture = self.player_sprite.walk_up_textures[self.character_face_direction][
