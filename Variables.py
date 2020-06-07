@@ -44,6 +44,8 @@ Jumping_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep
 Attack_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "AttackX.png"
 Walk_sound = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "StepsC.wav"
 
+
+# Sprtes "small"
 Walking_Sprite1 = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "WalkingX1.png"
 Jumping_Sprite1 = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "JumpingX1.png"
 Attack_Sprite1 = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "AttackX1.png"
