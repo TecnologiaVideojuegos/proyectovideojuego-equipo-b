@@ -12,12 +12,14 @@ SCREEN_TITLE = "Sprite animated walking"
 SPRITE_PIXEL_SIZE = 128
 SPRITE_SCALE = 0.5  # Wall scale
 PLAYER_SCALE = 0.5  # Player scale
+BOSS_SCALE=20
 GRID_PIXEL_SIZE = (SPRITE_PIXEL_SIZE * SPRITE_SCALE)
 
 # Movement speed of player, in pixels per frame
 MOVEMENT_SPEED = 3
 MOVEMENT_SPEED_ENEMIE_1 = 2
 MOVEMENT_SPEED_ENEMIE_2 = 4
+
 
 UPDATES_PER_FRAME = 7
 GRAVITY = 1.5
@@ -57,6 +59,11 @@ Lightning_Enemie_1 = "Sprites_clases" + os.path.sep + "Enemie_1" + os.path.sep +
 #Enemie_1
 Walking_Enemie_2 = "Sprites_clases" + os.path.sep + "Enemie_2" + os.path.sep + "Sprites" + os.path.sep + "Walking2.png"
 Lightning_Enemie_2 = "Sprites_clases" + os.path.sep + "Enemie_2" + os.path.sep + "Sprites" + os.path.sep + "Lighting2.png"
+
+#Boss_1
+Stand_Boss_1="Sprites_clases" + os.path.sep + "Boss_1" + os.path.sep + "Sprites" + os.path.sep + "BOSS0.png"
+Attack_Boss_1="Sprites_clases" + os.path.sep + "Boss_1" + os.path.sep + "Sprites" + os.path.sep + "BOSSANIMATION.png"
+
 
 #Background Sprites
 Cartel_Gasolinera_Sprite = "Screens" + os.path.sep + "Background_items" + os.path.sep + "Cartelgasolinera.png"

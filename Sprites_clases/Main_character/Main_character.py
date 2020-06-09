@@ -140,8 +140,6 @@ class Main_Character(arcade.Sprite):
 
         # Attacking animation
         if self.is_attacking:
-            self.set_to_false()
-            self.is_attacking = True
             if self.cur_texture == 40:
                 self.is_attacking=False
             if self.cur_texture >= 4 * UPDATES_PER_FRAME:

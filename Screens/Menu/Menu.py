@@ -12,6 +12,8 @@ class Menu(arcade.Window):
 
         self.background = None
         self.arrow_pos=None
+        self.select=False
+
 
     def setup(self):
         self.arrow_pos = 0
@@ -39,5 +41,5 @@ class Menu(arcade.Window):
             print(self.arrow_pos)
 
         elif key == arcade.key.ENTER:
-            print("Seleccion")
+            self.select = True
             self.on_close()

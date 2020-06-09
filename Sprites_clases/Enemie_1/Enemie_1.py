@@ -3,7 +3,6 @@ import arcade
 from Variables import *
 from Sprites_clases.Main_character.Main_character import *
 
-
 class Enemie_1(arcade.Sprite):
     """Inicializador"""
 
@@ -90,14 +89,9 @@ class Enemie_1(arcade.Sprite):
         self.center_y = self.summon_y
         self.scale = PLAYER_SCALE
 
-        # Set the viewport boundaries
-        # These numbers set where we have 'scrolled' to.
 
-        # Set the viewport boundaries
-        # These numbers set where we have 'scrolled' to.
-        self.view_left = 0
-        self.view_bottom = 0
-        self.game_over = False
+    def Load(self):
+        self.dead = False
 
     def on_draw(self):
 
@@ -145,7 +139,7 @@ class Enemie_1(arcade.Sprite):
 
     def interact(self,x,y):
         if self.dead:
-            None
+            self.change_x=0
         else:
             where_x = self.center_x-x
             where_y = self.center_y-y

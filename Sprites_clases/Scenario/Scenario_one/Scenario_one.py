@@ -3,8 +3,10 @@ import arcade
 from Sprites_clases.Main_character.Main_character import *
 from Sprites_clases.Enemie_1.Enemie_1 import *
 from Sprites_clases.Enemie_2.Enemie_2 import *
+from Sprites_clases.Boss_1.Boss_1 import *
 from Variables import *
-
+import time
+import random
 
 class Scenario(arcade.Window):
     """ Main application class. """
@@ -120,6 +122,9 @@ class Scenario(arcade.Window):
             self.close()
         else:
 
+            if self.player.center_x==1000:
+                self.Generate_Enemie(0, 200, 200)
+                self.Generate_Enemie(1, 200, 200)
             self.player.is_falling = self.player.change_y < 0
             self.player_list.update_animation()
 
@@ -201,8 +206,8 @@ class Scenario(arcade.Window):
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.on_key_press_move_right()
         elif key == arcade.key.X:
-            self.delete_wall(700)
-            self.Generate_Enemie(1, SCREEN_HEIGHT // 2, SCREEN_WIDTH // 2)  # posicion valida Screen hight and width //2
+            self.delete_wall()
+            self.Generate_Enemie(0, 200, 200)  # posicion valida Screen hight and width //2
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
@@ -246,8 +251,8 @@ class Scenario(arcade.Window):
             if self.enemy1 == None:
                 # Set up the enemy1
                 self.enemy1 = Enemie_1()
-            self.enemy1.setup()
-
+                self.enemy1.setup()
+            self.enemy1.Load()
             # Set up the enemy1 position
             self.enemy1.center_x = pos_x
             self.enemy1.center_y = pos_y
@@ -262,8 +267,8 @@ class Scenario(arcade.Window):
             if self.enemy2 == None:
                 # Set up the enemy2
                 self.enemy2 = Enemie_2()
-            self.enemy2.setup()
-
+                self.enemy2.setup()
+            self.enemy2.Load()
             # Set up the enemy1 position
             self.enemy2.center_x = pos_x
             self.enemy2.center_y = pos_y
@@ -274,9 +279,9 @@ class Scenario(arcade.Window):
             self.physics_engine_enemy2 = arcade.PhysicsEnginePlatformer(self.enemy2, self.wall_list,
                                                                         gravity_constant=GRAVITY)
 
-    def delete_wall(self, pos_x):
+    def delete_wall(self):
         for elem in self.wall_list:
-            if elem.center_x == pos_x:
+            if elem.center_x == 700:
                 self.wall_list.remove(elem)
 
     def GUI(self):

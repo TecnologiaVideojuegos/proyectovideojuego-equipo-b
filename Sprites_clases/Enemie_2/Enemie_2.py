@@ -11,9 +11,6 @@ class Enemie_2(arcade.Sprite):
 
         # Set up parent class
         super().__init__()
-
-        self.summon_x = 100
-        self.summon_y = 100
         # Sprite lists
         self.enemy2_list = None
 
@@ -87,19 +84,11 @@ class Enemie_2(arcade.Sprite):
 
         # Set up the player position
 
-        self.center_x = self.summon_x
-        self.center_y = self.summon_y
         self.scale = PLAYER_SCALE
 
-        # Set the viewport boundaries
-        # These numbers set where we have 'scrolled' to.
 
-        # Set the viewport boundaries
-        # These numbers set where we have 'scrolled' to.
-        self.view_left = 0
-        self.view_bottom = 0
-        self.game_over = False
-
+    def Load(self):
+        self.dead = False
     def on_draw(self):
 
         # This command has to happen before we start drawing
@@ -144,7 +133,7 @@ class Enemie_2(arcade.Sprite):
 
     def interact(self,x,y):
         if self.dead:
-            None
+            self.change_x=0
         else:
             where_x=self.center_x-x
             where_y=self.center_y-y
