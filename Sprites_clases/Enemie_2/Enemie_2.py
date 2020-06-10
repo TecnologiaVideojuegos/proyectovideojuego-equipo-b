@@ -44,25 +44,25 @@ class Enemie_2(arcade.Sprite):
         # Stand Right Sprites
         self.enemy2_sprite.stand_textures = []
         self.enemy2_sprite.stand_textures.append(
-            arcade.load_texture(Lightning_Enemie_2, x=0, y=0, width=240, height=520))
+            arcade.load_texture(Lightning_Enemie_2, x=0, y=0, width=120, height=260))
 
         # Stand left Sprites
         self.enemy2_sprite.stand_textures.append(
-            arcade.load_texture(Lightning_Enemie_2, x=0, y=0, width=240, height=520, mirrored=True))
+            arcade.load_texture(Lightning_Enemie_2, x=0, y=0, width=120, height=260, mirrored=True))
 
         # Walk Right Sprites
         self.enemy2_sprite.walk_textures = []
         texturas = []
         for i in range(7):
             texturas.append(
-                arcade.load_texture(Walking_Enemie_2, x=i * 236 + 50, y=0, width=220, height=520))
+                arcade.load_texture(Walking_Enemie_2, x=i * 118 + 25, y=0, width=110, height=260))
         self.enemy2_sprite.walk_textures.append(texturas)
 
         # Walk Left Sprites
         texturas = []
         for i in range(7):
             texturas.append(
-                arcade.load_texture(Walking_Enemie_2, x=i * 236 + 50, y=0, width=220, height=520, mirrored=True))
+                arcade.load_texture(Walking_Enemie_2, x=i * 118 + 25, y=0, width=110, height=260, mirrored=True))
         self.enemy2_sprite.walk_textures.append(texturas)
 
         # Dead Sprites
@@ -71,13 +71,13 @@ class Enemie_2(arcade.Sprite):
         texturas = []
         for i in range(9):
             texturas.append(
-                arcade.load_texture(Lightning_Enemie_2, x=i * 236, y=0, width=220, height=520))
+                arcade.load_texture(Lightning_Enemie_2, x=i * 118, y=0, width=110, height=260))
         self.enemy2_sprite.dead_textures.append(texturas)
         # Dead Left Sprites
         texturas = []
         for i in range(9):
             texturas.append(
-                arcade.load_texture(Lightning_Enemie_2, x=i * 236, y=0, width=220, height=520, mirrored=True))
+                arcade.load_texture(Lightning_Enemie_2, x=i * 118, y=0, width=110, height=260, mirrored=True))
         self.enemy2_sprite.dead_textures.append(texturas)
 
         self.enemy2_list.append(self.enemy2_sprite)

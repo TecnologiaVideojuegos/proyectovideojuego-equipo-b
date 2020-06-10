@@ -233,7 +233,7 @@ class Scenario(arcade.Window):
             self.player.on_key_press_move_left()
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.on_key_press_move_right()
-        #elif key == arcade.key.X:
+        # elif key == arcade.key.X:
 
 
     def on_key_release(self, key, modifiers):
@@ -303,7 +303,7 @@ class Scenario(arcade.Window):
             # Set up the enemy1 position
             self.enemy1.center_x = pos_x
             self.enemy1.center_y = pos_y
-            self.enemy1.scale = PLAYER_SCALE / 2
+            self.enemy1.scale = PLAYER_SCALE
 
             self.enemy_list.append(self.enemy1)
 
@@ -319,7 +319,7 @@ class Scenario(arcade.Window):
             # Set up the enemy1 position
             self.enemy2.center_x = pos_x
             self.enemy2.center_y = pos_y
-            self.enemy2.scale = PLAYER_SCALE / 2
+            self.enemy2.scale = PLAYER_SCALE
 
             self.enemy_list.append(self.enemy2)
 

@@ -46,25 +46,25 @@ class Enemie_1(arcade.Sprite):
         # Stand Right Sprites
         self.enemy1_sprite.stand_textures = []
         self.enemy1_sprite.stand_textures.append(
-            arcade.load_texture(Lightning_Enemie_1, x=0, y=0, width=240, height=520))
+            arcade.load_texture(Lightning_Enemie_1, x=0, y=0, width=120, height=260))
 
         # Stand left Sprites
         self.enemy1_sprite.stand_textures.append(
-            arcade.load_texture(Lightning_Enemie_1, x=0, y=0, width=240, height=520, mirrored=True))
+            arcade.load_texture(Lightning_Enemie_1, x=0, y=0, width=120, height=260, mirrored=True))
 
         # Walk Right Sprites
         self.enemy1_sprite.walk_textures = []
         texturas = []
         for i in range(7):
             texturas.append(
-                arcade.load_texture(Walking_Enemie_1, x=i * 236 + 50, y=0, width=220, height=520))
+                arcade.load_texture(Walking_Enemie_1, x=i * 118 + 25, y=0, width=110, height=260))
         self.enemy1_sprite.walk_textures.append(texturas)
 
         # Walk Left Sprites
         texturas = []
         for i in range(7):
             texturas.append(
-                arcade.load_texture(Walking_Enemie_1, x=i * 236 + 50, y=0, width=220, height=520, mirrored=True))
+                arcade.load_texture(Walking_Enemie_1, x=i * 118 + 25, y=0, width=110, height=260, mirrored=True))
         self.enemy1_sprite.walk_textures.append(texturas)
 
 
@@ -74,13 +74,13 @@ class Enemie_1(arcade.Sprite):
         texturas = []
         for i in range(9):
             texturas.append(
-                arcade.load_texture(Lightning_Enemie_1, x=i * 236, y=0, width=220, height=520))
+                arcade.load_texture(Lightning_Enemie_1, x=i * 118, y=0, width=110, height=260))
         self.enemy1_sprite.dead_textures.append(texturas)
         # Dead Left Sprites
         texturas = []
         for i in range(9):
             texturas.append(
-                arcade.load_texture(Lightning_Enemie_1, x=i * 236, y=0, width=220, height=520, mirrored=True))
+                arcade.load_texture(Lightning_Enemie_1, x=i * 118, y=0, width=110, height=260, mirrored=True))
         self.enemy1_sprite.dead_textures.append(texturas)
         self.enemy1_list.append(self.enemy1_sprite)
         # Set up the player position
@@ -137,20 +137,20 @@ class Enemie_1(arcade.Sprite):
             self.texture = self.enemy1_sprite.walk_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME]
 
-    def interact(self,x,y):
+    def interact(self, x, y):
         if self.dead:
-            self.change_x=0
+            self.change_x = 0
         else:
             where_x = self.center_x-x
             where_y = self.center_y-y
-            if -20 < where_x and where_x< 20 and -5<where_y and where_y<5 :
+            if -20 < where_x and where_x< 20 and -5<where_y and where_y<5:
                 self.is_walking = False
                 self.is_attacking = True
-            elif where_x<0:
+            elif where_x < 0:
                 self.is_walking = True
                 self.change_x = MOVEMENT_SPEED_ENEMIE_1
 
-            elif where_x>0:
+            elif where_x > 0:
                 self.is_walking = True
                 self.change_x = -MOVEMENT_SPEED_ENEMIE_1
 
