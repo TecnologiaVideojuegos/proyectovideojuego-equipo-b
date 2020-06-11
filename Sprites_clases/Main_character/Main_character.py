@@ -155,42 +155,42 @@ class Main_Character(arcade.Sprite):
 
         # Attacking animation
         if self.is_attacking:
-            if self.cur_texture == 40:
+            if self.cur_texture == 32:
                 self.is_attacking = False
-            if self.cur_texture >= 4 * UPDATES_PER_FRAME:
+            if self.cur_texture >= 4 * UPDATES_PER_FRAME_Main_Char:
                 self.cur_texture = 0
             self.texture = self.player_sprite.attack_textures[self.character_face_direction][
-                self.cur_texture // UPDATES_PER_FRAME]
+                self.cur_texture // UPDATES_PER_FRAME_Main_Char]
 
         # Jumping animation
         elif self.is_jumping:
             # self.set_to_false()
             #self.is_jumping = True
-            if self.cur_texture == 90:
+            if self.cur_texture == 72:
                 self.is_jumping = False
                 # self.jump_needs_reset = True
-            if self.cur_texture >= 9 * UPDATES_PER_FRAME:
+            if self.cur_texture >= 9 * UPDATES_PER_FRAME_Main_Char:
                 self.cur_texture = 0
             self.texture = self.player_sprite.walk_up_textures[self.character_face_direction][
-                self.cur_texture // UPDATES_PER_FRAME]
+                self.cur_texture // UPDATES_PER_FRAME_Main_Char]
 
 
         # Falling animation
         elif self.is_falling:
-            if self.cur_texture >= 4 * UPDATES_PER_FRAME:
+            if self.cur_texture >= 4 * UPDATES_PER_FRAME_Main_Char:
                 self.cur_texture = 0
 
             self.texture = self.player_sprite.walk_down_textures[self.character_face_direction][
-                self.cur_texture // UPDATES_PER_FRAME]
+                self.cur_texture // UPDATES_PER_FRAME_Main_Char]
 
         # Walking animation
         elif self.is_walking:
             self.set_to_false()
             self.is_walking = True
-            if self.cur_texture >= 7 * UPDATES_PER_FRAME:
+            if self.cur_texture >= 7 * UPDATES_PER_FRAME_Main_Char:
                 self.cur_texture = 0
             self.texture = self.player_sprite.walk_textures[self.character_face_direction][
-                self.cur_texture // UPDATES_PER_FRAME]
+                self.cur_texture // UPDATES_PER_FRAME_Main_Char]
 
         # Collexting Life animation
         elif self.is_collecting_life:
@@ -198,10 +198,10 @@ class Main_Character(arcade.Sprite):
             if self.cur_texture == 100:
                 self.is_collecting_life = False
             self.set_to_false()
-            if self.cur_texture >= 10 * UPDATES_PER_FRAME:
+            if self.cur_texture >= 10 * UPDATES_PER_FRAME_Main_Char:
                 self.cur_texture = 0
             self.texture = self.player_sprite.collect_life_textures[self.character_face_direction][
-                self.cur_texture // UPDATES_PER_FRAME]
+                self.cur_texture // UPDATES_PER_FRAME_Main_Char]
 
         else:
             self.texture = self.player_sprite.stand_textures[self.character_face_direction]

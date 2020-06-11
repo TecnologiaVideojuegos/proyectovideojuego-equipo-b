@@ -40,6 +40,11 @@ class Boss_1(arcade.Sprite):
         self.dead = True
         self.avaible=False
 
+
+
+    def setup(self):
+        self.dead = False
+
         self.boss_1_list = arcade.SpriteList()
         self.boss_1_sprite = arcade.AnimatedWalkingSprite()
 
@@ -68,11 +73,6 @@ class Boss_1(arcade.Sprite):
         self.boss_1_sprite.attack_textures.append(texturas)
 
         self.boss_1_list.append(self.boss_1_sprite)
-
-
-    def setup(self):
-        self.dead = False
-
         # Set up the player position
 
         self.scale = PLAYER_SCALE

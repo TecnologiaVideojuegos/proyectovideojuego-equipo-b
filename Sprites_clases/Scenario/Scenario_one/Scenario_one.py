@@ -26,6 +26,7 @@ class Scenario(arcade.Window):
         # Set up the enemy1
         self.enemy1 = None
         self.enemy2 = None
+        self.boss1 = None
         # Sprite lists
         self.player_list = None
         self.enemy_list = None
@@ -34,6 +35,7 @@ class Scenario(arcade.Window):
 
         self.lista = None
         self.sol_puzzle1 = None
+        self.sol_puzzle2 = None
         self.valor_vida = None
 
         self.Game_over = False
@@ -52,6 +54,7 @@ class Scenario(arcade.Window):
         self.Summon_Enemies = False
         self.dead_enemie1 = True
         self.dead_enemie2 = True
+        self.dead_boss1 = True
         self.Cross_Semaphore = False
         self.Summon_Boss = False
 
@@ -59,6 +62,7 @@ class Scenario(arcade.Window):
 
         self.lista = []
         self.sol_puzzle1 = [1, 0, 0, 1]
+        self.sol_puzzle2 = [0,1,0,1]
 
         self.valor_vida = 100
 
@@ -74,6 +78,11 @@ class Scenario(arcade.Window):
 
         self.enemy2 = Enemie_2()
         self.enemy2.setup()
+
+        self.boss1 = Boss_1()
+        self.boss1.setup()
+
+
         # Set up the player
         self.player = Main_Character()
         self.player.setup()
@@ -149,6 +158,7 @@ class Scenario(arcade.Window):
 
             if self.Summon_Boss:
                 self.Cross_Semaphore = False
+                self.Summon_Enemie()
             elif self.Cross_Semaphore:
                 self.Summon_Enemies = False
                 self.Summon_Boss = self.player.center_x > 7000
@@ -237,9 +247,8 @@ class Scenario(arcade.Window):
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.on_key_press_move_right()
         elif key == arcade.key.X:
-            self.player.is_collecting_life = True
-        #elif key == arcade.key.X:
-
+            #self.player.is_collecting_life = True
+            self.Generate_Enemie(2,self.player.center_x,500)
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
@@ -275,53 +284,75 @@ class Scenario(arcade.Window):
             enemie.interact(self.player.center_x, self.player.center_y)
 
     def puzzle(self, id):
+        if self.Summon_Enemies :
+            if len(self.lista) == 3:
+                self.lista.append(id)
+                if self.lista == self.sol_puzzle1:
+                    self.Cross_Semaphore = True
+                    self.delete_wall()
+                    self.lista=[]
 
-        if len(self.lista) == 3:
-            self.lista.append(id)
-            if self.lista == self.sol_puzzle1:
-                self.Cross_Semaphore = True
-                self.delete_wall()
-                print("Hecho")
-                print()
+                else:
+
+                    self.lista = []
             else:
-                print("mal")
-                self.lista = []
-        else:
-            self.lista.append(id)
-            i=len(self.lista)-1
-            if not self.lista[i]==self.sol_puzzle1[i] :
-                self.lista=[]
-                print("mal")
-            print(self.lista)
+                self.lista.append(id)
+                i=len(self.lista)-1
+                if not self.lista[i]==self.sol_puzzle1[i] :
+                    self.lista=[]
+
+                print(self.lista)
+
+        elif self.Summon_Boss :
+            if len(self.lista) == 3:
+                self.lista.append(id)
+                if self.lista == self.sol_puzzle2:
+                    self.Cross_Semaphore = True
+                    self.delete_wall()
+                    self.lista=[]
+                    print("Fin Fase 1")
+                    self.close()
+                else:
+
+                    self.lista = []
+            else:
+                self.lista.append(id)
+                i=len(self.lista)-1
+                if not self.lista[i]==self.sol_puzzle2[i] :
+                    self.lista=[]
+
+                print(self.lista)
 
     def Summon_Enemie(self):
-
-        #print("Summon")
-        if self.dead_enemie1 and random.randint(0, 300) == 0 and self.player.center_x > 400:
-            self.dead_enemie1 = False
-            #print("Summon1")
-            self.Generate_Enemie(0, self.player.center_x + 200, 400)
-        elif self.dead_enemie2 and random.randint(0, 300) == 0 and self.player.center_x > 400:
-            self.dead_enemie2 = False
-            self.Generate_Enemie(1, self.player.center_x - 200, 400)
-            #print("Summon2")
-
         if self.Summon_Enemies and self.player.center_x > 600:
-            if self.dead_enemie1 and random.randint(0, 350) == 0:
-                if (self.player.center_x > 4000 and self.player.center_x < 4500):
+            if self.dead_enemie1 and random.randint(0, 250) == 0:
+                if (self.player.center_x > 4500 and self.player.center_x < 5000):
                     self.dead_enemie1 = False
                     self.Generate_Enemie(0, self.player.center_x - 500, 200)
                 else:
                     self.dead_enemie1 = False
                     self.Generate_Enemie(0, self.player.center_x + 500, 200)
 
-            elif self.dead_enemie2 and random.randint(0, 350) == 0 and self.player.center_x > 400:
-                if (self.player.center_x > 4000 and self.player.center_x < 4500):
-                    self.dead_enemie2 = False
-                    self.Generate_Enemie(1, self.player.center_x - 500, 200)
+            elif self.dead_enemie2 and random.randint(0, 250) == 0:
+                self.dead_enemie2 = False
+                self.Generate_Enemie(1, self.player.center_x + 500, 200)
+        if self.Summon_Boss and self.player.center_x > 600:
+
+            if self.dead_enemie1 and random.randint(0, 250) == 0:
+                if (self.player.center_x > 7500 and self.player.center_x < 8000):
+                    self.dead_enemie1 = False
+                    self.Generate_Enemie(0, self.player.center_x - 500, 200)
                 else:
-                    self.dead_enemie2 = False
-                    self.Generate_Enemie(1, self.player.center_x + 500, 200)
+                    self.dead_enemie1 = False
+                    self.Generate_Enemie(0, self.player.center_x + 500, 200)
+
+            elif self.dead_enemie2 and random.randint(0, 250) == 0:
+                self.dead_enemie2 = False
+                self.Generate_Enemie(1, self.player.center_x + 500, 200)
+
+            elif self.dead_boss1:
+                self.dead_boss1=False
+                self.Generate_Enemie(2, self.player.center_x,0)
 
 
     def Generate_Enemie(self, numero_de_Portal, pos_x, pos_y):
@@ -357,6 +388,13 @@ class Scenario(arcade.Window):
 
             self.physics_engine_enemy2 = arcade.PhysicsEnginePlatformer(self.enemy2, self.wall_list,
                                                                         gravity_constant=GRAVITY)
+        elif numero_de_Portal == 2:
+            # Set up the enemy1 position
+            self.boss1.center_x = pos_x
+            self.boss1.center_y = 600
+            self.boss1.scale = BOSS_SCALE
+
+            self.enemy_list.append(self.boss1)
 
     def delete_wall(self):
         self.background_items_list.remove(self.semaforo)
