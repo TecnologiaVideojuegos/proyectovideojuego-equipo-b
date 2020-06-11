@@ -32,13 +32,13 @@ class Menu(arcade.Window):
             self.arrow_pos -= 1
             if self.arrow_pos < 0:
                 self.arrow_pos = 2
-            print(self.arrow_pos)
+
 
         elif key == arcade.key.DOWN or key == arcade.key.S:
             self.arrow_pos += 1
             if self.arrow_pos >= 3:
                 self.arrow_pos = 0
-            print(self.arrow_pos)
+
 
         elif key == arcade.key.ENTER:
             self.select = True
