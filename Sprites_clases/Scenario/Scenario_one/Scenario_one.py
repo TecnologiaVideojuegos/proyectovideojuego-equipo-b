@@ -159,11 +159,7 @@ class Scenario(arcade.Window):
                 self.Summon_Enemies = self.player.center_x < 3000
             elif self.player.center_x > 4900:
                 self.Reached_wall = True
-<<<<<<< HEAD
             #print(self.player.center_x)
-=======
-
->>>>>>> da66298c6cc70747e8bd36615a55298297911b5e
 
             if (len(self.enemy_list) > 0):
                 self.enemy_list.update_animation()
@@ -240,12 +236,9 @@ class Scenario(arcade.Window):
             self.player.on_key_press_move_left()
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.on_key_press_move_right()
-<<<<<<< HEAD
         elif key == arcade.key.X:
             self.player.is_collecting_life = True
-=======
         #elif key == arcade.key.X:
->>>>>>> da66298c6cc70747e8bd36615a55298297911b5e
 
 
     def on_key_release(self, key, modifiers):
@@ -282,22 +275,16 @@ class Scenario(arcade.Window):
             enemie.interact(self.player.center_x, self.player.center_y)
 
     def puzzle(self, id):
-<<<<<<< HEAD
-        if len(self.lista) == 4:
-=======
+
         if len(self.lista) == 3:
             self.lista.append(id)
->>>>>>> da66298c6cc70747e8bd36615a55298297911b5e
             if self.lista == self.sol_puzzle1:
                 self.Cross_Semaphore = True
                 self.delete_wall()
                 print("Hecho")
                 print()
             else:
-<<<<<<< HEAD
-=======
                 print("mal")
->>>>>>> da66298c6cc70747e8bd36615a55298297911b5e
                 self.lista = []
         else:
             self.lista.append(id)
@@ -308,7 +295,7 @@ class Scenario(arcade.Window):
             print(self.lista)
 
     def Summon_Enemie(self):
-<<<<<<< HEAD
+
         #print("Summon")
         if self.dead_enemie1 and random.randint(0, 300) == 0 and self.player.center_x > 400:
             self.dead_enemie1 = False
@@ -318,7 +305,7 @@ class Scenario(arcade.Window):
             self.dead_enemie2 = False
             self.Generate_Enemie(1, self.player.center_x - 200, 400)
             #print("Summon2")
-=======
+
         if self.Summon_Enemies and self.player.center_x > 600:
             if self.dead_enemie1 and random.randint(0, 350) == 0:
                 if (self.player.center_x > 4000 and self.player.center_x < 4500):
@@ -335,7 +322,7 @@ class Scenario(arcade.Window):
                 else:
                     self.dead_enemie2 = False
                     self.Generate_Enemie(1, self.player.center_x + 500, 200)
->>>>>>> da66298c6cc70747e8bd36615a55298297911b5e
+
 
     def Generate_Enemie(self, numero_de_Portal, pos_x, pos_y):
 
