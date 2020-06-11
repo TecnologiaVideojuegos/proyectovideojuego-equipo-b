@@ -145,7 +145,9 @@ class Scenario(arcade.Window):
         self.background = arcade.load_texture(Scenario_sprite)
 
     def on_update(self, delta_time):
-
+        if self.boss1.is_attacking:
+            self.player.change_x=0
+            self.player.set_to_false()
         if self.valor_vida <= 0:
             self.Game_over = True
             self.close()
@@ -181,9 +183,9 @@ class Scenario(arcade.Window):
                     self.physics_engine_enemy1.update()
                 if self.physics_engine_enemy2 != None:
                     self.physics_engine_enemy2.update()
-
-            self.collisions()
-            self.Trigger_IA()
+                self.Trigger_IA()
+                self.collisions()
+            #print(self.player.center_x)
 
             # --- Manage Scrolling ---
 
@@ -225,7 +227,7 @@ class Scenario(arcade.Window):
     def on_draw(self):
         arcade.start_render()
         # Draw the background texture
-        arcade.draw_lrwh_rectangle_textured(-1000, 0, 9000, SCREEN_HEIGHT,
+        arcade.draw_lrwh_rectangle_textured(-1000, 0, 11000, SCREEN_HEIGHT,
                                             self.background)  # At wall ground length 20 the width is 1280
         # self.wall_list.draw()                                                                   #At wall ground lenght 100 the image witdh is 6450
         self.background_items_list.draw()
@@ -252,7 +254,8 @@ class Scenario(arcade.Window):
             self.player.on_key_press_move_right()
         elif key == arcade.key.X:
             #self.player.is_collecting_life = True
-            self.Generate_Enemie(0,self.player.center_x,500)
+            self.Generate_Enemie(1,self.player.center_x,500)
+            self.delete_wall()
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
@@ -331,16 +334,16 @@ class Scenario(arcade.Window):
     def Summon_Enemie(self):
         if self.Summon_Enemies and self.player.center_x > 600:
             if self.dead_enemie1 and random.randint(0, 250) == 0:
-                if (self.player.center_x > 4500 and self.player.center_x < 5000):
-                    self.dead_enemie1 = False
-                    self.Generate_Enemie(0, self.player.center_x - 500, 200)
-                else:
-                    self.dead_enemie1 = False
-                    self.Generate_Enemie(0, self.player.center_x + 500, 200)
+                self.dead_enemie1 = False
+                self.Generate_Enemie(0, self.player.center_x - 700, 200)
 
             elif self.dead_enemie2 and random.randint(0, 250) == 0:
-                self.dead_enemie2 = False
-                self.Generate_Enemie(1, self.player.center_x + 500, 200)
+                if (self.player.center_x > 4500 and self.player.center_x < 5000):
+                    self.dead_enemie2 = False
+                    self.Generate_Enemie(1, 4200, 200)
+                else:
+                    self.dead_enemie2 = False
+                    self.Generate_Enemie(1, self.player.center_x + 700, 200)
         if self.Summon_Boss and self.player.center_x > 600:
 
             if self.dead_enemie1 and random.randint(0, 250) == 0:

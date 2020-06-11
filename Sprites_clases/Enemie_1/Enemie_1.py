@@ -124,7 +124,8 @@ class Enemie_1(arcade.Sprite):
 
         # Dead animation
         if self.dead:
-            if self.cur_texture == 90:
+
+            if self.cur_texture == 36:
                 self.kill()
             if self.cur_texture >= 9 * UPDATES_PER_FRAME_Enemies:
                 self.cur_texture = 0
@@ -147,10 +148,12 @@ class Enemie_1(arcade.Sprite):
                 self.is_walking = False
                 self.is_attacking = True
             elif where_x < 0:
+                self.is_attacking = False
                 self.is_walking = True
                 self.change_x = MOVEMENT_SPEED_ENEMIE_1
 
             elif where_x > 0:
+                self.is_attacking = False
                 self.is_walking = True
                 self.change_x = -MOVEMENT_SPEED_ENEMIE_1
 
