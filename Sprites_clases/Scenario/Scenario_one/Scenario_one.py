@@ -95,16 +95,18 @@ class Scenario(arcade.Window):
         for i in range(125):
             wall = arcade.Sprite(":resources:images/tiles/stone.png", SPRITE_SCALE)
             wall.bottom = 0
+            wall.type = "ground"
             wall.center_x = i * GRID_PIXEL_SIZE
             self.wall_list.append(wall)
 
         # Create the Wall
-        for posy in [0, 5000, 8000]:
+        for posy in [(0, "wall"), (5000, "Sema"), (8000, "wall")]:
             for i in range(10):
                 wall = arcade.Sprite(":resources:images/tiles/stone.png", SPRITE_SCALE)
                 wall.bottom = 0
+                wall.type = posy[1]
                 wall.center_y = i * GRID_PIXEL_SIZE
-                wall.center_x = posy
+                wall.center_x = posy[0]
                 self.wall_list.append(wall)
 
         # Añadiendo cartel gasolinera
@@ -114,11 +116,11 @@ class Scenario(arcade.Window):
         item.center_x = 3200
         self.background_items_list.append(item)
         # Añadiendo semaforo rojo
-        item = arcade.Sprite(Semaforo_Rojo_Sprite, SPRITE_SCALE)
-        item.bottom = 0
-        item.center_y = 260
-        item.center_x = 5000
-        self.background_items_list.append(item)
+        self.semaforo = arcade.Sprite(Semaforo_Rojo_Sprite, SPRITE_SCALE)
+        self.semaforo.bottom = 0
+        self.semaforo.center_y = 260
+        self.semaforo.center_x = 5000
+        self.background_items_list.append(self.semaforo)
         # Añadiendo Cartel direcciones
         item = arcade.Sprite(Señal_Direcciones_Sprite, SPRITE_SCALE)
         item.bottom = 0
@@ -157,7 +159,11 @@ class Scenario(arcade.Window):
                 self.Summon_Enemies = self.player.center_x < 3000
             elif self.player.center_x > 4900:
                 self.Reached_wall = True
+<<<<<<< HEAD
             #print(self.player.center_x)
+=======
+
+>>>>>>> da66298c6cc70747e8bd36615a55298297911b5e
 
             if (len(self.enemy_list) > 0):
                 self.enemy_list.update_animation()
@@ -234,8 +240,12 @@ class Scenario(arcade.Window):
             self.player.on_key_press_move_left()
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.on_key_press_move_right()
+<<<<<<< HEAD
         elif key == arcade.key.X:
             self.player.is_collecting_life = True
+=======
+        #elif key == arcade.key.X:
+>>>>>>> da66298c6cc70747e8bd36615a55298297911b5e
 
 
     def on_key_release(self, key, modifiers):
@@ -255,7 +265,7 @@ class Scenario(arcade.Window):
 
         hit_list = arcade.check_for_collision_with_list(self.player, self.enemy_list)
         for enemie in hit_list:
-            if self.player.is_attacking:
+            if self.player.is_attacking and not enemie.dead:
                 enemie.dead = True
                 self.puzzle(enemie.id)
                 if enemie.id == 0:
@@ -272,18 +282,33 @@ class Scenario(arcade.Window):
             enemie.interact(self.player.center_x, self.player.center_y)
 
     def puzzle(self, id):
+<<<<<<< HEAD
         if len(self.lista) == 4:
+=======
+        if len(self.lista) == 3:
+            self.lista.append(id)
+>>>>>>> da66298c6cc70747e8bd36615a55298297911b5e
             if self.lista == self.sol_puzzle1:
                 self.Cross_Semaphore = True
                 self.delete_wall()
+                print("Hecho")
+                print()
             else:
+<<<<<<< HEAD
+=======
+                print("mal")
+>>>>>>> da66298c6cc70747e8bd36615a55298297911b5e
                 self.lista = []
         else:
             self.lista.append(id)
+            i=len(self.lista)-1
+            if not self.lista[i]==self.sol_puzzle1[i] :
+                self.lista=[]
+                print("mal")
             print(self.lista)
 
-
     def Summon_Enemie(self):
+<<<<<<< HEAD
         #print("Summon")
         if self.dead_enemie1 and random.randint(0, 300) == 0 and self.player.center_x > 400:
             self.dead_enemie1 = False
@@ -293,6 +318,24 @@ class Scenario(arcade.Window):
             self.dead_enemie2 = False
             self.Generate_Enemie(1, self.player.center_x - 200, 400)
             #print("Summon2")
+=======
+        if self.Summon_Enemies and self.player.center_x > 600:
+            if self.dead_enemie1 and random.randint(0, 350) == 0:
+                if (self.player.center_x > 4000 and self.player.center_x < 4500):
+                    self.dead_enemie1 = False
+                    self.Generate_Enemie(0, self.player.center_x - 500, 200)
+                else:
+                    self.dead_enemie1 = False
+                    self.Generate_Enemie(0, self.player.center_x + 500, 200)
+
+            elif self.dead_enemie2 and random.randint(0, 350) == 0 and self.player.center_x > 400:
+                if (self.player.center_x > 4000 and self.player.center_x < 4500):
+                    self.dead_enemie2 = False
+                    self.Generate_Enemie(1, self.player.center_x - 500, 200)
+                else:
+                    self.dead_enemie2 = False
+                    self.Generate_Enemie(1, self.player.center_x + 500, 200)
+>>>>>>> da66298c6cc70747e8bd36615a55298297911b5e
 
     def Generate_Enemie(self, numero_de_Portal, pos_x, pos_y):
 
@@ -329,9 +372,18 @@ class Scenario(arcade.Window):
                                                                         gravity_constant=GRAVITY)
 
     def delete_wall(self):
-        for elem in self.wall_list:
-            if elem.center_x == 700:
-                self.wall_list.remove(elem)
+        self.background_items_list.remove(self.semaforo)
+        # Añadiendo semaforo apagado
+        self.semaforo = arcade.Sprite(Semaforo_Apagado_Sprite, SPRITE_SCALE)
+        self.semaforo.bottom = 0
+        self.semaforo.center_y = 260
+        self.semaforo.center_x = 5000
+        self.background_items_list.append(self.semaforo)
+
+        for i in range(3):
+            for elem in self.wall_list:
+                if elem.type == "Sema":
+                    self.wall_list.remove(elem)
 
     def GUI(self):
         arcade.draw_lrtb_rectangle_filled(self.view_left + 1195, self.view_left + 1206,
