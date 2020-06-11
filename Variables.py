@@ -68,5 +68,8 @@ Attack_Boss_1="Sprites_clases" + os.path.sep + "Boss_1" + os.path.sep + "Sprites
 #Background Sprites
 Cartel_Gasolinera_Sprite = "Screens" + os.path.sep + "Background_items" + os.path.sep + "Cartelgasolinera.png"
 Semaforo_Rojo_Sprite = "Screens" + os.path.sep + "Background_items" + os.path.sep + "semafororojotren.png"
+Semaforo_Apagado_Sprite = "Screens" + os.path.sep + "Background_items" + os.path.sep + "semaforotrenapagado.png"
 Señal_Direcciones_Sprite = "Screens" + os.path.sep + "Background_items" + os.path.sep + "Señaldirecciones.png"
 barra_vida = "Screens" + os.path.sep + "Background_items" + os.path.sep + "barra de vida.png"
+
+
