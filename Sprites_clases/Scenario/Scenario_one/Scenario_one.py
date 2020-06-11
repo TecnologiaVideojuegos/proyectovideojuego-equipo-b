@@ -57,6 +57,7 @@ class Scenario(arcade.Window):
         self.dead_boss1 = True
         self.Cross_Semaphore = False
         self.Summon_Boss = False
+        self.End_level = False
 
     def setup(self):
 
@@ -156,7 +157,10 @@ class Scenario(arcade.Window):
 
             self.physics_engine.update()
 
-            if self.Summon_Boss:
+            if self.End_level:
+                if self.player.center_x >7500 :
+                    self.close()
+            elif self.Summon_Boss:
                 self.Cross_Semaphore = False
                 self.Summon_Enemie()
             elif self.Cross_Semaphore:
@@ -248,7 +252,7 @@ class Scenario(arcade.Window):
             self.player.on_key_press_move_right()
         elif key == arcade.key.X:
             #self.player.is_collecting_life = True
-            self.Generate_Enemie(2,self.player.center_x,500)
+            self.Generate_Enemie(0,self.player.center_x,500)
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
@@ -291,7 +295,7 @@ class Scenario(arcade.Window):
                     self.Cross_Semaphore = True
                     self.delete_wall()
                     self.lista=[]
-
+                    self.Level_Pased()
                 else:
 
                     self.lista = []
@@ -310,8 +314,9 @@ class Scenario(arcade.Window):
                     self.Cross_Semaphore = True
                     self.delete_wall()
                     self.lista=[]
-                    print("Fin Fase 1")
-                    self.close()
+                    self.Summon_Boss = False
+                    self.End_level = True
+                    self.Level_Pased()
                 else:
 
                     self.lista = []
@@ -409,7 +414,9 @@ class Scenario(arcade.Window):
             for elem in self.wall_list:
                 if elem.type == "Sema":
                     self.wall_list.remove(elem)
-
+    def Level_Pased(self):
+        for enemi in self.enemy_list:
+            enemi.dead =True
     def GUI(self):
         arcade.draw_lrtb_rectangle_filled(self.view_left + 1195, self.view_left + 1206,
                                           self.view_bottom + self.valor_vida * 1.8 + 480, self.view_bottom + 475,

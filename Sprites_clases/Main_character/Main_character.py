@@ -152,10 +152,9 @@ class Main_Character(arcade.Sprite):
 
         # Walking animation
         self.cur_texture += 1
-
         # Attacking animation
         if self.is_attacking:
-            if self.cur_texture == 32:
+            if self.cur_texture == 20:
                 self.is_attacking = False
             if self.cur_texture >= 4 * UPDATES_PER_FRAME_Main_Char:
                 self.cur_texture = 0
@@ -166,7 +165,7 @@ class Main_Character(arcade.Sprite):
         elif self.is_jumping:
             # self.set_to_false()
             #self.is_jumping = True
-            if self.cur_texture == 72:
+            if self.cur_texture == 45:
                 self.is_jumping = False
                 # self.jump_needs_reset = True
             if self.cur_texture >= 9 * UPDATES_PER_FRAME_Main_Char:

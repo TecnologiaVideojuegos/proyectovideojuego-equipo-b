@@ -120,16 +120,16 @@ class Enemie_2(arcade.Sprite):
         if self.dead:
             if self.cur_texture == 90:
                 self.kill()
-            if self.cur_texture >= 9 * UPDATES_PER_FRAME:
+            if self.cur_texture >= 9 * UPDATES_PER_FRAME_Enemies:
                 self.cur_texture = 0
             self.texture = self.enemy2_sprite.dead_textures[self.character_face_direction][
-                self.cur_texture // UPDATES_PER_FRAME]
+                self.cur_texture // UPDATES_PER_FRAME_Enemies]
         # Walking animation
         elif self.is_walking:
-            if self.cur_texture >= 7 * UPDATES_PER_FRAME:
+            if self.cur_texture >= 7 * UPDATES_PER_FRAME_Enemies:
                 self.cur_texture = 0
             self.texture = self.enemy2_sprite.walk_textures[self.character_face_direction][
-                self.cur_texture // UPDATES_PER_FRAME]
+                self.cur_texture // UPDATES_PER_FRAME_Enemies]
 
     def interact(self,x,y):
         if self.dead:
