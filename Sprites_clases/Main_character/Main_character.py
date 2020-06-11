@@ -26,6 +26,7 @@ class Main_Character(arcade.Sprite):
         self.is_falling = False
         self.is_attacking = False
         self.is_walking = False
+        self.is_collecting_life = False
 
         self.jump_needs_reset = False
 
@@ -46,10 +47,10 @@ class Main_Character(arcade.Sprite):
         self.player_sprite.stand_textures = []
         # Stand right Sprites
         self.player_sprite.stand_textures.append(
-            arcade.load_texture(Jumping_Sprite1, x=0, y=0, width=120, height=260))
+            arcade.load_texture(Jumping_Sprite1, x=0, y=0, width=100, height=261))
         # Stand left Sprites
         self.player_sprite.stand_textures.append(
-            arcade.load_texture(Jumping_Sprite1, x=0, y=0, width=120, height=260, mirrored=True))
+            arcade.load_texture(Jumping_Sprite1, x=0, y=0, width=100, height=261, mirrored=True))
 
         # Jump Sprites
         self.player_sprite.walk_up_textures = []
@@ -87,14 +88,14 @@ class Main_Character(arcade.Sprite):
         texturas = []
         for i in range(7):
             texturas.append(
-                arcade.load_texture(Walking_Sprite1, x=i * 118 + 25, y=0, width=110, height=261))
+                arcade.load_texture(Walking_Sprite1, x=i * 118, y=0, width=120, height=261))
         self.player_sprite.walk_textures.append(texturas)
 
         # Walk Left Sprites
         texturas = []
         for i in range(7):
             texturas.append(
-                arcade.load_texture(Walking_Sprite1, x=i * 118 + 25, y=0, width=110, height=261, mirrored=True))
+                arcade.load_texture(Walking_Sprite1, x=i * 118, y=0, width=120, height=261, mirrored=True))
         self.player_sprite.walk_textures.append(texturas)
 
         #Attack Sprites
@@ -112,6 +113,20 @@ class Main_Character(arcade.Sprite):
                 arcade.load_texture(Attack_Sprite1, x=i * 531.5, y=0, width=531.5, height=300, mirrored=True))
         self.player_sprite.attack_textures.append(texturas)
 
+        # Collect Life Sprites
+        self.player_sprite.collect_life_textures = []
+        # Collect Life Right Sprites
+        texturas = []
+        for i in range(10):
+            texturas.append(
+                arcade.load_texture(Collecting_life_Sprite, x=i * 118, y=0, width=118, height=261))
+        self.player_sprite.collect_life_textures.append(texturas)
+        # Collect Life Left Sprites
+        texturas = []
+        for i in range(10):
+            texturas.append(
+                arcade.load_texture(Collecting_life_Sprite, x=i * 118, y=0, width=118, height=261, mirrored=True))
+        self.player_sprite.collect_life_textures.append(texturas)
 
         self.player_list.append(self.player_sprite)
 
@@ -141,7 +156,7 @@ class Main_Character(arcade.Sprite):
         # Attacking animation
         if self.is_attacking:
             if self.cur_texture == 40:
-                self.is_attacking=False
+                self.is_attacking = False
             if self.cur_texture >= 4 * UPDATES_PER_FRAME:
                 self.cur_texture = 0
             self.texture = self.player_sprite.attack_textures[self.character_face_direction][
@@ -150,7 +165,7 @@ class Main_Character(arcade.Sprite):
         # Jumping animation
         elif self.is_jumping:
             # self.set_to_false()
-            self.is_jumping = True
+            #self.is_jumping = True
             if self.cur_texture == 90:
                 self.is_jumping = False
                 # self.jump_needs_reset = True
@@ -176,6 +191,18 @@ class Main_Character(arcade.Sprite):
                 self.cur_texture = 0
             self.texture = self.player_sprite.walk_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME]
+
+        # Collexting Life animation
+        elif self.is_collecting_life:
+            # self.is_collecting_life = True
+            if self.cur_texture == 100:
+                self.is_collecting_life = False
+            self.set_to_false()
+            if self.cur_texture >= 10 * UPDATES_PER_FRAME:
+                self.cur_texture = 0
+            self.texture = self.player_sprite.collect_life_textures[self.character_face_direction][
+                self.cur_texture // UPDATES_PER_FRAME]
+
         else:
             self.texture = self.player_sprite.stand_textures[self.character_face_direction]
 

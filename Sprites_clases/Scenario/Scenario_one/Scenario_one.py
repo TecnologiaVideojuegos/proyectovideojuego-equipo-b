@@ -8,6 +8,7 @@ from Variables import *
 import time
 import random
 
+
 class Scenario(arcade.Window):
     """ Main application class. """
 
@@ -32,7 +33,7 @@ class Scenario(arcade.Window):
         self.background_items_list = None
 
         self.lista = None
-        self.sol_puzzle1=None
+        self.sol_puzzle1 = None
         self.valor_vida = None
 
         self.Game_over = False
@@ -46,18 +47,18 @@ class Scenario(arcade.Window):
 
 
         #Phase activation variables
-        self.Reached_wall=False
-        self.Move_back=False
-        self.Summon_Enemies=False
-        self.dead_enemie1=True
-        self.dead_enemie2 =True
-        self.Cross_Semaphore=False
-        self.Summon_Boss=False
+        self.Reached_wall = False
+        self.Move_back = False
+        self.Summon_Enemies = False
+        self.dead_enemie1 = True
+        self.dead_enemie2 = True
+        self.Cross_Semaphore = False
+        self.Summon_Boss = False
 
     def setup(self):
 
         self.lista = []
-        self.sol_puzzle1 =[1,0,0,1]
+        self.sol_puzzle1 = [1, 0, 0, 1]
 
         self.valor_vida = 100
 
@@ -156,7 +157,7 @@ class Scenario(arcade.Window):
                 self.Summon_Enemies = self.player.center_x < 3000
             elif self.player.center_x > 4900:
                 self.Reached_wall = True
-            print(self.player.center_x)
+            #print(self.player.center_x)
 
             if (len(self.enemy_list) > 0):
                 self.enemy_list.update_animation()
@@ -233,7 +234,8 @@ class Scenario(arcade.Window):
             self.player.on_key_press_move_left()
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.on_key_press_move_right()
-        # elif key == arcade.key.X:
+        elif key == arcade.key.X:
+            self.player.is_collecting_life = True
 
 
     def on_key_release(self, key, modifiers):
@@ -256,10 +258,10 @@ class Scenario(arcade.Window):
             if self.player.is_attacking:
                 enemie.dead = True
                 self.puzzle(enemie.id)
-                if enemie.id==0:
-                    self.dead_enemie1=True
-                elif enemie.id==1 :
-                    self.dead_enemie2=True
+                if enemie.id == 0:
+                    self.dead_enemie1 = True
+                elif enemie.id == 1:
+                    self.dead_enemie2 = True
             if not enemie.dead and enemie.is_attacking:
                 # decrease the character's life
                 self.valor_vida -= 0.5
@@ -271,26 +273,26 @@ class Scenario(arcade.Window):
 
     def puzzle(self, id):
         if len(self.lista) == 4:
-            if self.lista == self.sol_puzzle1 :
-                self.Cross_Semaphore=True
+            if self.lista == self.sol_puzzle1:
+                self.Cross_Semaphore = True
                 self.delete_wall()
             else:
-                self.lista=[]
+                self.lista = []
         else:
             self.lista.append(id)
             print(self.lista)
 
 
     def Summon_Enemie(self):
-        print("Summon")
-        if self.dead_enemie1 and random.randint(0,300)==0 and self.player.center_x > 400 :
-            self.dead_enemie1=False
-            print("Summon1")
-            self.Generate_Enemie(0,self.player.center_x + 200,400)
-        elif self.dead_enemie2 and random.randint(0, 300)==0 and self.player.center_x > 400:
-            self.dead_enemie2=False
-            self.Generate_Enemie(1,self.player.center_x -200,400)
-            print("Summon2")
+        #print("Summon")
+        if self.dead_enemie1 and random.randint(0, 300) == 0 and self.player.center_x > 400:
+            self.dead_enemie1 = False
+            #print("Summon1")
+            self.Generate_Enemie(0, self.player.center_x + 200, 400)
+        elif self.dead_enemie2 and random.randint(0, 300) == 0 and self.player.center_x > 400:
+            self.dead_enemie2 = False
+            self.Generate_Enemie(1, self.player.center_x - 200, 400)
+            #print("Summon2")
 
     def Generate_Enemie(self, numero_de_Portal, pos_x, pos_y):
 
@@ -332,9 +334,10 @@ class Scenario(arcade.Window):
                 self.wall_list.remove(elem)
 
     def GUI(self):
-        arcade.draw_lrtb_rectangle_filled(self.view_left + 1190, self.view_left + 1210,
-                                          self.view_bottom + self.valor_vida * 1.8 + 480, self.view_bottom + 470,
-                                          arcade.color.BLUE)
+        arcade.draw_lrtb_rectangle_filled(self.view_left + 1195, self.view_left + 1206,
+                                          self.view_bottom + self.valor_vida * 1.8 + 480, self.view_bottom + 475,
+                                          (250, 18, 201))
+        arcade.draw_circle_filled(self.view_left + 1200, self.view_bottom + 475, radius=6, color=(250, 18, 201))
         self.life_bar.bottom = self.view_bottom + 450
         self.life_bar.center_x = self.view_left + 1200
         self.life_bar_list.draw()
