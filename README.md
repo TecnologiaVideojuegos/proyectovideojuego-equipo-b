@@ -25,7 +25,11 @@ Programadores:
   - Pantalla de Game over
 
 Musicos:
-  -Musica adaptada a la sombria tematica del videojuego
+  - Ajustar los pasos
+  - Sonido de los bosses
+  - Musica de batalla
+  - Ataque bosses
+  - Common enemy
 
 Desarrollador Web:
   
