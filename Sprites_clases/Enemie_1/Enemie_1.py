@@ -140,6 +140,10 @@ class Enemie_1(arcade.Sprite):
 
         self.texture = self.enemy1_sprite.stand_textures[self.character_face_direction]
 
+        # Light stand
+        if self.dead_light:
+            self.texture = self.enemy1_sprite.light_textures[self.character_face_direction]
+
         # Dead animation
         if self.dead:
             if self.cur_texture == 36:
@@ -164,7 +168,7 @@ class Enemie_1(arcade.Sprite):
 
 
     def interact(self, x, y):
-        if self.dead_light:
+        if self.dead_light or self.dead:
             self.change_x = 0
         else:
             where_x = self.center_x-x

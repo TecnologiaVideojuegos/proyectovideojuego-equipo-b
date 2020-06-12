@@ -276,26 +276,21 @@ class Scenario(arcade.Window):
 
         hit_list = arcade.check_for_collision_with_list(self.player, self.enemy_list)
         for enemie in hit_list:
-            if self.player.is_attacking and not enemie.dead_light:
+            if self.player.is_attacking and  not enemie.dead:
+                print("yes")
                 self.puzzle(enemie.id)
-                if enemie.id == 0:
-                    self.dead_enemie1 = True
-                elif enemie.id == 1:
-                    self.dead_enemie2 = True
-                if enemie.__eq__(self.enemy1):
-                    self.enemy1.dead_light = True
-                if enemie.__eq__(self.enemy2):
-                    self.enemy2.dead_light = True
+                enemie.dead = True
             if not enemie.dead_light:
                 # decrease the character's life
                 self.valor_vida -= 0.5
-            if enemie.dead_light:
+            if enemie.dead_light and self.player.center_x==enemie.center_x:
                 self.player.is_collecting_life = True
+                if(self.valor_vida<80):
+                    self.valor_vida+=10
                 if enemie.__eq__(self.enemy1):
-                    self.enemy1.dead = True
+                    self.dead_enemie1=True
                 if enemie.__eq__(self.enemy2):
-                    self.enemy2.dead = True
-
+                    self.dead_enemie2 = True
 
     # Trigger the enemie IA
     def Trigger_IA(self):
