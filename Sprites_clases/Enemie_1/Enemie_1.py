@@ -40,6 +40,7 @@ class Enemie_1(arcade.Sprite):
 
     def setup(self):
         self.dead = False
+        self.dead_light = False
         self.enemy1_list = arcade.SpriteList()
         self.enemy1_sprite = arcade.AnimatedWalkingSprite()
 
@@ -82,6 +83,23 @@ class Enemie_1(arcade.Sprite):
             texturas.append(
                 arcade.load_texture(Lightning_Enemie_1, x=i * 118, y=0, width=110, height=260, mirrored=True))
         self.enemy1_sprite.dead_textures.append(texturas)
+
+        # Light Sprite
+        self.enemy1_sprite.light_textures = []
+        # Light Right Sprite
+        texturas = []
+        for i in range(1):
+            texturas.append(
+                arcade.load_texture(Lightning_Enemie_1, x=944, y=0, width=110, height=260))
+        self.enemy1_sprite.light_textures.append(texturas)
+        # Light Left Sprite
+        texturas = []
+        for i in range(1):
+            texturas.append(
+                arcade.load_texture(Lightning_Enemie_1, x=944, y=0, width=110, height=260, mirrored=True))
+        self.enemy1_sprite.light_textures.append(texturas)
+
+
         self.enemy1_list.append(self.enemy1_sprite)
         # Set up the player position
 
@@ -124,7 +142,6 @@ class Enemie_1(arcade.Sprite):
 
         # Dead animation
         if self.dead:
-
             if self.cur_texture == 36:
                 self.kill()
             if self.cur_texture >= 9 * UPDATES_PER_FRAME_Enemies:
@@ -137,6 +154,14 @@ class Enemie_1(arcade.Sprite):
                 self.cur_texture = 0
             self.texture = self.enemy1_sprite.walk_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME_Enemies]
+
+        # Light animation
+        elif self.dead_light:
+            if self.cur_texture >= 1 * UPDATES_PER_FRAME_Enemies:
+                self.cur_texture = 0
+            self.texture = self.enemy1_sprite.light_textures[self.character_face_direction][
+                self.cur_texture // UPDATES_PER_FRAME_Enemies]
+
 
     def interact(self, x, y):
         if self.dead:

@@ -41,6 +41,7 @@ class Enemie_2(arcade.Sprite):
 
     def setup(self):
         self.dead = False
+        self.dead_light = False
         self.enemy2_list = arcade.SpriteList()
         self.enemy2_sprite = arcade.AnimatedWalkingSprite()
 
@@ -82,6 +83,20 @@ class Enemie_2(arcade.Sprite):
             texturas.append(
                 arcade.load_texture(Lightning_Enemie_2, x=i * 118, y=0, width=110, height=260, mirrored=True))
         self.enemy2_sprite.dead_textures.append(texturas)
+        # Light Sprite
+        self.enemy2_sprite.light_textures = []
+        # Light Right Sprite
+        texturas = []
+        for i in range(1):
+            texturas.append(
+                arcade.load_texture(Lightning_Enemie_2, x=944, y=0, width=110, height=260))
+        self.enemy2_sprite.light_textures.append(texturas)
+        # Light Left Sprite
+        texturas = []
+        for i in range(1):
+            texturas.append(
+                arcade.load_texture(Lightning_Enemie_2, x=944, y=0, width=110, height=260, mirrored=True))
+        self.enemy2_sprite.light_textures.append(texturas)
 
         self.enemy2_list.append(self.enemy2_sprite)
 
@@ -132,6 +147,13 @@ class Enemie_2(arcade.Sprite):
             if self.cur_texture >= 7 * UPDATES_PER_FRAME_Enemies:
                 self.cur_texture = 0
             self.texture = self.enemy2_sprite.walk_textures[self.character_face_direction][
+                self.cur_texture // UPDATES_PER_FRAME_Enemies]
+
+        # Light animation
+        elif self.dead_light:
+            if self.cur_texture >= 1 * UPDATES_PER_FRAME_Enemies:
+                self.cur_texture = 0
+            self.texture = self.enemy2_sprite.light_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME_Enemies]
 
     def interact(self,x,y):
