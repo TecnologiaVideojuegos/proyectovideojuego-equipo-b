@@ -19,7 +19,6 @@ def main():
         window.setup()
         arcade.run()
 
-
         if window.select and window.arrow_pos == 0:
             if Scene_one == None:
                 Scene_one = Scenario(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)

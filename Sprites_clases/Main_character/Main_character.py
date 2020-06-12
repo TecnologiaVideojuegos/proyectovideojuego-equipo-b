@@ -194,9 +194,8 @@ class Main_Character(arcade.Sprite):
         # Collexting Life animation
         elif self.is_collecting_life:
             # self.is_collecting_life = True
-            if self.cur_texture == 100:
-                self.is_collecting_life = False
-            self.set_to_false()
+            if self.cur_texture == 50:
+                self.set_to_false()
             if self.cur_texture >= 10 * UPDATES_PER_FRAME_Main_Char:
                 self.cur_texture = 0
             self.texture = self.player_sprite.collect_life_textures[self.character_face_direction][
@@ -244,3 +243,4 @@ class Main_Character(arcade.Sprite):
         self.is_falling = False
         self.is_attacking = False
         self.is_walking = False
+        self.is_collecting_life = False

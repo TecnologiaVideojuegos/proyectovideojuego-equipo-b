@@ -63,7 +63,7 @@ class Scenario(arcade.Window):
 
         self.lista = []
         self.sol_puzzle1 = [1, 0, 0, 1]
-        self.sol_puzzle2 = [0,1,0,1]
+        self.sol_puzzle2 = [0, 1, 0, 1]
 
         self.valor_vida = 100
 
@@ -256,7 +256,7 @@ class Scenario(arcade.Window):
             self.player.on_key_press_move_right()
         elif key == arcade.key.X:
             #self.player.is_collecting_life = True
-            self.Generate_Enemie(0, self.player.center_x, 500)
+            self.Generate_Enemie(1, self.player.center_x, 500)
             self.delete_wall()
 
     def on_key_release(self, key, modifiers):
@@ -276,17 +276,26 @@ class Scenario(arcade.Window):
 
         hit_list = arcade.check_for_collision_with_list(self.player, self.enemy_list)
         for enemie in hit_list:
-            if self.player.is_attacking and not enemie.dead:
-                enemie.dead = True
-                self.enemy1.dead_light = True
+            if self.player.is_attacking and not enemie.dead_light:
                 self.puzzle(enemie.id)
                 if enemie.id == 0:
                     self.dead_enemie1 = True
                 elif enemie.id == 1:
                     self.dead_enemie2 = True
-            if not enemie.dead and enemie.is_attacking:
+                if enemie.__eq__(self.enemy1):
+                    self.enemy1.dead_light = True
+                if enemie.__eq__(self.enemy2):
+                    self.enemy2.dead_light = True
+            if not enemie.dead_light:
                 # decrease the character's life
                 self.valor_vida -= 0.5
+            if enemie.dead_light:
+                self.player.is_collecting_life = True
+                if enemie.__eq__(self.enemy1):
+                    self.enemy1.dead = True
+                if enemie.__eq__(self.enemy2):
+                    self.enemy2.dead = True
+
 
     # Trigger the enemie IA
     def Trigger_IA(self):
@@ -294,7 +303,7 @@ class Scenario(arcade.Window):
             enemie.interact(self.player.center_x, self.player.center_y)
 
     def puzzle(self, id):
-        if self.Summon_Enemies :
+        if self.Summon_Enemies:
             if len(self.lista) == 3:
                 self.lista.append(id)
                 if self.lista == self.sol_puzzle1:
