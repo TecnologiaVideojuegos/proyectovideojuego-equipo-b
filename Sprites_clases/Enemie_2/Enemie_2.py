@@ -107,6 +107,7 @@ class Enemie_2(arcade.Sprite):
 
     def Load(self):
         self.dead = False
+        self.dead_light = False
     def on_draw(self):
 
         # This command has to happen before we start drawing

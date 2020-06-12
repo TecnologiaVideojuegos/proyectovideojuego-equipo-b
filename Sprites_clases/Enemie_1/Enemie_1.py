@@ -107,9 +107,9 @@ class Enemie_1(arcade.Sprite):
         self.center_y = self.summon_y
         self.scale = PLAYER_SCALE
 
-
     def Load(self):
         self.dead = False
+        self.dead_light = False
 
     def on_draw(self):
 

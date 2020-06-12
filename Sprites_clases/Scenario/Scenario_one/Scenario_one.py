@@ -344,15 +344,12 @@ class Scenario(arcade.Window):
     def Summon_Enemie(self):
         if self.Summon_Enemies and self.player.center_x > 600:
             if self.dead_enemie1 and random.randint(0, 250) == 0:
-                self.dead_enemie1 = False
                 self.Generate_Enemie(0, self.player.center_x - 700, 200)
 
             elif self.dead_enemie2 and random.randint(0, 250) == 0:
                 if (self.player.center_x > 4500 and self.player.center_x < 5000):
-                    self.dead_enemie2 = False
                     self.Generate_Enemie(1, 4200, 200)
                 else:
-                    self.dead_enemie2 = False
                     self.Generate_Enemie(1, self.player.center_x + 700, 200)
         if self.Summon_Boss and self.player.center_x > 600:
 
@@ -365,11 +362,9 @@ class Scenario(arcade.Window):
                     self.Generate_Enemie(0, self.player.center_x + 500, 200)
 
             elif self.dead_enemie2 and random.randint(0, 250) == 0:
-                self.dead_enemie2 = False
                 self.Generate_Enemie(1, self.player.center_x + 500, 200)
 
             elif self.dead_boss1:
-                self.dead_boss1=False
                 self.Generate_Enemie(2, self.player.center_x,0)
 
 
@@ -380,6 +375,7 @@ class Scenario(arcade.Window):
                 # Set up the enemy1
                 self.enemy1 = Enemie_1()
                 self.enemy1.setup()
+            self.dead_enemie1 = False
             self.enemy1.Load()
             # Set up the enemy1 position
             self.enemy1.center_x = pos_x
@@ -396,6 +392,7 @@ class Scenario(arcade.Window):
                 # Set up the enemy2
                 self.enemy2 = Enemie_2()
                 self.enemy2.setup()
+            self.dead_enemie2 = False
             self.enemy2.Load()
             # Set up the enemy1 position
             self.enemy2.center_x = pos_x
@@ -411,7 +408,7 @@ class Scenario(arcade.Window):
             self.boss1.center_x = pos_x
             self.boss1.center_y = 600
             self.boss1.scale = BOSS_SCALE
-
+            self.dead_boss1 = False
             self.enemy_list.append(self.boss1)
 
     def delete_wall(self):
