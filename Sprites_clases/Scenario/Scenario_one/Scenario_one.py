@@ -142,7 +142,7 @@ class Scenario(arcade.Window):
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, gravity_constant=GRAVITY)
 
         # Load the background image
-        self.background = arcade.load_texture(Scenario_background_sprite)
+        self.background = arcade.load_texture(Scenario_sprite)
 
     def on_update(self, delta_time):
         if self.boss1.is_attacking:
