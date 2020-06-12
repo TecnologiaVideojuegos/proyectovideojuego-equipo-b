@@ -142,7 +142,7 @@ class Scenario(arcade.Window):
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, gravity_constant=GRAVITY)
 
         # Load the background image
-        self.background = arcade.load_texture(Scenario_sprite)
+        self.background = arcade.load_texture(Scenario_background_sprite)
 
     def on_update(self, delta_time):
         if self.boss1.is_attacking:
@@ -277,16 +277,16 @@ class Scenario(arcade.Window):
         hit_list = arcade.check_for_collision_with_list(self.player, self.enemy_list)
         for enemie in hit_list:
             if self.player.is_attacking and  not enemie.dead:
-                print("yes")
                 self.puzzle(enemie.id)
                 enemie.dead = True
             if not enemie.dead_light:
                 # decrease the character's life
                 self.valor_vida -= 0.5
-            if enemie.dead_light and self.player.center_x==enemie.center_x:
+            if enemie.dead_light and ( self.player.center_x>=enemie.center_x-10 and self.player.center_x<=enemie.center_x+10):
                 self.player.is_collecting_life = True
+                enemie.collected = True
                 if(self.valor_vida<80):
-                    self.valor_vida+=10
+                    self.valor_vida+=5
                 if enemie.__eq__(self.enemy1):
                     self.dead_enemie1=True
                 if enemie.__eq__(self.enemy2):
@@ -334,7 +334,7 @@ class Scenario(arcade.Window):
                 if not self.lista[i]==self.sol_puzzle2[i] :
                     self.lista=[]
 
-                print(self.lista)
+
 
     def Summon_Enemie(self):
         if self.Summon_Enemies and self.player.center_x > 600:

@@ -35,12 +35,16 @@ class Enemie_1(arcade.Sprite):
         self.position_y = Main_Character.center_y
 
         self.is_walking = False
+        self.is_jumping = False
         self.is_attacking = False
-
+        self.collected = False
+        self.dead = False
+        self.dead_light = False
 
     def setup(self):
         self.dead = False
         self.dead_light = False
+        self.collected = False
         self.enemy1_list = arcade.SpriteList()
         self.enemy1_sprite = arcade.AnimatedWalkingSprite()
 
@@ -87,17 +91,11 @@ class Enemie_1(arcade.Sprite):
         # Light Sprite
         self.enemy1_sprite.light_textures = []
         # Light Right Sprite
-        texturas = []
-        for i in range(1):
-            texturas.append(
-                arcade.load_texture(Lightning_Enemie_1, x=944, y=0, width=110, height=260))
-        self.enemy1_sprite.light_textures.append(texturas)
+        self.enemy1_sprite.light_textures.append(
+            arcade.load_texture(Lightning_Enemie_2, x=944, y=0, width=100, height=260, mirrored=True))
         # Light Left Sprite
-        texturas = []
-        for i in range(1):
-            texturas.append(
-                arcade.load_texture(Lightning_Enemie_1, x=944, y=0, width=110, height=260, mirrored=True))
-        self.enemy1_sprite.light_textures.append(texturas)
+        self.enemy1_sprite.light_textures.append(
+            arcade.load_texture(Lightning_Enemie_2, x=944, y=0, width=100, height=260, mirrored=True))
 
 
         self.enemy1_list.append(self.enemy1_sprite)
@@ -110,6 +108,7 @@ class Enemie_1(arcade.Sprite):
     def Load(self):
         self.dead = False
         self.dead_light = False
+        self.collected = False
 
     def on_draw(self):
 
@@ -140,14 +139,18 @@ class Enemie_1(arcade.Sprite):
 
         self.texture = self.enemy1_sprite.stand_textures[self.character_face_direction]
 
+        # Die
+        if self.collected:
+            self.kill()
+
         # Light stand
-        if self.dead_light:
+        elif self.dead_light:
             self.texture = self.enemy1_sprite.light_textures[self.character_face_direction]
 
         # Dead animation
-        if self.dead:
+        elif self.dead:
             if self.cur_texture == 36:
-                self.kill()
+                self.dead_light = True
             if self.cur_texture >= 9 * UPDATES_PER_FRAME_Enemies:
                 self.cur_texture = 0
             self.texture = self.enemy1_sprite.dead_textures[self.character_face_direction][

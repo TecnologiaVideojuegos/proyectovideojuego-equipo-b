@@ -76,3 +76,7 @@ Señal_Direcciones_Sprite = "Screens" + os.path.sep + "Background_items" + os.pa
 barra_vida = "Screens" + os.path.sep + "Background_items" + os.path.sep + "barra de vida.png"
 
 
+#New stuff
+Scenario_background_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "level1back.png"
+Scenario_foreground1_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "level1front.png"
+Scenario_foreground2_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "level1light.png"
