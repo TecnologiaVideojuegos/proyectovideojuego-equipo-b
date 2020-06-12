@@ -140,7 +140,6 @@ class Enemie_2(arcade.Sprite):
         else:
 
             self.is_jumping = not (self.center_y < 130)
-            print(self.is_jumping)
             if not self.is_attacking and not self.is_jumping and random.randint(0, 55)==0:
 
                 self.change_y = PLAYER_JUMP_SPEED

@@ -234,10 +234,12 @@ class Scenario(arcade.Window):
         self.player_list.draw()
         self.enemy_list.draw()
         self.GUI()
-
-        score_text = f"Vida: {self.valor_vida}"
-        arcade.draw_text(score_text, self.view_left + 50, self.view_bottom + 650,
-                         arcade.csscolor.BLACK, 18)
+        if len(self.lista)>0 :
+            score_text=""
+            for i in self.lista:
+                score_text += "%d " % (i)
+            arcade.draw_text(score_text, self.view_left + 50, self.view_bottom + 650,
+                             arcade.csscolor.BLACK, 18)
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
@@ -307,9 +309,7 @@ class Scenario(arcade.Window):
                 i=len(self.lista)-1
                 if not self.lista[i]==self.sol_puzzle1[i] :
                     self.lista=[]
-
-                print(self.lista)
-
+                    
         elif self.Summon_Boss :
             if len(self.lista) == 3:
                 self.lista.append(id)
