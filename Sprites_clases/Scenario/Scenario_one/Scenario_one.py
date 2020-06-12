@@ -256,7 +256,7 @@ class Scenario(arcade.Window):
             self.player.on_key_press_move_right()
         elif key == arcade.key.X:
             #self.player.is_collecting_life = True
-            self.Generate_Enemie(1,self.player.center_x,500)
+            self.Generate_Enemie(0, self.player.center_x, 500)
             self.delete_wall()
 
     def on_key_release(self, key, modifiers):
@@ -278,6 +278,7 @@ class Scenario(arcade.Window):
         for enemie in hit_list:
             if self.player.is_attacking and not enemie.dead:
                 enemie.dead = True
+                self.enemy1.dead_light = True
                 self.puzzle(enemie.id)
                 if enemie.id == 0:
                     self.dead_enemie1 = True
