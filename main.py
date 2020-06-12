@@ -33,8 +33,10 @@ def main():
             if Game_over == None:
                 Game_over = GameOver(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
             Game_over.setup()
-
             arcade.run()
+        elif Scene_one.Game_won:
+            print("Congrats, you won")
+            
 
         quit = True
 

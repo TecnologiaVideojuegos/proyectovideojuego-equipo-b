@@ -39,6 +39,7 @@ class Scenario(arcade.Window):
         self.valor_vida = None
 
         self.Game_over = False
+        self.Game_won = False
 
         self.view_left = 0
         self.view_bottom = 0
@@ -145,101 +146,108 @@ class Scenario(arcade.Window):
         self.background = arcade.load_texture(Scenario_sprite )
 
     def on_update(self, delta_time):
-        if self.boss1.is_attacking:
-            self.player.change_x=0
-            self.player.set_to_false()
-        if self.valor_vida <= 0:
-            self.Game_over = True
-            self.close()
-        else:
+        try:
+            if self.boss1.is_attacking:
+                self.player.change_x=0
+                self.player.set_to_false()
+
+            if self.valor_vida <= 0:
+                self.Game_over = True
+                self.close()
+            else:
 
 
-            self.player.is_falling = self.player.change_y < 0
-            self.player_list.update_animation()
+                self.player.is_falling = self.player.change_y < 0
+                self.player_list.update_animation()
 
-            self.physics_engine.update()
+                self.physics_engine.update()
 
-            if self.End_level:
-                if self.player.center_x >7500 :
-                    self.close()
-            elif self.Summon_Boss:
-                self.Cross_Semaphore = False
-                self.Summon_Enemie()
-            elif self.Cross_Semaphore:
-                self.Summon_Enemies = False
-                self.Summon_Boss = self.player.center_x > 7000
-            elif self.Summon_Enemies:
-                self.Reached_wall = False
-                self.Summon_Enemie()
-            elif self.Reached_wall:
-                self.Summon_Enemies = self.player.center_x < 3000
-            elif self.player.center_x > 4900:
-                self.Reached_wall = True
-            #print(self.player.center_x)
+                if self.End_level:
+                    if self.player.center_x >7500 :
+                        self.Game_won = True
+                        self.close()
+                elif self.Summon_Boss:
+                    self.Cross_Semaphore = False
+                    self.Summon_Enemie()
+                elif self.Cross_Semaphore:
+                    self.Summon_Enemies = False
+                    self.Summon_Boss = self.player.center_x > 7000
+                elif self.Summon_Enemies:
+                    self.Reached_wall = False
+                    self.Summon_Enemie()
+                elif self.Reached_wall:
+                    self.Summon_Enemies = self.player.center_x < 3000
+                elif self.player.center_x > 4900:
+                    self.Reached_wall = True
+                #print(self.player.center_x)
 
-            if (len(self.enemy_list) > 0):
-                self.enemy_list.update_animation()
-                if self.physics_engine_enemy1 != None:
-                    self.physics_engine_enemy1.update()
-                if self.physics_engine_enemy2 != None:
-                    self.physics_engine_enemy2.update()
-                self.Trigger_IA()
-                self.collisions()
-            #print(self.player.center_x)
+                if (len(self.enemy_list) > 0):
+                    self.enemy_list.update_animation()
+                    if self.physics_engine_enemy1 != None:
+                        self.physics_engine_enemy1.update()
+                    if self.physics_engine_enemy2 != None:
+                        self.physics_engine_enemy2.update()
+                    self.Trigger_IA()
+                    self.collisions()
+                #print(self.player.center_x)
 
-            # --- Manage Scrolling ---
+                # --- Manage Scrolling ---
 
-            # Track if we need to change the viewport
+                # Track if we need to change the viewport
 
-            changed = False
+                changed = False
 
-            # Scroll left
-            left_boundary = self.view_left + SCREEN_WIDTH - RIGHT_MARGIN * 1.5
-            if self.player.left < left_boundary:
-                self.view_left -= left_boundary - self.player.left
-                changed = True
+                # Scroll left
+                left_boundary = self.view_left + SCREEN_WIDTH - RIGHT_MARGIN * 1.5
+                if self.player.left < left_boundary:
+                    self.view_left -= left_boundary - self.player.left
+                    changed = True
 
-            # Scroll right
-            right_boundary = self.view_left + SCREEN_WIDTH - RIGHT_MARGIN
-            if self.player.right > right_boundary:
-                self.view_left += self.player.right - right_boundary
-                changed = True
+                # Scroll right
+                right_boundary = self.view_left + SCREEN_WIDTH - RIGHT_MARGIN
+                if self.player.right > right_boundary:
+                    self.view_left += self.player.right - right_boundary
+                    changed = True
 
-            # Scroll up
-            top_boundary = self.view_bottom + SCREEN_HEIGHT - VIEWPORT_MARGIN
-            if self.player.top > top_boundary:
-                self.view_bottom += self.player.top - top_boundary
-                changed = True
+                # Scroll up
+                top_boundary = self.view_bottom + SCREEN_HEIGHT - VIEWPORT_MARGIN
+                if self.player.top > top_boundary:
+                    self.view_bottom += self.player.top - top_boundary
+                    changed = True
 
-            # Scroll down
-            bottom_boundary = self.view_bottom + VIEWPORT_MARGIN
-            if self.player.bottom < bottom_boundary:
-                self.view_bottom -= bottom_boundary - self.player.bottom
-                changed = True
+                # Scroll down
+                bottom_boundary = self.view_bottom + VIEWPORT_MARGIN
+                if self.player.bottom < bottom_boundary:
+                    self.view_bottom -= bottom_boundary - self.player.bottom
+                    changed = True
 
-            # If we need to scroll, go ahead and do it.
-            if changed:
-                arcade.set_viewport(self.view_left,
-                                    SCREEN_WIDTH + self.view_left,
-                                    self.view_bottom,
-                                    SCREEN_HEIGHT + self.view_bottom)
-
+                # If we need to scroll, go ahead and do it.
+                if changed:
+                    arcade.set_viewport(self.view_left,
+                                        SCREEN_WIDTH + self.view_left,
+                                        self.view_bottom,
+                                        SCREEN_HEIGHT + self.view_bottom)
+        except:
+            print()
     def on_draw(self):
-        arcade.start_render()
-        # Draw the background texture
-        arcade.draw_lrwh_rectangle_textured(-1000, 0, 11000, SCREEN_HEIGHT,
-                                            self.background)  # At wall ground length 20 the width is 1280
-        # self.wall_list.draw()                                                                   #At wall ground lenght 100 the image witdh is 6450
-        self.background_items_list.draw()
-        self.player_list.draw()
-        self.enemy_list.draw()
-        self.GUI()
-        if len(self.lista)>0 :
-            score_text=""
-            for i in self.lista:
-                score_text += "%d " % (i)
-            arcade.draw_text(score_text, self.view_left + 50, self.view_bottom + 650,
-                             arcade.csscolor.BLACK, 18)
+        try:
+            arcade.start_render()
+            # Draw the background texture
+            arcade.draw_lrwh_rectangle_textured(-1000, 0, 11000, SCREEN_HEIGHT,
+                                                self.background)  # At wall ground length 20 the width is 1280
+            # self.wall_list.draw()                                                                   #At wall ground lenght 100 the image witdh is 6450
+            self.background_items_list.draw()
+            self.player_list.draw()
+            self.enemy_list.draw()
+            self.GUI()
+            if len(self.lista)>0 :
+                score_text=""
+                for i in self.lista:
+                    score_text += "%d " % (i)
+                arcade.draw_text(score_text, self.view_left + 50, self.view_bottom + 650,
+                                 arcade.csscolor.BLACK, 18)
+        except:
+            print()
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
@@ -275,22 +283,24 @@ class Scenario(arcade.Window):
     def collisions(self):
 
         hit_list = arcade.check_for_collision_with_list(self.player, self.enemy_list)
+        print(self.dead_enemie1,self.dead_enemie2)
         for enemie in hit_list:
             if self.player.is_attacking and  not enemie.dead:
                 self.puzzle(enemie.id)
                 enemie.dead = True
-            if not enemie.dead_light:
-                # decrease the character's life
-                self.valor_vida -= 0.5
             if enemie.dead_light and ( self.player.center_x>=enemie.center_x-10 and self.player.center_x<=enemie.center_x+10):
                 self.player.is_collecting_life = True
                 enemie.collected = True
                 if(self.valor_vida<80):
-                    self.valor_vida+=5
-                if enemie.__eq__(self.enemy1):
+                    self.valor_vida+=10
+                if enemie.id==0:
                     self.dead_enemie1=True
-                if enemie.__eq__(self.enemy2):
+                elif enemie.id==1:
                     self.dead_enemie2 = True
+            elif not enemie.dead:
+                # decrease the character's life
+                self.valor_vida -= 0.5
+
 
     # Trigger the enemie IA
     def Trigger_IA(self):
@@ -337,27 +347,25 @@ class Scenario(arcade.Window):
 
 
     def Summon_Enemie(self):
-        if self.Summon_Enemies and self.player.center_x > 600:
+        if self.Summon_Enemies and self.player.center_x > 1000:
             if self.dead_enemie1 and random.randint(0, 250) == 0:
                 self.Generate_Enemie(0, self.player.center_x - 700, 200)
 
             elif self.dead_enemie2 and random.randint(0, 250) == 0:
-                if (self.player.center_x > 4500 and self.player.center_x < 5000):
+                if self.player.center_x > 4000 :
                     self.Generate_Enemie(1, 4200, 200)
                 else:
                     self.Generate_Enemie(1, self.player.center_x + 700, 200)
-        if self.Summon_Boss and self.player.center_x > 600:
+        if self.Summon_Boss and self.player.center_x > 1000:
 
             if self.dead_enemie1 and random.randint(0, 250) == 0:
-                if (self.player.center_x > 7500 and self.player.center_x < 8000):
-                    self.dead_enemie1 = False
-                    self.Generate_Enemie(0, self.player.center_x - 500, 200)
-                else:
-                    self.dead_enemie1 = False
-                    self.Generate_Enemie(0, self.player.center_x + 500, 200)
+                self.Generate_Enemie(0, self.player.center_x - 700, 200)
 
             elif self.dead_enemie2 and random.randint(0, 250) == 0:
-                self.Generate_Enemie(1, self.player.center_x + 500, 200)
+                if self.player.center_x > 7500:
+                    self.Generate_Enemie(1, 7000, 200)
+                else:
+                    self.Generate_Enemie(1, self.player.center_x + 700, 200)
 
             elif self.dead_boss1:
                 self.Generate_Enemie(2, self.player.center_x,0)

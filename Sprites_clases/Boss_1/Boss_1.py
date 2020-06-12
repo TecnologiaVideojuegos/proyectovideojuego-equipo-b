@@ -96,10 +96,10 @@ class Boss_1(arcade.Sprite):
 
 
     def on_update(self):
-        if self.center_x != None :
-            self.boss_1_list.update()
 
-            self.boss_1_list.update_animation()
+        self.boss_1_list.update()
+
+        self.boss_1_list.update_animation()
 
 
     def update_animation(self, delta_time):
@@ -115,7 +115,9 @@ class Boss_1(arcade.Sprite):
 
         self.texture = self.boss_1_sprite.stand_textures[self.character_face_direction]
 
-        if self.is_attacking:
+        if self.dead:
+            self.kill()
+        elif self.is_attacking:
             if self.cur_texture == 40:
                 self.is_attacking = False
             if self.cur_texture >= 4 * UPDATES_PER_FRAME:
