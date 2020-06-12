@@ -36,7 +36,7 @@ def main():
             arcade.run()
         elif Scene_one.Game_won:
             print("Congrats, you won")
-            
+
 
         quit = True
 

@@ -90,8 +90,8 @@ class Scenario(arcade.Window):
         self.player.setup()
 
         # Set up the player position
-        self.player.center_x = SCREEN_WIDTH // 2
-        self.player.center_y = SCREEN_HEIGHT // 2
+        self.player.center_x = 65
+        self.player.center_y = 100
         self.player.scale = PLAYER_SCALE
 
         self.player_list.append(self.player)
@@ -105,13 +105,13 @@ class Scenario(arcade.Window):
         # Create the ground
         for i in range(125):
             wall = arcade.Sprite(":resources:images/tiles/stone.png", SPRITE_SCALE)
-            wall.bottom = 0
+            wall.bottom = 60
             wall.type = "ground"
             wall.center_x = i * GRID_PIXEL_SIZE
             self.wall_list.append(wall)
 
         # Create the Wall
-        for posy in [(0, "wall"), (5000, "Sema"), (8000, "wall")]:
+        for posy in [(0, "wall"), (3550, "Sema"), (8000, "wall")]:
             for i in range(10):
                 wall = arcade.Sprite(":resources:images/tiles/stone.png", SPRITE_SCALE)
                 wall.bottom = 0
@@ -120,33 +120,19 @@ class Scenario(arcade.Window):
                 wall.center_x = posy[0]
                 self.wall_list.append(wall)
 
-        # Añadiendo cartel gasolinera
-        item = arcade.Sprite(Cartel_Gasolinera_Sprite, SPRITE_SCALE)
-        item.bottom = 0
-        item.center_y = 230
-        item.center_x = 3200
-        self.background_items_list.append(item)
-        # Añadiendo semaforo rojo
-        self.semaforo = arcade.Sprite(Semaforo_Rojo_Sprite, SPRITE_SCALE)
-        self.semaforo.bottom = 0
-        self.semaforo.center_y = 260
-        self.semaforo.center_x = 5000
-        self.background_items_list.append(self.semaforo)
-        # Añadiendo Cartel direcciones
-        item = arcade.Sprite(Señal_Direcciones_Sprite, SPRITE_SCALE)
-        item.bottom = 0
-        item.center_y = 95
-        item.center_x = 600
-        self.background_items_list.append(item)
+
 
         # Set the physics_engine
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, gravity_constant=GRAVITY)
 
         # Load the background image
-        self.background = arcade.load_texture(Scenario_sprite )
+        self.background = arcade.load_texture(Scenario_background_sprite )
+        self.foreground = arcade.load_texture(Scenario_foreground1_sprite )
+        self.foreground2 = arcade.load_texture(Scenario_foreground2_sprite)
 
     def on_update(self, delta_time):
         try:
+            print(self.player.center_x)
             if self.boss1.is_attacking:
                 self.player.change_x=0
                 self.player.set_to_false()
@@ -163,7 +149,7 @@ class Scenario(arcade.Window):
                 self.physics_engine.update()
 
                 if self.End_level:
-                    if self.player.center_x >7500 :
+                    if self.player.center_x >7900 :
                         self.Game_won = True
                         self.close()
                 elif self.Summon_Boss:
@@ -176,8 +162,8 @@ class Scenario(arcade.Window):
                     self.Reached_wall = False
                     self.Summon_Enemie()
                 elif self.Reached_wall:
-                    self.Summon_Enemies = self.player.center_x < 3000
-                elif self.player.center_x > 4900:
+                    self.Summon_Enemies = self.player.center_x < 2900
+                elif self.player.center_x > 3400:
                     self.Reached_wall = True
                 #print(self.player.center_x)
 
@@ -233,12 +219,19 @@ class Scenario(arcade.Window):
         try:
             arcade.start_render()
             # Draw the background texture
-            arcade.draw_lrwh_rectangle_textured(-1000, 0, 11000, SCREEN_HEIGHT,
+            arcade.draw_lrwh_rectangle_textured(-700, 20, 9200, SCREEN_HEIGHT,
                                                 self.background)  # At wall ground length 20 the width is 1280
+
+
             # self.wall_list.draw()                                                                   #At wall ground lenght 100 the image witdh is 6450
             self.background_items_list.draw()
             self.player_list.draw()
             self.enemy_list.draw()
+            arcade.draw_lrwh_rectangle_textured(-700, 10, 9200, SCREEN_HEIGHT,
+                                                self.foreground)
+            if self.foreground2 != None:
+                arcade.draw_lrwh_rectangle_textured(-700, 10, 9200, SCREEN_HEIGHT,
+                                                self.foreground2)
             self.GUI()
             if len(self.lista)>0 :
                 score_text=""
@@ -264,7 +257,7 @@ class Scenario(arcade.Window):
             self.player.on_key_press_move_right()
         elif key == arcade.key.X:
             #self.player.is_collecting_life = True
-            self.Generate_Enemie(1, self.player.center_x, 500)
+            #self.Generate_Enemie(1, self.player.center_x, 500)
             self.delete_wall()
 
     def on_key_release(self, key, modifiers):
@@ -283,7 +276,6 @@ class Scenario(arcade.Window):
     def collisions(self):
 
         hit_list = arcade.check_for_collision_with_list(self.player, self.enemy_list)
-        print(self.dead_enemie1,self.dead_enemie2)
         for enemie in hit_list:
             if self.player.is_attacking and  not enemie.dead:
                 self.puzzle(enemie.id)
@@ -348,20 +340,20 @@ class Scenario(arcade.Window):
 
     def Summon_Enemie(self):
         if self.Summon_Enemies and self.player.center_x > 1000:
-            if self.dead_enemie1 and random.randint(0, 250) == 0:
+            if self.dead_enemie1 and random.randint(0, 175) == 0:
                 self.Generate_Enemie(0, self.player.center_x - 700, 200)
 
-            elif self.dead_enemie2 and random.randint(0, 250) == 0:
-                if self.player.center_x > 4000 :
-                    self.Generate_Enemie(1, 4200, 200)
+            elif self.dead_enemie2 and random.randint(0, 175) == 0:
+                if self.player.center_x > 3400 :
+                    self.Generate_Enemie(1, 2950, 200)
                 else:
                     self.Generate_Enemie(1, self.player.center_x + 700, 200)
         if self.Summon_Boss and self.player.center_x > 1000:
 
-            if self.dead_enemie1 and random.randint(0, 250) == 0:
+            if self.dead_enemie1 and random.randint(0, 155) == 0:
                 self.Generate_Enemie(0, self.player.center_x - 700, 200)
 
-            elif self.dead_enemie2 and random.randint(0, 250) == 0:
+            elif self.dead_enemie2 and random.randint(0, 155) == 0:
                 if self.player.center_x > 7500:
                     self.Generate_Enemie(1, 7000, 200)
                 else:
@@ -415,18 +407,13 @@ class Scenario(arcade.Window):
             self.enemy_list.append(self.boss1)
 
     def delete_wall(self):
-        self.background_items_list.remove(self.semaforo)
         # Añadiendo semaforo apagado
-        self.semaforo = arcade.Sprite(Semaforo_Apagado_Sprite, SPRITE_SCALE)
-        self.semaforo.bottom = 0
-        self.semaforo.center_y = 260
-        self.semaforo.center_x = 5000
-        self.background_items_list.append(self.semaforo)
-
+        self.foreground2 = None
         for i in range(3):
             for elem in self.wall_list:
                 if elem.type == "Sema":
                     self.wall_list.remove(elem)
+
     def Level_Pased(self):
         for enemi in self.enemy_list:
             enemi.dead =True

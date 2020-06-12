@@ -185,7 +185,6 @@ class Main_Character(arcade.Sprite):
         # Collexting Life animation
         elif self.is_collecting_life:
             # self.is_collecting_life = True
-            print(self.cur_texture)
             if self.cur_texture == 40:
                 self.is_collecting_life = False
             if self.cur_texture >= 10 * UPDATES_PER_FRAME_Main_Char_Soul:
