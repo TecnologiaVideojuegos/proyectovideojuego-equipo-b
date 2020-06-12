@@ -164,7 +164,7 @@ class Enemie_1(arcade.Sprite):
 
 
     def interact(self, x, y):
-        if self.dead:
+        if self.dead_light:
             self.change_x = 0
         else:
             where_x = self.center_x-x
