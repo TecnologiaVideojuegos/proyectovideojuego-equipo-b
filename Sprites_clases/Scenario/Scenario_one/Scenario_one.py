@@ -337,27 +337,46 @@ class Scenario_one(arcade.Window):
     def Summon_Enemie(self):
         if self.Summon_Enemies and self.player.center_x > 1000:
             if random.randint(0, 175) == 0:
-                self.Generate_Enemie(0, self.player.center_x - 700, 200)
+                range = random.randint(-500, 500)
+                if range >= 0:
+                    minim = 250
+                else:
+                    minim = -250
+                self.Generate_Enemie(0, self.player.center_x + minim + range, 200)
 
             elif random.randint(0, 175) == 0:
-                if self.player.center_x > 3400 :
+                if self.player.center_x > 3400:
                     self.Generate_Enemie(1, 2950, 200)
                 else:
-                    self.Generate_Enemie(1, self.player.center_x + 700, 200)
+                    range = random.randint(-500, 500)
+                    if range >= 0:
+                        minim = 250
+                    else:
+                        minim = -250
+                    self.Generate_Enemie(1, self.player.center_x + minim + range, 200)
         if self.Summon_Boss and self.player.center_x > 1000:
 
             if random.randint(0, 155) == 0:
-                self.Generate_Enemie(0, self.player.center_x - 700, 200)
+                range = random.randint(-500, 500)
+                if range >= 0:
+                    minim = 250
+                else:
+                    minim = -250
+                self.Generate_Enemie(0, self.player.center_x + minim + range, 200)
 
             elif random.randint(0, 155) == 0:
                 if self.player.center_x > 7500:
                     self.Generate_Enemie(1, 7000, 200)
                 else:
-                    self.Generate_Enemie(1, self.player.center_x + 700, 200)
+                    range = random.randint(-500, 500)
+                    if range >= 0:
+                        minim = 250
+                    else:
+                        minim = -250
+                    self.Generate_Enemie(1, self.player.center_x + minim + range, 200)
 
             elif self.dead_boss1:
-                self.Generate_Enemie(2, self.player.center_x,0)
-
+                self.Generate_Enemie(2, self.player.center_x, 0)
 
     def Generate_Enemie(self, numero_de_Portal, pos_x, pos_y):
 
