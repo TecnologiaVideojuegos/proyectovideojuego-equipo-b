@@ -157,7 +157,7 @@ class Scenario_two(arcade.Window):
             elif self.Cross_Semaphore:
                 self.Summon_Enemies = False
                 print("boss time")
-                self.Summon_Boss = self.player.center_x > 7350
+                self.Summon_Boss = self.player.center_x > 5000
             elif self.Summon_Enemies:
                 self.Reached_wall = False
                 self.Summon_Enemie()
@@ -170,6 +170,9 @@ class Scenario_two(arcade.Window):
 
             if (len(self.enemy_list) > 0):
                 self.enemy_list.update_animation()
+                if self.boss2.valor_vida <= 0:
+                    self.close()
+                    print("Has matado al jefe")
                 if self.physics_engine_enemy01 != None:
                     self.physics_engine_enemy01.update()
                 if self.physics_engine_enemy02 != None:
@@ -219,6 +222,8 @@ class Scenario_two(arcade.Window):
                                     self.view_bottom,
                                     SCREEN_HEIGHT + self.view_bottom)
 
+
+
     def on_draw(self):
         try:
             arcade.start_render()
@@ -259,7 +264,7 @@ class Scenario_two(arcade.Window):
             # self.player.is_collecting_life = True
             # self.Generate_Enemie(1, self.player.center_x, 500)
             self.delete_wall()
-            self.Generate_Enemie(1, self.player.center_x-50, 200)
+            self.Generate_Enemie(2, self.player.center_x-50, 200)
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
@@ -278,10 +283,12 @@ class Scenario_two(arcade.Window):
 
         hit_list = arcade.check_for_collision_with_list(self.player, self.enemy_list)
         for enemie in hit_list:
-            if self.player.is_attacking and not enemie.dead:
+            if self.player.is_attacking and not enemie.dead and enemie != self.boss2:
                 self.puzzle(enemie.id)
                 enemie.dead = True
-            if enemie.dead_light and (
+            elif self.player.is_attacking and not enemie.dead and enemie == self.boss2:
+                self.boss2.valor_vida -= 0.5
+            if enemie != self.boss2 and enemie.dead_light and(
                     self.player.center_x >= enemie.center_x - 10 and self.player.center_x <= enemie.center_x + 10):
                 self.player.is_collecting_life = True
                 enemie.collected = True
@@ -295,8 +302,8 @@ class Scenario_two(arcade.Window):
     def Trigger_IA(self):
         for enemie in self.enemy_list:
             enemie.interact(self.player.center_x, self.player.center_y)
-            if enemie == self.boss2 and enemie.is_attacking and abs(self.player.center_x-enemie.center_x)<40:
-                self.player.center_x -= 100
+            if enemie == self.boss2 and enemie.is_attacking:
+                self.player.center_x -= 500
 
     def puzzle(self, id):
         if self.Summon_Enemies:
@@ -345,12 +352,12 @@ class Scenario_two(arcade.Window):
                     minim = 600
                 else:
                     minim = -600
-                if self.player.center_x + minim + range > 6600:
-                    self.Generate_Enemie(0, 6500, 200)
+                if self.player.center_x + minim + range > 3000:
+                    self.Generate_Enemie(0, 2950, 200)
                 else:
                     self.Generate_Enemie(0, self.player.center_x + minim + range, 200)
 
-            elif random.randint(0, 175) == 0:
+            if random.randint(0, 175) == 0:
                 range = random.randint(-500, 500)
                 if range >= 0:
                     minim = 600
@@ -368,19 +375,19 @@ class Scenario_two(arcade.Window):
                     minim = 600
                 else:
                     minim = -600
-                if self.player.center_x + minim + range > 6600:
-                    self.Generate_Enemie(0, 6500, 200)
+                if self.player.center_x + minim + range > 6400:
+                    self.Generate_Enemie(0, 6400 + minim + range, 200)
                 else:
                     self.Generate_Enemie(0, self.player.center_x + minim + range, 200)
 
-            elif random.randint(0, 155) == 0:
+            if random.randint(0, 155) == 0:
                 range = random.randint(-500, 500)
                 if range >= 0:
                     minim = 600
                 else:
                     minim = -600
-                if self.player.center_x + minim + range > 8000:
-                    self.Generate_Enemie(1, 6750, 200)
+                if self.player.center_x + minim + range > 6400:
+                    self.Generate_Enemie(1, 6400 + minim + range, 200)
                 else:
                     self.Generate_Enemie(1, self.player.center_x + minim + range, 200)
 
@@ -473,8 +480,8 @@ class Scenario_two(arcade.Window):
                                                                              gravity_constant=GRAVITY)
         elif numero_de_Portal == 2:
             # Set up the enemy1 position
-            self.boss2.center_x = pos_x
-            self.boss2.center_y = 600
+            self.boss2.center_x = 7400
+            self.boss2.center_y = 400
             self.boss2.scale = BOSS_SCALE
             self.dead_boss2 = False
             self.enemy_list.append(self.boss2)

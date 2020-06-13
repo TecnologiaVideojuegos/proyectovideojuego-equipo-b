@@ -45,6 +45,9 @@ class Boss_2(arcade.Sprite):
     def setup(self):
         self.dead = False
 
+        self.valor_vida = 60
+        self.points = [[-25, -125], [25, -125], [25, 125], [-25, 125]]
+
         self.boss_1_list = arcade.SpriteList()
         self.boss_1_sprite = arcade.AnimatedWalkingSprite()
 
@@ -121,11 +124,10 @@ class Boss_2(arcade.Sprite):
             self.texture = self.boss_1_sprite.attack_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME]
 
-    def interact(self,x,y):
+    def interact(self, x, y):
         where_x = self.center_x - x
-        if -40 < where_x and where_x < 40:
-
-            if random.randint(0,20) == 0:
+        if abs(where_x) < 300:
+            if random.randint(0, 150) == 0:
                 self.is_attacking = True
         else:
 
