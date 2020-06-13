@@ -104,12 +104,8 @@ class Boss_2(arcade.Sprite):
 
     def update_animation(self, delta_time):
 
-        # Figure out if we need to flip face left or right
-        if self.change_x < 0 and self.character_face_direction == RIGHT_FACING:
-            self.character_face_direction = LEFT_FACING
-        elif self.change_x > 0 and self.character_face_direction == LEFT_FACING:
-            self.character_face_direction = RIGHT_FACING
-
+        # This boss always look left
+        self.character_face_direction = LEFT_FACING
         # Standing animation
         self.cur_texture += 1
 
@@ -127,9 +123,12 @@ class Boss_2(arcade.Sprite):
 
     def interact(self,x,y):
         where_x = self.center_x - x
-        if -20 < where_x and where_x < 20:
-            self.is_attacking = True
+        if -40 < where_x and where_x < 40:
+
+            if random.randint(0,20) == 0:
+                self.is_attacking = True
         else:
+
             self.is_attacking = False
 
 
