@@ -2,7 +2,7 @@ import arcade
 from Sprites_clases.Main_character.Main_character import *
 from Sprites_clases.Enemie_1.Enemie_1 import *
 from Sprites_clases.Enemie_2.Enemie_2 import *
-from Sprites_clases.Boss_1.Boss_1 import *
+from Sprites_clases.Boss_2.Boss_2 import *
 from Variables import *
 import time
 import random
@@ -29,7 +29,7 @@ class Scenario_two(arcade.Window):
         self.enemy02 = None
         self.enemy11 = None
         self.enemy22 = None
-        self.boss1 = None
+        self.boss2 = None
         # Sprite lists
         self.player_list = None
         self.enemy_list = None
@@ -57,7 +57,7 @@ class Scenario_two(arcade.Window):
         self.Summon_Enemies = False
         self.dead_enemie1 = True
         self.dead_enemie2 = True
-        self.dead_boss1 = True
+        self.dead_boss2 = True
         self.Cross_Semaphore = False
         self.Summon_Boss = False
         self.End_level = False
@@ -89,8 +89,8 @@ class Scenario_two(arcade.Window):
         self.enemy02 = Enemie_2()
         self.enemy02.setup()
 
-        self.boss1 = Boss_1()
-        self.boss1.setup()
+        self.boss2 = Boss_2()
+        self.boss2.setup()
 
         # Set up the player
         self.player = Main_Character()
@@ -135,7 +135,7 @@ class Scenario_two(arcade.Window):
         self.foreground = arcade.load_texture(Scenario_2_foreground_sprite)
 
     def on_update(self, delta_time):
-        #print(self.player.center_x)
+        print(self.player.center_x)
         if self.boss1.is_attacking:
             self.player.change_x = 0
             self.player.set_to_false()
@@ -298,6 +298,8 @@ class Scenario_two(arcade.Window):
     def Trigger_IA(self):
         for enemie in self.enemy_list:
             enemie.interact(self.player.center_x, self.player.center_y)
+            if enemie == self.boss2 and enemie.is_attacking and abs(self.player.center_x-enemie.center_x)<40:
+                self.player.center_x-=100
 
     def puzzle(self, id):
         if self.Summon_Enemies:
@@ -370,7 +372,6 @@ class Scenario_two(arcade.Window):
                     alive1=True
                 if enemi == self.enemy11:
                     alive2=True
-            print ("Enemie1 ---", alive1,alive2, "  Can spawn??  : ",self.dead_enemie1)
             if not alive1 :
                 if self.enemy01 == None:
                     # Set up the enemy1
@@ -412,7 +413,6 @@ class Scenario_two(arcade.Window):
                 if enemi == self.enemy22:
                     alive2 = True
 
-            print("Enemie2 ---", alive1, alive2, "  Can spawn??  : ", self.dead_enemie2)
 
             if not alive1:
                 if self.enemy02 == None:
@@ -447,11 +447,11 @@ class Scenario_two(arcade.Window):
                                                                              gravity_constant=GRAVITY)
         elif numero_de_Portal == 2:
             # Set up the enemy1 position
-            self.boss1.center_x = pos_x
-            self.boss1.center_y = 600
-            self.boss1.scale = BOSS_SCALE
-            self.dead_boss1 = False
-            self.enemy_list.append(self.boss1)
+            self.boss2.center_x = pos_x
+            self.boss2.center_y = 600
+            self.boss2.scale = BOSS_SCALE
+            self.dead_boss2 = False
+            self.enemy_list.append(self.boss2)
 
     def delete_wall(self):
         for i in range(3):

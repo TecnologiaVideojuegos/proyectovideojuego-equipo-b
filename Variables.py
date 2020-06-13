@@ -65,6 +65,10 @@ Lightning_Enemie_2 = "Sprites_clases" + os.path.sep + "Enemie_2" + os.path.sep +
 Stand_Boss_1="Sprites_clases" + os.path.sep + "Boss_1" + os.path.sep + "Sprites" + os.path.sep + "BOSS0.png"
 Attack_Boss_1="Sprites_clases" + os.path.sep + "Boss_1" + os.path.sep + "Sprites" + os.path.sep + "BOSSANIMATION.png"
 
+#Boss_1
+Stand_Boss_2="Sprites_clases" + os.path.sep + "Boss_2" + os.path.sep + "Sprites" + os.path.sep + "BOSS0.png"
+Attack_Boss_2="Sprites_clases" + os.path.sep + "Boss_2" + os.path.sep + "Sprites" + os.path.sep + "BOSSANIMATION.png"
+
 
 #Background Sprites
 Cartel_Gasolinera_Sprite = "Screens" + os.path.sep + "Background_items" + os.path.sep + "Cartelgasolinera.png"
