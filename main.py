@@ -41,7 +41,6 @@ def main():
 
         quit = True
 
-
 def All_to_None():
         window=None
         Scene_one=None
