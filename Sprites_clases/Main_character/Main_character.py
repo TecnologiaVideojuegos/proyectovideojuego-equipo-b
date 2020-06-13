@@ -37,8 +37,19 @@ class Main_Character(arcade.Sprite):
         # side-to-side. Box is centered at sprite center, (0, 0)
         self.points = [[-25, -125], [25, -125], [25, 125], [-25, 125]]
 
+
+
     def setup(self):
         "El archivo WalkingX.png lo metí directamente en la carpeta del proyecto de PyCharm"
+
+        #Load character sounds
+        self.walking_sound = arcade.load_sound("StepsC.wav")
+        self.jump_sound = arcade.load_sound("SaltoC.wav")
+        self.attack_sound = arcade.load_sound("./Music/Golpe1.wav")
+        self.attack1_sound = arcade.load_sound("Golpe2.wav")
+        self.attack_sound = arcade.load_sound("Golpe3.wav")
+        self.falling_sound = arcade.load_sound("CaidaC.wav")
+        self.light_sound = arcade.load_sound("Coger luz.wav")
 
         self.player_list = arcade.SpriteList()
         self.player_sprite = arcade.AnimatedWalkingSprite()
@@ -121,6 +132,7 @@ class Main_Character(arcade.Sprite):
             texturas.append(
                 arcade.load_texture(Collecting_life_Sprite, x=i * 118, y=0, width=118, height=261))
         self.player_sprite.collect_life_textures.append(texturas)
+
         # Collect Life Left Sprites
         texturas = []
         for i in range(10):
@@ -163,6 +175,7 @@ class Main_Character(arcade.Sprite):
 
         # Jumping animation
         elif self.is_jumping:
+
             # self.set_to_false()
             #self.is_jumping = True
             if self.cur_texture == 45:
@@ -192,6 +205,7 @@ class Main_Character(arcade.Sprite):
             self.texture = self.player_sprite.collect_life_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME_Main_Char]
 
+
         # Walking animation
         elif self.is_walking:
             self.set_to_false()
@@ -202,8 +216,10 @@ class Main_Character(arcade.Sprite):
                 self.cur_texture // UPDATES_PER_FRAME_Main_Char]
 
 
+
         else:
             self.texture = self.player_sprite.stand_textures[self.character_face_direction]
+
 
 
 
@@ -214,27 +230,34 @@ class Main_Character(arcade.Sprite):
             self.change_y = PLAYER_JUMP_SPEED
             self.jump_needs_reset = True
 
+
+
     def on_key_press_move_left(self):
         if not self.is_attacking:
             self.is_walking = True
             self.change_x = -MOVEMENT_SPEED
+
+
 
     def on_key_press_move_right(self):
         if not self.is_attacking:
             self.is_walking = True
             self.change_x = MOVEMENT_SPEED
 
+
     def on_key_press_attack(self):
         if not self.is_walking:
             self.is_attacking = True
+            arcade.play_sound(self.attack_sound)
 
     #on key release
     def on_key_release_move_left(self):
         self.change_x = 0
-        arcade.stop_sound(self.caminar)
+
 
     def on_key_release_move_right(self):
         self.change_x = 0
+
 
     def on_key_release_attack(self):
         self.is_attacking = False

@@ -60,7 +60,17 @@ class Scenario_one(arcade.Window):
         self.Summon_Boss = False
         self.End_level = False
 
+
+
     def setup(self):
+        #Load character sounds
+        self.walking_sound = arcade.load_sound("StepsC.wav")
+        self.jump_sound = arcade.load_sound("SaltoC.wav")
+        self.Attack_sound = arcade.load_sound("Golpe1.wav")
+        self.attack1_sound = arcade.load_sound("Golpe2.wav")
+        self.attack_sound = arcade.load_sound("Golpe3.wav")
+        self.falling_sound = arcade.load_sound("CaidaC.wav")
+        self.light_sound = arcade.load_sound("Coger luz.wav")
 
         self.lista = []
         self.sol_puzzle1 = [1, 0, 0, 1]
@@ -246,10 +256,13 @@ class Scenario_one(arcade.Window):
         """Called whenever a key is pressed. """
         if key == arcade.key.SPACE:
             self.player.on_key_press_attack()
+            arcade.play_sound(self.Attack_sound)
+
         elif key == arcade.key.UP or key == arcade.key.W:
             if self.physics_engine.can_jump() and not self.player.jump_needs_reset:
                 self.player.is_jumping = True
                 self.player.change_y = PLAYER_JUMP_SPEED
+                arcade.play_sound(self.jump_sound)
                 self.player.jump_needs_reset = False
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player.on_key_press_move_left()
