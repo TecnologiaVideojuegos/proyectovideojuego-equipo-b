@@ -39,9 +39,6 @@ RIGHT_MARGIN = 4 * SPRITE_PIXEL_SIZE * SPRITE_SCALE*2
 RIGHT_FACING = 0
 LEFT_FACING = 1
 
-#Sprites
-#Schenario
-Scenario_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "ESCENARIO1.png"
 
 #Main_Character
 Walking_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "WalkingX.png"
@@ -77,7 +74,15 @@ Señal_Direcciones_Sprite = "Screens" + os.path.sep + "Background_items" + os.pa
 barra_vida = "Screens" + os.path.sep + "Background_items" + os.path.sep + "barra de vida.png"
 
 
-#New stuff
-Scenario_background_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "level1back.png"
-Scenario_foreground1_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "level1front.png"
-Scenario_foreground2_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "level1light.png"
+#Scenario sprites
+
+#Scenario one
+Scenario_1_background_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "level1back.png"
+Scenario_1_foreground1_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "level1front.png"
+Scenario_1_foreground2_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "level1light.png"
+
+#Scenario two
+Scenario_2_background_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_two" + os.path.sep + "Sprites" + os.path.sep + "level2back.png"
+Scenario_2_foreground_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_two" + os.path.sep + "Sprites" + os.path.sep + "level2front.png"
+
+

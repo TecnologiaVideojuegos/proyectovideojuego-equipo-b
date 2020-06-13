@@ -141,6 +141,8 @@ class Enemie_2(arcade.Sprite):
 
         # Light stand
         elif self.dead_light:
+            if random.randint(0,100)==0:
+                self.kill()
             self.texture = self.enemy2_sprite.light_textures[self.character_face_direction]
 
         # Dead animation
