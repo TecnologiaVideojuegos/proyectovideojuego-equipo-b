@@ -63,14 +63,14 @@ class Scenario_one(arcade.Window):
 
 
     def setup(self):
-        #Load character sounds
-        self.walking_sound = arcade.load_sound("StepsC.wav")
-        self.jump_sound = arcade.load_sound("SaltoC.wav")
-        self.Attack_sound = arcade.load_sound("Golpe1.wav")
-        self.attack1_sound = arcade.load_sound("Golpe2.wav")
-        self.attack_sound = arcade.load_sound("Golpe3.wav")
-        self.falling_sound = arcade.load_sound("CaidaC.wav")
-        self.light_sound = arcade.load_sound("Coger luz.wav")
+        # Load character sounds
+        self.walking_sound = arcade.load_sound(Walk_sound)
+        self.jump_sound = arcade.load_sound(Jump_sound)
+        self.attack_sound = arcade.load_sound(Attack_sound)
+        self.attack1_sound = arcade.load_sound(attack1_sound)
+        self.attack2_sound = arcade.load_sound(attack2_sound)
+        # self.falling_sound = arcade.load_sound("CaidaC.wav")
+        self.light_sound = arcade.load_sound(light_sound)
 
         self.lista = []
         self.sol_puzzle1 = [1, 0, 0, 1]
@@ -256,7 +256,8 @@ class Scenario_one(arcade.Window):
         """Called whenever a key is pressed. """
         if key == arcade.key.SPACE:
             self.player.on_key_press_attack()
-            arcade.play_sound(self.Attack_sound)
+            if self.player.is_attacking:
+                arcade.play_sound(self.attack_sound)
 
         elif key == arcade.key.UP or key == arcade.key.W:
             if self.physics_engine.can_jump() and not self.player.jump_needs_reset:

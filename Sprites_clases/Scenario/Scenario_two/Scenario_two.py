@@ -251,6 +251,7 @@ class Scenario_two(arcade.Window):
         """Called whenever a key is pressed. """
         if key == arcade.key.SPACE:
             self.player.on_key_press_attack()
+
         elif key == arcade.key.UP or key == arcade.key.W:
             if self.physics_engine.can_jump() and not self.player.jump_needs_reset:
                 self.player.is_jumping = True

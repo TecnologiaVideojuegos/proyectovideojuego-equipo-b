@@ -22,7 +22,7 @@ def main():
 
         if window.select and window.arrow_pos == 0:
             if Scene_one == None:
-                Scene_one = Scenario_two(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+                Scene_one = Scenario_one(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
             Scene_one.setup()
             arcade.run()
 

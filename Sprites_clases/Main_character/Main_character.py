@@ -43,13 +43,13 @@ class Main_Character(arcade.Sprite):
         "El archivo WalkingX.png lo metí directamente en la carpeta del proyecto de PyCharm"
 
         #Load character sounds
-        self.walking_sound = arcade.load_sound("StepsC.wav")
-        self.jump_sound = arcade.load_sound("SaltoC.wav")
-        self.attack_sound = arcade.load_sound("./Music/Golpe1.wav")
-        self.attack1_sound = arcade.load_sound("Golpe2.wav")
-        self.attack_sound = arcade.load_sound("Golpe3.wav")
-        self.falling_sound = arcade.load_sound("CaidaC.wav")
-        self.light_sound = arcade.load_sound("Coger luz.wav")
+        #self.walking_sound = arcade.load_sound(Walk_sound)
+        #self.jump_sound = arcade.load_sound(Jump_sound)
+        #self.attack_sound = arcade.load_sound(Attack_sound)
+        #self.attack1_sound = arcade.load_sound(attack1_sound)
+        #self.attack2_sound = arcade.load_sound(attack2_sound)
+        # self.falling_sound = arcade.load_sound("CaidaC.wav")
+        #self.light_sound = arcade.load_sound(light_sound)
 
         self.player_list = arcade.SpriteList()
         self.player_sprite = arcade.AnimatedWalkingSprite()
@@ -248,7 +248,7 @@ class Main_Character(arcade.Sprite):
     def on_key_press_attack(self):
         if not self.is_walking:
             self.is_attacking = True
-            arcade.play_sound(self.attack_sound)
+            # arcade.play_sound(self.attack_sound)
 
     #on key release
     def on_key_release_move_left(self):

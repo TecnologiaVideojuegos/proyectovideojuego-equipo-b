@@ -45,8 +45,6 @@ Walking_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep
 Jumping_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "JumpingX.png"
 Attack_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "AttackX.png"
 Collecting_life_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "lightingX.png"
-Walk_sound = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "StepsC.wav"
-Attack_sound = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Golpe1.wav"
 
 # Sprtes "small"
 Walking_Sprite1 = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "WalkingX1.png"
@@ -90,4 +88,12 @@ Scenario_1_foreground2_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os
 Scenario_2_background_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_two" + os.path.sep + "Sprites" + os.path.sep + "level2back.png"
 Scenario_2_foreground_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_two" + os.path.sep + "Sprites" + os.path.sep + "level2front.png"
 
+
+# Music
+Walk_sound = "Music" + os.path.sep + "StepsC.wav"
+Attack_sound = "Music" + os.path.sep + "Golpe1.wav"
+Jump_sound = "Music" + os.path.sep + "SaltoC.wav"
+attack1_sound = "Music" + os.path.sep + "Golpe2.wav"
+attack2_sound = "Music" + os.path.sep + "Golpe3.wav"
+light_sound = "Music" + os.path.sep + "Coger luz.wav"
 
