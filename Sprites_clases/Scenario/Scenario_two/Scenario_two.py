@@ -136,9 +136,6 @@ class Scenario_two(arcade.Window):
 
     def on_update(self, delta_time):
         print(self.player.center_x)
-        if self.boss1.is_attacking:
-            self.player.change_x = 0
-            self.player.set_to_false()
 
         if self.valor_vida <= 0:
             self.Game_over = True
@@ -338,29 +335,57 @@ class Scenario_two(arcade.Window):
                 if not self.lista[i] == self.sol_puzzle2[i]:
                     self.lista = []
 
+
     def Summon_Enemie(self):
         if self.Summon_Enemies and self.player.center_x > 600:
-            if random.randint(0, 100) == 0:
-                self.Generate_Enemie(0, self.player.center_x - 450, 200)
+            if random.randint(0, 175) == 0:
+                range = random.randint(-500, 500)
+                if range >= 0:
+                    minim = 600
+                else:
+                    minim = -600
+                if self.player.center_x + minim + range > 3000:
+                    self.Generate_Enemie(0, 2950, 200)
+                else:
+                    self.Generate_Enemie(0, self.player.center_x + minim + range, 200)
 
-            elif random.randint(0, 100) == 0:
-                if self.player.center_x > 3400:
+            elif random.randint(0, 175) == 0:
+                range = random.randint(-500, 500)
+                if range >= 0:
+                    minim = 600
+                else:
+                    minim = -600
+                if self.player.center_x + minim + range > 3000:
                     self.Generate_Enemie(1, 2950, 200)
                 else:
-                    self.Generate_Enemie(1, self.player.center_x + 450, 200)
+                    self.Generate_Enemie(1, self.player.center_x + minim + range, 200)
+
         if self.Summon_Boss and self.player.center_x > 600:
-
-            if random.randint(0, 100) == 0:
-                self.Generate_Enemie(0, self.player.center_x - 450, 200)
-
-            elif random.randint(0, 150) == 0:
-                if self.player.center_x > 8000:
-                    self.Generate_Enemie(1, 7500, 200)
+            if random.randint(0, 155) == 0:
+                range = random.randint(-500, 500)
+                if range >= 0:
+                    minim = 600
                 else:
-                    self.Generate_Enemie(1, self.player.center_x + 400, 200)
+                    minim = -600
+                if self.player.center_x + minim + range> 8000:
+                    self.Generate_Enemie(0, 2950, 200)
+                else:
+                    self.Generate_Enemie(0, self.player.center_x + minim + range, 200)
+
+            elif random.randint(0, 155) == 0:
+                range = random.randint(-500, 500)
+                if range >= 0:
+                    minim = 600
+                else:
+                    minim = -600
+                if self.player.center_x + minim + range > 8000:
+                    self.Generate_Enemie(1, 6750, 200)
+                else:
+                    self.Generate_Enemie(1, self.player.center_x + minim + range, 200)
 
             elif self.dead_boss1:
                 self.Generate_Enemie(2, self.player.center_x, 0)
+
 
     def Generate_Enemie(self, numero_de_Portal, pos_x, pos_y):
 
