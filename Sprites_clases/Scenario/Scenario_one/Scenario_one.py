@@ -9,7 +9,7 @@ import time
 import random
 
 
-class Scenario(arcade.Window):
+class Scenario_one(arcade.Window):
     """ Main application class. """
 
     def __init__(self, width, height, title):
@@ -60,7 +60,17 @@ class Scenario(arcade.Window):
         self.Summon_Boss = False
         self.End_level = False
 
+
+
     def setup(self):
+        # Load character sounds
+        self.walking_sound = arcade.load_sound(Walk_sound)
+        self.jump_sound = arcade.load_sound(Jump_sound)
+        self.attack_sound = arcade.load_sound(Attack_sound)
+        self.attack1_sound = arcade.load_sound(attack1_sound)
+        self.attack2_sound = arcade.load_sound(attack2_sound)
+        # self.falling_sound = arcade.load_sound("CaidaC.wav")
+        self.light_sound = arcade.load_sound(light_sound)
 
         self.lista = []
         self.sol_puzzle1 = [1, 0, 0, 1]
@@ -126,9 +136,9 @@ class Scenario(arcade.Window):
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, gravity_constant=GRAVITY)
 
         # Load the background image
-        self.background = arcade.load_texture(Scenario_background_sprite )
-        self.foreground = arcade.load_texture(Scenario_foreground1_sprite )
-        self.foreground2 = arcade.load_texture(Scenario_foreground2_sprite)
+        self.background = arcade.load_texture(Scenario_1_background_sprite )
+        self.foreground = arcade.load_texture(Scenario_1_foreground1_sprite )
+        self.foreground2 = arcade.load_texture(Scenario_1_foreground2_sprite)
 
     def on_update(self, delta_time):
         try:
@@ -246,10 +256,14 @@ class Scenario(arcade.Window):
         """Called whenever a key is pressed. """
         if key == arcade.key.SPACE:
             self.player.on_key_press_attack()
+            if self.player.is_attacking:
+                arcade.play_sound(self.attack_sound)
+
         elif key == arcade.key.UP or key == arcade.key.W:
             if self.physics_engine.can_jump() and not self.player.jump_needs_reset:
                 self.player.is_jumping = True
                 self.player.change_y = PLAYER_JUMP_SPEED
+                arcade.play_sound(self.jump_sound)
                 self.player.jump_needs_reset = False
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player.on_key_press_move_left()
@@ -285,10 +299,6 @@ class Scenario(arcade.Window):
                 enemie.collected = True
                 if(self.valor_vida<80):
                     self.valor_vida+=10
-                if enemie.id==0:
-                    self.dead_enemie1=True
-                elif enemie.id==1:
-                    self.dead_enemie2 = True
             elif not enemie.dead:
                 # decrease the character's life
                 self.valor_vida -= 0.5
@@ -339,65 +349,100 @@ class Scenario(arcade.Window):
 
 
     def Summon_Enemie(self):
-        if self.Summon_Enemies and self.player.center_x > 1000:
-            if self.dead_enemie1 and random.randint(0, 175) == 0:
-                self.Generate_Enemie(0, self.player.center_x - 700, 200)
+        if self.Summon_Enemies and self.player.center_x > 600:
+            if random.randint(0, 175) == 0:
+                range = random.randint(-500, 500)
+                if range >= 0:
+                    minim = 600
+                else:
+                    minim = -600
+                if self.player.center_x + minim + range > 3000:
+                    self.Generate_Enemie(0, 2950, 200)
+                else:
+                    self.Generate_Enemie(0, self.player.center_x + minim + range, 200)
 
-            elif self.dead_enemie2 and random.randint(0, 175) == 0:
-                if self.player.center_x > 3400 :
+            elif random.randint(0, 175) == 0:
+                range = random.randint(-500, 500)
+                if range >= 0:
+                    minim = 600
+                else:
+                    minim = -600
+                if self.player.center_x + minim + range > 3000:
                     self.Generate_Enemie(1, 2950, 200)
                 else:
-                    self.Generate_Enemie(1, self.player.center_x + 700, 200)
-        if self.Summon_Boss and self.player.center_x > 1000:
+                    self.Generate_Enemie(1, self.player.center_x + minim + range, 200)
 
-            if self.dead_enemie1 and random.randint(0, 155) == 0:
-                self.Generate_Enemie(0, self.player.center_x - 700, 200)
-
-            elif self.dead_enemie2 and random.randint(0, 155) == 0:
-                if self.player.center_x > 7500:
-                    self.Generate_Enemie(1, 7000, 200)
+        if self.Summon_Boss and self.player.center_x > 600:
+            if random.randint(0, 155) == 0:
+                range = random.randint(-500, 500)
+                if range >= 0:
+                    minim = 600
                 else:
-                    self.Generate_Enemie(1, self.player.center_x + 700, 200)
+                    minim = -600
+                if self.player.center_x + minim + range> 7500:
+                    self.Generate_Enemie(0, 2950, 200)
+                else:
+                    self.Generate_Enemie(0, self.player.center_x + minim + range, 200)
+
+            elif random.randint(0, 155) == 0:
+                range = random.randint(-500, 500)
+                if range >= 0:
+                    minim = 600
+                else:
+                    minim = -600
+                if self.player.center_x + minim + range > 7500:
+                    self.Generate_Enemie(1, 6750, 200)
+                else:
+                    self.Generate_Enemie(1, self.player.center_x + minim + range, 200)
 
             elif self.dead_boss1:
-                self.Generate_Enemie(2, self.player.center_x,0)
-
+                self.Generate_Enemie(2, self.player.center_x, 0)
 
     def Generate_Enemie(self, numero_de_Portal, pos_x, pos_y):
 
         if (numero_de_Portal == 0):
-            if self.enemy1 == None:
-                # Set up the enemy1
-                self.enemy1 = Enemie_1()
-                self.enemy1.setup()
-            self.dead_enemie1 = False
-            self.enemy1.Load()
-            # Set up the enemy1 position
-            self.enemy1.center_x = pos_x
-            self.enemy1.center_y = pos_y
-            self.enemy1.scale = PLAYER_SCALE
+            alive = False
+            for enemi in self.enemy_list:
+                if enemi == self.enemy1:
+                    alive = True
+            if not alive:
+                if self.enemy1 == None:
+                    # Set up the enemy1
+                    self.enemy1 = Enemie_1()
+                    self.enemy1.setup()
+                self.dead_enemie1 = False
+                self.enemy1.Load()
+                # Set up the enemy1 position
+                self.enemy1.center_x = pos_x
+                self.enemy1.center_y = pos_y
+                self.enemy1.scale = PLAYER_SCALE
 
-            self.enemy_list.append(self.enemy1)
+                self.enemy_list.append(self.enemy1)
 
-            self.physics_engine_enemy1 = arcade.PhysicsEnginePlatformer(self.enemy1, self.wall_list,
-                                                                        gravity_constant=GRAVITY)
+                self.physics_engine_enemy1 = arcade.PhysicsEnginePlatformer(self.enemy1, self.wall_list,
+                                                                            gravity_constant=GRAVITY)
 
         elif numero_de_Portal == 1:
-            if self.enemy2 == None:
-                # Set up the enemy2
-                self.enemy2 = Enemie_2()
-                self.enemy2.setup()
-            self.dead_enemie2 = False
-            self.enemy2.Load()
-            # Set up the enemy1 position
-            self.enemy2.center_x = pos_x
-            self.enemy2.center_y = pos_y
-            self.enemy2.scale = PLAYER_SCALE
+            alive = False
+            for enemi in self.enemy_list:
+                if enemi == self.enemy2:
+                    alive = True
+            if not alive:
+                if self.enemy2 == None:
+                    # Set up the enemy2
+                    self.enemy2 = Enemie_2()
+                    self.enemy2.setup()
+                self.dead_enemie2 = False
+                self.enemy2.Load()
+                # Set up the enemy1 position
+                self.enemy2.center_x = pos_x
+                self.enemy2.center_y = pos_y
+                self.enemy2.scale = PLAYER_SCALE
 
-            self.enemy_list.append(self.enemy2)
+                self.enemy_list.append(self.enemy2)
 
-            self.physics_engine_enemy2 = arcade.PhysicsEnginePlatformer(self.enemy2, self.wall_list,
-                                                                        gravity_constant=GRAVITY)
+                self.physics_engine_enemy2 = arcade.PhysicsEnginePlatformer(self.enemy2, self.wall_list,
+                                                                            gravity_constant=GRAVITY)
         elif numero_de_Portal == 2:
             # Set up the enemy1 position
             self.boss1.center_x = pos_x

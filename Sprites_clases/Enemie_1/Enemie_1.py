@@ -1,3 +1,5 @@
+import random
+
 import arcade
 
 from Variables import *
@@ -145,6 +147,8 @@ class Enemie_1(arcade.Sprite):
 
         # Light stand
         elif self.dead_light:
+            if random.randint(0,100)==0:
+                self.kill()
             self.texture = self.enemy1_sprite.light_textures[self.character_face_direction]
 
         # Dead animation
