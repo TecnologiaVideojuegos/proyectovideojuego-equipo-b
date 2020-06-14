@@ -64,6 +64,17 @@ class Scenario_two(arcade.Window):
         self.Easter_egg = False
 
     def setup(self):
+        # Load character sounds
+        self.walking_sound = arcade.load_sound(Walk_sound)
+        self.jump_sound = arcade.load_sound(Jump_sound)
+        self.attack_sound = arcade.load_sound(Attack_sound)
+        # self.falling_sound = arcade.load_sound("CaidaC.wav")
+        self.light_sound = arcade.load_sound(light_sound)
+        self.enemieGenerate_sound = arcade.load_sound(EnemieGenertes_sound)
+        self.light_sound = arcade.load_sound(Light_sound)
+        self.ambient_sound = arcade.load_sound(Ambiente_sound)
+        self.tension_sound = arcade.load_sound(Tension_sound)
+        self.puzzle_sound = arcade.load_sound(Puzzle_sound)
 
         self.lista = []
         self.sol_puzzle1 = [1, 1, 1, 1, 0, 0]
@@ -137,6 +148,11 @@ class Scenario_two(arcade.Window):
         self.foreground = arcade.load_texture(Scenario_2_foreground_sprite)
 
     def on_update(self, delta_time):
+        self.contador -= 1
+        self.contador/60
+        arcade.play_sound(self.ambient_sound)
+
+
         try:
             if self.valor_vida <= 0:
                 self.Game_over = True
@@ -263,11 +279,13 @@ class Scenario_two(arcade.Window):
         """Called whenever a key is pressed. """
         if key == arcade.key.SPACE:
             self.player.on_key_press_attack()
+            arcade.play_sound(self.attack_sound)
 
         elif key == arcade.key.UP or key == arcade.key.W:
             if self.physics_engine.can_jump() and not self.player.jump_needs_reset:
                 self.player.is_jumping = True
                 self.player.change_y = PLAYER_JUMP_SPEED
+                arcade.play_sound(self.jump_sound)
                 self.player.jump_needs_reset = False
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player.on_key_press_move_left()
@@ -305,6 +323,7 @@ class Scenario_two(arcade.Window):
                     self.player.center_x >= enemie.center_x - 10 and self.player.center_x <= enemie.center_x + 10):
                 self.player.is_collecting_life = True
                 enemie.collected = True
+                arcade.play_sound(self.light_sound)
                 if (self.valor_vida < 80):
                     self.valor_vida += 10
             elif enemie!=self.boss2 and not enemie.dead:
@@ -323,6 +342,7 @@ class Scenario_two(arcade.Window):
             if len(self.lista) == len(self.sol_puzzle1)-1:
                 self.lista.append(id)
                 if self.lista == self.sol_puzzle1:
+                    arcade.play_sound(self.puzzle_sound)
                     self.Cross_Semaphore = True
                     self.delete_wall()
                     self.lista = []
@@ -340,6 +360,7 @@ class Scenario_two(arcade.Window):
             if len(self.lista) == len(self.sol_puzzle2)-1:
                 self.lista.append(id)
                 if self.lista == self.sol_puzzle2:
+                    arcade.play_sound(self.puzzle_sound)
                     self.Cross_Semaphore = True
                     self.delete_wall()
                     self.lista = []
