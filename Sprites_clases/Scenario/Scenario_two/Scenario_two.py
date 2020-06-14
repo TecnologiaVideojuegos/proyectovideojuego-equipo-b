@@ -75,6 +75,7 @@ class Scenario_two(arcade.Window):
         self.ambient_sound = arcade.load_sound(Ambiente_sound)
         self.tension_sound = arcade.load_sound(Tension_sound)
         self.puzzle_sound = arcade.load_sound(Puzzle_sound)
+        self.boss2_sound = arcade.load_sound(Boss2_sound)
 
         self.lista = []
         self.sol_puzzle1 = [1, 1, 1, 1, 0, 0]
@@ -512,6 +513,7 @@ class Scenario_two(arcade.Window):
                                                                              gravity_constant=GRAVITY)
         elif numero_de_Portal == 2:
             # Set up the enemy1 position
+            arcade.play_sound(self.boss2_sound)
             self.boss2.center_x = 7400
             self.boss2.center_y = 200
             self.boss2.scale = BOSS_SCALE_2
