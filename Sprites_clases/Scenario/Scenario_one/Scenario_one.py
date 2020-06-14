@@ -59,7 +59,7 @@ class Scenario_one(arcade.Window):
         self.Cross_Semaphore = False
         self.Summon_Boss = False
         self.End_level = False
-
+        self.Second_foreground = False
 
 
     def setup(self):
@@ -74,8 +74,8 @@ class Scenario_one(arcade.Window):
         self.boss2_sound = arcade.load_sound(Boss2_sound)
 
         self.lista = []
-        self.sol_puzzle1 = [1,1,0, 1,0]
-        self.sol_puzzle2 = [1,0,1,1,0,1]
+        self.sol_puzzle1 = [1,1,0]
+        self.sol_puzzle2 = [0,1,1,0]
 
         self.valor_vida = 100
 
@@ -238,11 +238,13 @@ class Scenario_one(arcade.Window):
             self.background_items_list.draw()
             self.player_list.draw()
             self.enemy_list.draw()
-            arcade.draw_lrwh_rectangle_textured(-700, 10, 9200, SCREEN_HEIGHT,
-                                                self.foreground)
-            if self.foreground2 != None:
+
+            if self.Second_foreground:
                 arcade.draw_lrwh_rectangle_textured(-700, 10, 9200, SCREEN_HEIGHT,
-                                                self.foreground2)
+                                                self.foreground)
+            else:
+                arcade.draw_lrwh_rectangle_textured(-700, 10, 9200, SCREEN_HEIGHT,
+                                                    self.foreground2)
             self.GUI()
             if len(self.lista)>0 :
                 score_text=""
@@ -465,7 +467,7 @@ class Scenario_one(arcade.Window):
 
     def delete_wall(self):
         # Añadiendo semaforo apagado
-        self.foreground2 = None
+        self.Second_foreground = True
         for i in range(3):
             for elem in self.wall_list:
                 if elem.type == "Sema":

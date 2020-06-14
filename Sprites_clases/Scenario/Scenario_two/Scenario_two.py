@@ -78,8 +78,8 @@ class Scenario_two(arcade.Window):
         self.boss2_sound = arcade.load_sound(Boss2_sound)
 
         self.lista = []
-        self.sol_puzzle1 = [1, 1, 1, 1, 0, 0]
-        self.sol_puzzle2 = [0, 1, 0, 1]
+        self.sol_puzzle1 = [1,1,0,1,0]
+        self.sol_puzzle2 = [1,0,1,1,0,1]
 
         self.valor_vida = 100
 
