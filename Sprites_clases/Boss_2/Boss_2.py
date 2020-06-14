@@ -1,3 +1,6 @@
+import time
+from builtins import print
+
 import arcade
 
 from Variables import *
@@ -45,8 +48,8 @@ class Boss_2(arcade.Sprite):
     def setup(self):
         self.dead = False
 
-        self.valor_vida = 60
-        self.points = [[-25, -125], [25, -125], [25, 125], [-25, 125]]
+        self.valor_vida = 50
+        self.points = [[-50, -250], [50, -250], [50, 250], [-50, 250]]
 
         self.boss_1_list = arcade.SpriteList()
         self.boss_1_sprite = arcade.AnimatedWalkingSprite()
@@ -54,25 +57,25 @@ class Boss_2(arcade.Sprite):
         # Stand Right Sprites
         self.boss_1_sprite.stand_textures = []
         self.boss_1_sprite.stand_textures.append(
-            arcade.load_texture(Stand_Boss_1, x=0, y=0, width=236, height=298))
+            arcade.load_texture(Stand_Boss_2, x=0, y=0, width=236, height=298))
 
         # Stand left Sprites
         self.boss_1_sprite.stand_textures.append(
-            arcade.load_texture(Stand_Boss_1, x=0, y=0, width=236, height=298, mirrored=True))
+            arcade.load_texture(Stand_Boss_2, x=0, y=0, width=236, height=298, mirrored=True))
 
         # Attack Sprites
         self.boss_1_sprite.attack_textures = []
         # Attack Right Sprites
         texturas = []
-        for i in range(4):
+        for i in range(3):
             texturas.append(
-                arcade.load_texture(Attack_Boss_1, x=i * 236, y=0, width=236, height=298))
+                arcade.load_texture(Attack_Boss_2, x=i * 236, y=0, width=236, height=298))
         self.boss_1_sprite.attack_textures.append(texturas)
         # Attack Left Sprites
         texturas = []
-        for i in range(4):
+        for i in range(3):
             texturas.append(
-                arcade.load_texture(Attack_Boss_1, x=i * 236, y=0, width=236, height=298, mirrored=True))
+                arcade.load_texture(Attack_Boss_2, x=i * 236, y=0, width=236, height=298, mirrored=True))
         self.boss_1_sprite.attack_textures.append(texturas)
 
         self.boss_1_list.append(self.boss_1_sprite)
@@ -108,30 +111,34 @@ class Boss_2(arcade.Sprite):
     def update_animation(self, delta_time):
 
         # This boss always look left
-        self.character_face_direction = LEFT_FACING
+        self.character_face_direction = RIGHT_FACING
         # Standing animation
         self.cur_texture += 1
 
         self.texture = self.boss_1_sprite.stand_textures[self.character_face_direction]
 
         if self.dead:
+            self.texture = self.boss_1_sprite.attack_textures[self.character_face_direction][2]
+            time.sleep(0.5)
             self.kill()
+
+
         elif self.is_attacking:
-            if self.cur_texture == 40:
+
+            if self.cur_texture == 5:
                 self.is_attacking = False
-            if self.cur_texture >= 4 * UPDATES_PER_FRAME:
+
+            if self.cur_texture >= 3 * UPDATES_PER_FRAME_BOSS_2:
                 self.cur_texture = 0
             self.texture = self.boss_1_sprite.attack_textures[self.character_face_direction][
-                self.cur_texture // UPDATES_PER_FRAME]
+
+                self.cur_texture // UPDATES_PER_FRAME_BOSS_2]
 
     def interact(self, x, y):
         where_x = self.center_x - x
         if abs(where_x) < 300:
             if random.randint(0, 150) == 0:
                 self.is_attacking = True
-        else:
-
-            self.is_attacking = False
 
 
 

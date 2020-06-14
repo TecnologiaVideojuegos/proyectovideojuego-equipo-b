@@ -13,6 +13,7 @@ SPRITE_PIXEL_SIZE = 128
 SPRITE_SCALE = 0.5  # Wall scale
 PLAYER_SCALE = 0.5  # Player scale
 BOSS_SCALE = 3
+BOSS_SCALE_2 = 1
 GRID_PIXEL_SIZE = (SPRITE_PIXEL_SIZE * SPRITE_SCALE)
 
 # Movement speed of player, in pixels per frame
@@ -22,6 +23,7 @@ MOVEMENT_SPEED_ENEMIE_2 = 4
 
 
 UPDATES_PER_FRAME = 8
+UPDATES_PER_FRAME_BOSS_2 = 2
 UPDATES_PER_FRAME_Main_Char=5
 UPDATES_PER_FRAME_Main_Char_Soul=4
 UPDATES_PER_FRAME_Enemies=4
@@ -64,9 +66,9 @@ Lightning_Enemie_2 = "Sprites_clases" + os.path.sep + "Enemie_2" + os.path.sep +
 Stand_Boss_1="Sprites_clases" + os.path.sep + "Boss_1" + os.path.sep + "Sprites" + os.path.sep + "BOSS0.png"
 Attack_Boss_1="Sprites_clases" + os.path.sep + "Boss_1" + os.path.sep + "Sprites" + os.path.sep + "BOSSANIMATION.png"
 
-#Boss_1
-Stand_Boss_2="Sprites_clases" + os.path.sep + "Boss_2" + os.path.sep + "Sprites" + os.path.sep + "BOSS0.png"
-Attack_Boss_2="Sprites_clases" + os.path.sep + "Boss_2" + os.path.sep + "Sprites" + os.path.sep + "BOSSANIMATION.png"
+#Boss_2
+Stand_Boss_2="Sprites_clases" + os.path.sep + "Boss_2" + os.path.sep + "Sprites" + os.path.sep + "BOSS1.png"
+Attack_Boss_2="Sprites_clases" + os.path.sep + "Boss_2" + os.path.sep + "Sprites" + os.path.sep + "BOSS1attack.png"
 
 
 #Background Sprites

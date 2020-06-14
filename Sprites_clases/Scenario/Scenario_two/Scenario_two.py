@@ -61,6 +61,7 @@ class Scenario_two(arcade.Window):
         self.Cross_Semaphore = False
         self.Summon_Boss = False
         self.End_level = False
+        self.Easter_egg = False
 
     def setup(self):
 
@@ -135,93 +136,98 @@ class Scenario_two(arcade.Window):
         self.foreground = arcade.load_texture(Scenario_2_foreground_sprite)
 
     def on_update(self, delta_time):
-        print(self.player.center_x)
+        try:
+            if self.valor_vida <= 0:
+                self.Game_over = True
+                self.close()
+            else:
 
-        if self.valor_vida <= 0:
-            self.Game_over = True
-            self.close()
-        else:
+                self.player.is_falling = self.player.change_y < 0
+                self.player_list.update_animation()
 
-            self.player.is_falling = self.player.change_y < 0
-            self.player_list.update_animation()
+                self.physics_engine.update()
 
-            self.physics_engine.update()
-
-            if self.End_level:
-                if self.player.center_x > 7900:
+                if self.End_level:
+                    if self.player.center_x > 7900:
+                        self.Game_won = True
+                        self.close()
+                elif self.Easter_egg:
                     self.Game_won = True
-                    self.close()
-            elif self.Summon_Boss:
-                self.Cross_Semaphore = False
-                self.Summon_Enemie()
-            elif self.Cross_Semaphore:
-                self.Summon_Enemies = False
-                print("boss time")
-                self.Summon_Boss = self.player.center_x > 5000
-            elif self.Summon_Enemies:
-                self.Reached_wall = False
-                self.Summon_Enemie()
-            elif self.Reached_wall and self.player.center_x < 4000:
-                self.Summon_Enemies = True
-                self.player.center_x = 2134
-            elif self.player.center_x > 4000:
-                self.Reached_wall = True
-            # print(self.player.center_x)"""
+                    self.delete_boss_wall()
+                    if self.player.center_x > 7900:
+                        self.close()
+                elif self.Summon_Boss:
+                    self.Cross_Semaphore = False
+                    self.Summon_Enemie()
+                elif self.Cross_Semaphore:
+                    self.Summon_Enemies = False
+                    self.Summon_Boss = self.player.center_x > 5000
+                elif self.Summon_Enemies:
+                    self.Reached_wall = False
+                    self.Summon_Enemie()
+                elif self.Reached_wall and self.player.center_x < 4000:
+                    self.Summon_Enemies = True
+                    self.player.center_x = 2134
+                elif self.player.center_x > 4000:
+                    self.Reached_wall = True
+                # print(self.player.center_x)"""
 
-            if (len(self.enemy_list) > 0):
-                self.enemy_list.update_animation()
-                if self.boss2.valor_vida <= 0:
-                    self.close()
-                    print("Has matado al jefe")
-                if self.physics_engine_enemy01 != None:
-                    self.physics_engine_enemy01.update()
-                if self.physics_engine_enemy02 != None:
-                    self.physics_engine_enemy02.update()
-                if self.physics_engine_enemy11 != None:
-                    self.physics_engine_enemy11.update()
-                if self.physics_engine_enemy22 != None:
-                    self.physics_engine_enemy22.update()
-                self.Trigger_IA()
-                self.collisions()
-            # print(self.player.center_x)
+                if (len(self.enemy_list) > 0):
+                    self.enemy_list.update_animation()
+                    if self.physics_engine_enemy01 != None:
+                        self.physics_engine_enemy01.update()
+                    if self.physics_engine_enemy02 != None:
+                        self.physics_engine_enemy02.update()
+                    if self.physics_engine_enemy11 != None:
+                        self.physics_engine_enemy11.update()
+                    if self.physics_engine_enemy22 != None:
+                        self.physics_engine_enemy22.update()
+                    self.Trigger_IA()
+                    self.collisions()
+                    if self.boss2.valor_vida <= 0:
+                        self.Level_Pased()
+                        self.Summon_Boss=False
+                        self.Easter_egg =True
+                # print(self.player.center_x)
 
-            # --- Manage Scrolling ---
+                # --- Manage Scrolling ---
 
-            # Track if we need to change the viewport
+                # Track if we need to change the viewport
 
-            changed = False
+                changed = False
 
-            # Scroll left
-            left_boundary = self.view_left + SCREEN_WIDTH - RIGHT_MARGIN * 1.5
-            if self.player.left < left_boundary:
-                self.view_left -= left_boundary - self.player.left
-                changed = True
+                # Scroll left
+                left_boundary = self.view_left + SCREEN_WIDTH - RIGHT_MARGIN * 1.5
+                if self.player.left < left_boundary:
+                    self.view_left -= left_boundary - self.player.left
+                    changed = True
 
-            # Scroll right
-            right_boundary = self.view_left + SCREEN_WIDTH - RIGHT_MARGIN
-            if self.player.right > right_boundary:
-                self.view_left += self.player.right - right_boundary
-                changed = True
+                # Scroll right
+                right_boundary = self.view_left + SCREEN_WIDTH - RIGHT_MARGIN
+                if self.player.right > right_boundary:
+                    self.view_left += self.player.right - right_boundary
+                    changed = True
 
-            # Scroll up
-            top_boundary = self.view_bottom + SCREEN_HEIGHT - VIEWPORT_MARGIN
-            if self.player.top > top_boundary:
-                self.view_bottom += self.player.top - top_boundary
-                changed = True
+                # Scroll up
+                top_boundary = self.view_bottom + SCREEN_HEIGHT - VIEWPORT_MARGIN
+                if self.player.top > top_boundary:
+                    self.view_bottom += self.player.top - top_boundary
+                    changed = True
 
-            # Scroll down
-            bottom_boundary = self.view_bottom + VIEWPORT_MARGIN
-            if self.player.bottom < bottom_boundary:
-                self.view_bottom -= bottom_boundary - self.player.bottom
-                changed = True
+                # Scroll down
+                bottom_boundary = self.view_bottom + VIEWPORT_MARGIN
+                if self.player.bottom < bottom_boundary:
+                    self.view_bottom -= bottom_boundary - self.player.bottom
+                    changed = True
 
-            # If we need to scroll, go ahead and do it.
-            if changed:
-                arcade.set_viewport(self.view_left,
-                                    SCREEN_WIDTH + self.view_left,
-                                    self.view_bottom,
-                                    SCREEN_HEIGHT + self.view_bottom)
-
+                # If we need to scroll, go ahead and do it.
+                if changed:
+                    arcade.set_viewport(self.view_left,
+                                        SCREEN_WIDTH + self.view_left,
+                                        self.view_bottom,
+                                        SCREEN_HEIGHT + self.view_bottom)
+        except:
+            None
 
 
     def on_draw(self):
@@ -245,7 +251,7 @@ class Scenario_two(arcade.Window):
                 arcade.draw_text(score_text, self.view_left + 50, self.view_bottom + 650,
                                  arcade.csscolor.WHITE, 18)
         except:
-            print()
+            None
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
@@ -295,7 +301,7 @@ class Scenario_two(arcade.Window):
                 enemie.collected = True
                 if (self.valor_vida < 80):
                     self.valor_vida += 10
-            elif not enemie.dead:
+            elif enemie!=self.boss2 and not enemie.dead:
                 # decrease the character's life
                 self.valor_vida -= 0.5
 
@@ -303,7 +309,7 @@ class Scenario_two(arcade.Window):
     def Trigger_IA(self):
         for enemie in self.enemy_list:
             enemie.interact(self.player.center_x, self.player.center_y)
-            if enemie == self.boss2 and enemie.is_attacking:
+            if enemie == self.boss2 and enemie.is_attacking and abs(self.player.center_x-self.boss2.center_x)<300:
                 self.player.center_x -= 500
 
     def puzzle(self, id):
@@ -376,8 +382,8 @@ class Scenario_two(arcade.Window):
                     minim = 600
                 else:
                     minim = -600
-                if self.player.center_x + minim + range > 6400:
-                    self.Generate_Enemie(0, 6400 + minim + range, 200)
+                if self.player.center_x + minim + range > 6300:
+                    self.Generate_Enemie(0, 6300 + minim + range, 200)
                 else:
                     self.Generate_Enemie(0, self.player.center_x + minim + range, 200)
 
@@ -387,8 +393,8 @@ class Scenario_two(arcade.Window):
                     minim = 600
                 else:
                     minim = -600
-                if self.player.center_x + minim + range > 6400:
-                    self.Generate_Enemie(1, 6400 + minim + range, 200)
+                if self.player.center_x + minim + range > 6300:
+                    self.Generate_Enemie(1, 600 + minim + range, 200)
                 else:
                     self.Generate_Enemie(1, self.player.center_x + minim + range, 200)
 
@@ -406,7 +412,6 @@ class Scenario_two(arcade.Window):
                     alive1 = True
                 if enemi == self.enemy11:
                     alive2 = True
-            print("Enemie1 --", alive1, alive2)
             if not alive1:
                 if self.enemy01 == None:
                     # Set up the enemy1
@@ -447,7 +452,6 @@ class Scenario_two(arcade.Window):
                     alive1 = True
                 if enemi == self.enemy22:
                     alive2 = True
-            print("Enemie2 --", alive1, alive2)
             if not alive1:
                 if self.enemy02 == None:
                     # Set up the enemy1
@@ -482,8 +486,8 @@ class Scenario_two(arcade.Window):
         elif numero_de_Portal == 2:
             # Set up the enemy1 position
             self.boss2.center_x = 7400
-            self.boss2.center_y = 400
-            self.boss2.scale = BOSS_SCALE
+            self.boss2.center_y = 200
+            self.boss2.scale = BOSS_SCALE_2
             self.dead_boss2 = False
             self.enemy_list.append(self.boss2)
 
