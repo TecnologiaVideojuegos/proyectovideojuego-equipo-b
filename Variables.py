@@ -96,4 +96,5 @@ Jump_sound = "Music" + os.path.sep + "SaltoC.wav"
 attack1_sound = "Music" + os.path.sep + "Golpe2.wav"
 attack2_sound = "Music" + os.path.sep + "Golpe3.wav"
 light_sound = "Music" + os.path.sep + "Coger luz.wav"
-
+EnemieGenertes_sound = "Music" + os.path.sep + "common_enemy_generation_sound.wav"
+Light_sound = "Music" + os.path.sep + "Coger luz.wav"

@@ -71,6 +71,8 @@ class Scenario_one(arcade.Window):
         self.attack2_sound = arcade.load_sound(attack2_sound)
         # self.falling_sound = arcade.load_sound("CaidaC.wav")
         self.light_sound = arcade.load_sound(light_sound)
+        self.enemieGenerate_sound = arcade.load_sound(EnemieGenertes_sound)
+        self.light_sound = arcade.load_sound(Light_sound)
 
         self.lista = []
         self.sol_puzzle1 = [1, 0, 0, 1]
@@ -267,8 +269,10 @@ class Scenario_one(arcade.Window):
                 self.player.jump_needs_reset = False
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player.on_key_press_move_left()
+            arcade.play_sound(self.walking_sound)
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.on_key_press_move_right()
+            arcade.play_sound(self.walking_sound)
         elif key == arcade.key.X:
             #self.player.is_collecting_life = True
             #self.Generate_Enemie(1, self.player.center_x, 500)
@@ -279,9 +283,11 @@ class Scenario_one(arcade.Window):
         if key == arcade.key.LEFT or key == arcade.key.A:
             self.player.change_x = 0
             self.player.is_walking = False
+            arcade.stop_sound(self.walking_sound)
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.change_x = 0
             self.player.is_walking = False
+            arcade.stop_sound(self.walking_sound)
         # elif key == arcade.key.UP or key == arcade.key.W:
         # self.player.is_jumping = False
         # self.player.is_falling = True
@@ -297,6 +303,7 @@ class Scenario_one(arcade.Window):
             if enemie.dead_light and ( self.player.center_x>=enemie.center_x-10 and self.player.center_x<=enemie.center_x+10):
                 self.player.is_collecting_life = True
                 enemie.collected = True
+                arcade.play_sound(self.light_sound)
                 if(self.valor_vida<80):
                     self.valor_vida+=10
             elif not enemie.dead:
@@ -361,6 +368,8 @@ class Scenario_one(arcade.Window):
                 else:
                     self.Generate_Enemie(0, self.player.center_x + minim + range, 200)
 
+
+
             elif random.randint(0, 175) == 0:
                 range = random.randint(-500, 500)
                 if range >= 0:
@@ -410,6 +419,7 @@ class Scenario_one(arcade.Window):
                     # Set up the enemy1
                     self.enemy1 = Enemie_1()
                     self.enemy1.setup()
+
                 self.dead_enemie1 = False
                 self.enemy1.Load()
                 # Set up the enemy1 position
@@ -421,6 +431,7 @@ class Scenario_one(arcade.Window):
 
                 self.physics_engine_enemy1 = arcade.PhysicsEnginePlatformer(self.enemy1, self.wall_list,
                                                                             gravity_constant=GRAVITY)
+                arcade.play_sound(self.enemieGenerate_sound)
 
         elif numero_de_Portal == 1:
             alive = False
@@ -443,6 +454,8 @@ class Scenario_one(arcade.Window):
 
                 self.physics_engine_enemy2 = arcade.PhysicsEnginePlatformer(self.enemy2, self.wall_list,
                                                                             gravity_constant=GRAVITY)
+                arcade.play_sound(self.enemieGenerate_sound)
+
         elif numero_de_Portal == 2:
             # Set up the enemy1 position
             self.boss1.center_x = pos_x
