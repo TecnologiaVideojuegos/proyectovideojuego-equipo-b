@@ -268,10 +268,10 @@ class Scenario_one(arcade.Window):
                 self.player.jump_needs_reset = False
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player.on_key_press_move_left()
-            arcade.play_sound(self.walking_sound)
+
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.on_key_press_move_right()
-            arcade.play_sound(self.walking_sound)
+
         elif key == arcade.key.X:
             #self.player.is_collecting_life = True
             #self.Generate_Enemie(1, self.player.center_x, 500)
@@ -282,11 +282,11 @@ class Scenario_one(arcade.Window):
         if key == arcade.key.LEFT or key == arcade.key.A:
             self.player.change_x = 0
             self.player.is_walking = False
-            arcade.stop_sound(self.walking_sound)
+
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.change_x = 0
             self.player.is_walking = False
-            arcade.stop_sound(self.walking_sound)
+
         # elif key == arcade.key.UP or key == arcade.key.W:
         # self.player.is_jumping = False
         # self.player.is_falling = True
