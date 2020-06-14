@@ -43,6 +43,8 @@ class Boss_1(arcade.Sprite):
 
 
     def setup(self):
+        self.boss1attack_sound = arcade.load_sound(Boss1Attack_sound)
+
         self.dead = False
 
         self.boss_1_list = arcade.SpriteList()
@@ -129,6 +131,8 @@ class Boss_1(arcade.Sprite):
         if(random.randint(0,200)==0):
 
             self.is_attacking=True
+            arcade.play_sound(self.boss1attack_sound)
+
         if(random.randint(0,40)==0):
             where_x = self.center_x-x
             MOVE = random.randint(100,500)
