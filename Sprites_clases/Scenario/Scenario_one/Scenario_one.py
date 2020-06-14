@@ -60,8 +60,6 @@ class Scenario_one(arcade.Window):
         self.Summon_Boss = False
         self.End_level = False
 
-        self.contador = 2100
-
 
 
     def setup(self):
@@ -73,13 +71,11 @@ class Scenario_one(arcade.Window):
         self.light_sound = arcade.load_sound(light_sound)
         self.enemieGenerate_sound = arcade.load_sound(EnemieGenertes_sound)
         self.light_sound = arcade.load_sound(Light_sound)
-        self.ambient_sound = arcade.load_sound(Ambiente_sound)
-        self.tension_sound = arcade.load_sound(Tension_sound)
-        self.puzzle_sound = arcade.load_sound(Puzzle_sound)
+        self.boss2_sound = arcade.load_sound(Boss2_sound)
 
         self.lista = []
-        self.sol_puzzle1 = [1, 1, 0]
-        self.sol_puzzle2 = [0, 1, 1, 0]
+        self.sol_puzzle1 = [1,1,0, 1,0]
+        self.sol_puzzle2 = [1,0,1,1,0,1]
 
         self.valor_vida = 100
 
@@ -126,7 +122,7 @@ class Scenario_one(arcade.Window):
             self.wall_list.append(wall)
 
         # Create the Wall
-        for posy in [(0, "wall"), (3550, "Sema"), (8000, "wall")]:
+        for posy in [(0, "wall"), (3550, "Sema"), (8050, "wall")]:
             for i in range(10):
                 wall = arcade.Sprite(":resources:images/tiles/stone.png", SPRITE_SCALE)
                 wall.bottom = 0
@@ -141,17 +137,11 @@ class Scenario_one(arcade.Window):
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, gravity_constant=GRAVITY)
 
         # Load the background image
-        self.background = arcade.load_texture(Scenario_1_background_sprite)
-        self.foreground = arcade.load_texture(Scenario_1_foreground1_sprite)
+        self.background = arcade.load_texture(Scenario_1_background_sprite )
+        self.foreground = arcade.load_texture(Scenario_1_foreground1_sprite )
         self.foreground2 = arcade.load_texture(Scenario_1_foreground2_sprite)
 
     def on_update(self, delta_time):
-
-        self.contador -= 1
-        self.contador/60
-        arcade.play_sound(self.ambient_sound)
-
-
         try:
             if self.boss1.is_attacking:
                 self.player.change_x=0
@@ -164,12 +154,13 @@ class Scenario_one(arcade.Window):
 
 
                 self.player.is_falling = self.player.change_y < 0
+                self.player.is_jumping = self.player.change_y > 0
                 self.player_list.update_animation()
 
                 self.physics_engine.update()
 
                 if self.End_level:
-                    if self.player.center_x >7900 :
+                    if self.player.center_x >7950 :
                         self.Game_won = True
                         self.close()
                 elif self.Summon_Boss:
@@ -324,13 +315,11 @@ class Scenario_one(arcade.Window):
         for enemie in self.enemy_list:
             enemie.interact(self.player.center_x, self.player.center_y)
 
-
     def puzzle(self, id):
         if self.Summon_Enemies:
             if len(self.lista) == len(self.sol_puzzle1)-1:
                 self.lista.append(id)
                 if self.lista == self.sol_puzzle1:
-                    arcade.play_sound(self.puzzle_sound)
                     self.Cross_Semaphore = True
                     self.delete_wall()
                     self.lista=[]
@@ -348,7 +337,6 @@ class Scenario_one(arcade.Window):
             if len(self.lista) == len(self.sol_puzzle2)-1:
                 self.lista.append(id)
                 if self.lista == self.sol_puzzle2:
-                    arcade.play_sound(self.puzzle_sound)
                     self.Cross_Semaphore = True
                     self.delete_wall()
                     self.lista=[]
@@ -368,7 +356,7 @@ class Scenario_one(arcade.Window):
 
     def Summon_Enemie(self):
         if self.Summon_Enemies and self.player.center_x > 600:
-            if random.randint(0, 175) == 0:
+            if random.randint(0, 125) == 0:
                 range = random.randint(-500, 500)
                 if range >= 0:
                     minim = 600
@@ -381,7 +369,7 @@ class Scenario_one(arcade.Window):
 
 
 
-            elif random.randint(0, 175) == 0:
+            elif random.randint(0, 125) == 0:
                 range = random.randint(-500, 500)
                 if range >= 0:
                     minim = 600
@@ -393,13 +381,13 @@ class Scenario_one(arcade.Window):
                     self.Generate_Enemie(1, self.player.center_x + minim + range, 200)
 
         if self.Summon_Boss and self.player.center_x > 600:
-            if random.randint(0, 155) == 0:
+            if random.randint(0, 115) == 0:
                 range = random.randint(-500, 500)
                 if range >= 0:
                     minim = 600
                 else:
                     minim = -600
-                if self.player.center_x + minim + range > 7500:
+                if self.player.center_x + minim + range> 7500:
                     self.Generate_Enemie(0, 2950, 200)
                 else:
                     self.Generate_Enemie(0, self.player.center_x + minim + range, 200)
@@ -489,8 +477,8 @@ class Scenario_one(arcade.Window):
     def GUI(self):
         arcade.draw_lrtb_rectangle_filled(self.view_left + 1195, self.view_left + 1206,
                                           self.view_bottom + self.valor_vida * 1.8 + 480, self.view_bottom + 475,
-                                          arcade.color.WHITE)
-        arcade.draw_circle_filled(self.view_left + 1200, self.view_bottom + 475, radius=6, color=arcade.color.WHITE)
+                                          (250, 18, 201))
+        arcade.draw_circle_filled(self.view_left + 1200, self.view_bottom + 475, radius=6, color=(250, 18, 201))
         self.life_bar.bottom = self.view_bottom + 450
         self.life_bar.center_x = self.view_left + 1200
         self.life_bar_list.draw()

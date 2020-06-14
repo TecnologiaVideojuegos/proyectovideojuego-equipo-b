@@ -13,9 +13,14 @@ UPDATES_PER_FRAME_Screen=20
 
 
 #Menu
-Menu_sprite_1 = "Screens" + os.path.sep + "Menu" + os.path.sep + "MAIN_MENU_1.png"
-Menu_sprite_2 = "Screens" + os.path.sep + "Menu" + os.path.sep + "MAIN_MENU_2.png"
-Menu_sprite_3 = "Screens" + os.path.sep + "Menu" + os.path.sep + "MAIN_MENU_3.png"
+Menu_sprite_1 = "Screens" + os.path.sep + "Menu" + os.path.sep + "Sprites" + os.path.sep + "MAIN_MENU_1.png"
+Menu_sprite_2 = "Screens" + os.path.sep + "Menu" + os.path.sep + "Sprites" + os.path.sep + "MAIN_MENU_2.png"
+Menu_sprite_3 = "Screens" + os.path.sep + "Menu" + os.path.sep + "Sprites" + os.path.sep + "MAIN_MENU_3.png"
+
+Tip_sprite_1 = "Screens" + os.path.sep + "Menu" + os.path.sep + "Sprites" + os.path.sep + "Tip1.png"
+Tip_sprite_2 = "Screens" + os.path.sep + "Menu" + os.path.sep + "Sprites" + os.path.sep + "Tip2.png"
+Tip_sprite_3 = "Screens" + os.path.sep + "Menu" + os.path.sep + "Sprites" + os.path.sep + "Tip3.png"
+Tip_sprite_4 = "Screens" + os.path.sep + "Menu" + os.path.sep + "Sprites" + os.path.sep + "Tip4.png"
 
 #Gameover
 Game_over_sprite1="Screens" + os.path.sep + "GameOver" + os.path.sep + "Gameover1.png"

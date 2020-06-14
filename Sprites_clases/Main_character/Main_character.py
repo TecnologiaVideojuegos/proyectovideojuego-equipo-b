@@ -241,6 +241,7 @@ class Main_Character(arcade.Sprite):
 
     def on_key_press_attack(self):
         if not self.is_walking:
+            self.is_collecting_life = False
             self.is_attacking = True
             # arcade.play_sound(self.attack_sound)
 

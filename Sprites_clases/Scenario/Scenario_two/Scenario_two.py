@@ -75,6 +75,7 @@ class Scenario_two(arcade.Window):
         self.ambient_sound = arcade.load_sound(Ambiente_sound)
         self.tension_sound = arcade.load_sound(Tension_sound)
         self.puzzle_sound = arcade.load_sound(Puzzle_sound)
+        self.boss2_sound = arcade.load_sound(Boss2_sound)
 
         self.lista = []
         self.sol_puzzle1 = [1, 1, 1, 1, 0, 0]
@@ -160,18 +161,20 @@ class Scenario_two(arcade.Window):
             else:
 
                 self.player.is_falling = self.player.change_y < 0
+                self.player.is_jumping = self.player.change_y > 0
+
                 self.player_list.update_animation()
 
                 self.physics_engine.update()
 
                 if self.End_level:
-                    if self.player.center_x > 7900:
+                    if self.player.center_x > 7980:
                         self.Game_won = True
                         self.close()
                 elif self.Easter_egg:
                     self.Game_won = True
                     self.delete_boss_wall()
-                    if self.player.center_x > 7900:
+                    if self.player.center_x > 7980:
                         self.close()
                 elif self.Summon_Boss:
                     self.Cross_Semaphore = False
@@ -510,6 +513,7 @@ class Scenario_two(arcade.Window):
                                                                              gravity_constant=GRAVITY)
         elif numero_de_Portal == 2:
             # Set up the enemy1 position
+            arcade.play_sound(self.boss2_sound)
             self.boss2.center_x = 7400
             self.boss2.center_y = 200
             self.boss2.scale = BOSS_SCALE_2
