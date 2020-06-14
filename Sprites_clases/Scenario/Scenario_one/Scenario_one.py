@@ -67,12 +67,11 @@ class Scenario_one(arcade.Window):
         self.walking_sound = arcade.load_sound(Walk_sound)
         self.jump_sound = arcade.load_sound(Jump_sound)
         self.attack_sound = arcade.load_sound(Attack_sound)
-        self.attack1_sound = arcade.load_sound(attack1_sound)
-        self.attack2_sound = arcade.load_sound(attack2_sound)
         # self.falling_sound = arcade.load_sound("CaidaC.wav")
         self.light_sound = arcade.load_sound(light_sound)
         self.enemieGenerate_sound = arcade.load_sound(EnemieGenertes_sound)
         self.light_sound = arcade.load_sound(Light_sound)
+        self.boss2_sound = arcade.load_sound(Boss2_sound)
 
         self.lista = []
         self.sol_puzzle1 = [1,1,0, 1,0]
