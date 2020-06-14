@@ -78,8 +78,8 @@ class Scenario_one(arcade.Window):
         self.puzzle_sound = arcade.load_sound(Puzzle_sound)
 
         self.lista = []
-        self.sol_puzzle1 = [1, 0, 0, 1]
-        self.sol_puzzle2 = [0, 1, 0, 1]
+        self.sol_puzzle1 = [1,1,0]
+        self.sol_puzzle2 = [0,1,1,0]
 
         self.valor_vida = 100
 
@@ -153,7 +153,6 @@ class Scenario_one(arcade.Window):
 
 
         try:
-            print(self.player.center_x)
             if self.boss1.is_attacking:
                 self.player.change_x=0
                 self.player.set_to_false()
@@ -328,7 +327,7 @@ class Scenario_one(arcade.Window):
 
     def puzzle(self, id):
         if self.Summon_Enemies:
-            if len(self.lista) == 3:
+            if len(self.lista) == len(self.sol_puzzle1)-1:
                 self.lista.append(id)
                 if self.lista == self.sol_puzzle1:
                     arcade.play_sound(self.puzzle_sound)
@@ -346,7 +345,7 @@ class Scenario_one(arcade.Window):
                     self.lista=[]
                     
         elif self.Summon_Boss :
-            if len(self.lista) == 3:
+            if len(self.lista) == len(self.sol_puzzle2)-1:
                 self.lista.append(id)
                 if self.lista == self.sol_puzzle2:
                     arcade.play_sound(self.puzzle_sound)

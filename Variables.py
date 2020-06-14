@@ -13,6 +13,7 @@ SPRITE_PIXEL_SIZE = 128
 SPRITE_SCALE = 0.5  # Wall scale
 PLAYER_SCALE = 0.5  # Player scale
 BOSS_SCALE = 3
+BOSS_SCALE_2 = 1
 GRID_PIXEL_SIZE = (SPRITE_PIXEL_SIZE * SPRITE_SCALE)
 
 # Movement speed of player, in pixels per frame
@@ -22,6 +23,7 @@ MOVEMENT_SPEED_ENEMIE_2 = 4
 
 
 UPDATES_PER_FRAME = 8
+UPDATES_PER_FRAME_BOSS_2 = 2
 UPDATES_PER_FRAME_Main_Char=5
 UPDATES_PER_FRAME_Main_Char_Soul=4
 UPDATES_PER_FRAME_Enemies=4
@@ -64,9 +66,9 @@ Lightning_Enemie_2 = "Sprites_clases" + os.path.sep + "Enemie_2" + os.path.sep +
 Stand_Boss_1="Sprites_clases" + os.path.sep + "Boss_1" + os.path.sep + "Sprites" + os.path.sep + "BOSS0.png"
 Attack_Boss_1="Sprites_clases" + os.path.sep + "Boss_1" + os.path.sep + "Sprites" + os.path.sep + "BOSSANIMATION.png"
 
-#Boss_1
-Stand_Boss_2="Sprites_clases" + os.path.sep + "Boss_2" + os.path.sep + "Sprites" + os.path.sep + "BOSS0.png"
-Attack_Boss_2="Sprites_clases" + os.path.sep + "Boss_2" + os.path.sep + "Sprites" + os.path.sep + "BOSSANIMATION.png"
+#Boss_2
+Stand_Boss_2="Sprites_clases" + os.path.sep + "Boss_2" + os.path.sep + "Sprites" + os.path.sep + "BOSS1.png"
+Attack_Boss_2="Sprites_clases" + os.path.sep + "Boss_2" + os.path.sep + "Sprites" + os.path.sep + "BOSS1attack.png"
 
 
 #Background Sprites
@@ -80,13 +82,14 @@ barra_vida = "Screens" + os.path.sep + "Background_items" + os.path.sep + "barra
 #Scenario sprites
 
 #Scenario one
-Scenario_1_background_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "level1back.png"
-Scenario_1_foreground1_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "level1front.png"
-Scenario_1_foreground2_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "level1light.png"
+Scenario_1_background_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "LEVEL1BACK.png"
+Scenario_1_foreground1_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "LEVEL1FRONT.png"
+Scenario_1_foreground2_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "LEVEL1FRONTLIGHTS.png"
 
 #Scenario two
-Scenario_2_background_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_two" + os.path.sep + "Sprites" + os.path.sep + "level2back.png"
-Scenario_2_foreground_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_two" + os.path.sep + "Sprites" + os.path.sep + "level2front.png"
+Scenario_2_background_sprite_true = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_two" + os.path.sep + "Sprites" + os.path.sep + "LEVEL2BACKTRUE.png"
+Scenario_2_foreground_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_two" + os.path.sep + "Sprites" + os.path.sep + "LEVEL2FRONT.png"
+Scenario_2_background_sprite_false = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_two" + os.path.sep + "Sprites" + os.path.sep + "LEVEL2BACK.png"
 
 
 # Music
