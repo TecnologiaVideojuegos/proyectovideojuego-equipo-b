@@ -75,8 +75,8 @@ class Scenario_one(arcade.Window):
         self.light_sound = arcade.load_sound(Light_sound)
 
         self.lista = []
-        self.sol_puzzle1 = [1,1,0]
-        self.sol_puzzle2 = [0,1,1,0]
+        self.sol_puzzle1 = [1, 1, 0]
+        self.sol_puzzle2 = [0, 1, 1, 0]
 
         self.valor_vida = 100
 
@@ -138,8 +138,8 @@ class Scenario_one(arcade.Window):
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, gravity_constant=GRAVITY)
 
         # Load the background image
-        self.background = arcade.load_texture(Scenario_1_background_sprite )
-        self.foreground = arcade.load_texture(Scenario_1_foreground1_sprite )
+        self.background = arcade.load_texture(Scenario_1_background_sprite)
+        self.foreground = arcade.load_texture(Scenario_1_foreground1_sprite)
         self.foreground2 = arcade.load_texture(Scenario_1_foreground2_sprite)
 
     def on_update(self, delta_time):
@@ -387,7 +387,7 @@ class Scenario_one(arcade.Window):
                     minim = 600
                 else:
                     minim = -600
-                if self.player.center_x + minim + range> 7500:
+                if self.player.center_x + minim + range > 7500:
                     self.Generate_Enemie(0, 2950, 200)
                 else:
                     self.Generate_Enemie(0, self.player.center_x + minim + range, 200)
@@ -477,8 +477,8 @@ class Scenario_one(arcade.Window):
     def GUI(self):
         arcade.draw_lrtb_rectangle_filled(self.view_left + 1195, self.view_left + 1206,
                                           self.view_bottom + self.valor_vida * 1.8 + 480, self.view_bottom + 475,
-                                          (250, 18, 201))
-        arcade.draw_circle_filled(self.view_left + 1200, self.view_bottom + 475, radius=6, color=(250, 18, 201))
+                                          arcade.color.WHITE)
+        arcade.draw_circle_filled(self.view_left + 1200, self.view_bottom + 475, radius=6, color=arcade.color.WHITE)
         self.life_bar.bottom = self.view_bottom + 450
         self.life_bar.center_x = self.view_left + 1200
         self.life_bar_list.draw()
