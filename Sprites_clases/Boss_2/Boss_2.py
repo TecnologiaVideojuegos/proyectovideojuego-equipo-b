@@ -122,7 +122,6 @@ class Boss_2(arcade.Sprite):
             time.sleep(0.5)
             self.kill()
 
-
         elif self.is_attacking:
 
             if self.cur_texture == 5:

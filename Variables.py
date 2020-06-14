@@ -82,13 +82,14 @@ barra_vida = "Screens" + os.path.sep + "Background_items" + os.path.sep + "barra
 #Scenario sprites
 
 #Scenario one
-Scenario_1_background_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "level1back.png"
-Scenario_1_foreground1_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "level1front.png"
-Scenario_1_foreground2_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "level1light.png"
+Scenario_1_background_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "LEVEL1BACK.png"
+Scenario_1_foreground1_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "LEVEL1FRONT.png"
+Scenario_1_foreground2_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_one" + os.path.sep + "Sprites" + os.path.sep + "LEVEL1FRONTLIGHTS.png"
 
 #Scenario two
-Scenario_2_background_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_two" + os.path.sep + "Sprites" + os.path.sep + "level2back.png"
-Scenario_2_foreground_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_two" + os.path.sep + "Sprites" + os.path.sep + "level2front.png"
+Scenario_2_background_sprite_true = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_two" + os.path.sep + "Sprites" + os.path.sep + "LEVEL2BACKTRUE.png"
+Scenario_2_foreground_sprite = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_two" + os.path.sep + "Sprites" + os.path.sep + "LEVEL2FRONT.png"
+Scenario_2_background_sprite_false = "Sprites_clases" + os.path.sep + "Scenario" + os.path.sep + "Scenario_two" + os.path.sep + "Sprites" + os.path.sep + "LEVEL2BACK.png"
 
 
 # Music

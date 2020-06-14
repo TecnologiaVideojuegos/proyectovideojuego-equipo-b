@@ -144,7 +144,6 @@ class Scenario_one(arcade.Window):
 
     def on_update(self, delta_time):
         try:
-            print(self.player.center_x)
             if self.boss1.is_attacking:
                 self.player.change_x=0
                 self.player.set_to_false()

@@ -113,7 +113,7 @@ class Scenario_two(arcade.Window):
         # Create the ground
         for i in range(145):
             wall = arcade.Sprite(":resources:images/tiles/stone.png", SPRITE_SCALE)
-            wall.bottom = 60
+            wall.bottom = 10
             wall.type = "ground"
             wall.center_x = i * GRID_PIXEL_SIZE
             self.wall_list.append(wall)
@@ -132,7 +132,8 @@ class Scenario_two(arcade.Window):
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, gravity_constant=GRAVITY)
 
         # Load the background image
-        self.background = arcade.load_texture(Scenario_2_background_sprite)
+        self.background_true = arcade.load_texture(Scenario_2_background_sprite_true)
+        self.background_false = arcade.load_texture(Scenario_2_background_sprite_false)
         self.foreground = arcade.load_texture(Scenario_2_foreground_sprite)
 
     def on_update(self, delta_time):
@@ -234,9 +235,12 @@ class Scenario_two(arcade.Window):
         try:
             arcade.start_render()
             # Draw the background texture
-            arcade.draw_lrwh_rectangle_textured(-700, 10, 9200, SCREEN_HEIGHT,
-                                                self.background)  # At wall ground length 20 the width is 1280
-
+            if self.Easter_egg:
+                arcade.draw_lrwh_rectangle_textured(-700, 10, 9200, SCREEN_HEIGHT,
+                                                self.background_true)  # At wall ground length 20 the width is 1280
+            else:
+                arcade.draw_lrwh_rectangle_textured(-700, 10, 9200, SCREEN_HEIGHT,
+                                                    self.background_false)
             # self.wall_list.draw()                                                                   #At wall ground lenght 100 the image witdh is 6450
             self.background_items_list.draw()
             self.player_list.draw()
