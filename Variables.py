@@ -46,7 +46,7 @@ LEFT_FACING = 1
 Walking_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "WalkingX.png"
 Jumping_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "JumpingX.png"
 Attack_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "AttackX.png"
-Collecting_life_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "lightingX.png"
+Collecting_life_Sprite = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "LightingX.png"
 
 # Sprtes "small"
 Walking_Sprite1 = "Sprites_clases" + os.path.sep + "Main_character" + os.path.sep + "Sprites" + os.path.sep + "WalkingX1.png"
@@ -72,10 +72,6 @@ Attack_Boss_2="Sprites_clases" + os.path.sep + "Boss_2" + os.path.sep + "Sprites
 
 
 #Background Sprites
-Cartel_Gasolinera_Sprite = "Screens" + os.path.sep + "Background_items" + os.path.sep + "Cartelgasolinera.png"
-Semaforo_Rojo_Sprite = "Screens" + os.path.sep + "Background_items" + os.path.sep + "semafororojotren.png"
-Semaforo_Apagado_Sprite = "Screens" + os.path.sep + "Background_items" + os.path.sep + "semaforotrenapagado.png"
-Señal_Direcciones_Sprite = "Screens" + os.path.sep + "Background_items" + os.path.sep + "Señaldirecciones.png"
 barra_vida = "Screens" + os.path.sep + "Background_items" + os.path.sep + "barra de vida.png"
 
 

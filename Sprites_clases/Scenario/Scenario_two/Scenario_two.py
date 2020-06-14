@@ -144,18 +144,20 @@ class Scenario_two(arcade.Window):
             else:
 
                 self.player.is_falling = self.player.change_y < 0
+                self.player.is_jumping = self.player.change_y > 0
+
                 self.player_list.update_animation()
 
                 self.physics_engine.update()
 
                 if self.End_level:
-                    if self.player.center_x > 7900:
+                    if self.player.center_x > 7980:
                         self.Game_won = True
                         self.close()
                 elif self.Easter_egg:
                     self.Game_won = True
                     self.delete_boss_wall()
-                    if self.player.center_x > 7900:
+                    if self.player.center_x > 7980:
                         self.close()
                 elif self.Summon_Boss:
                     self.Cross_Semaphore = False

@@ -75,8 +75,8 @@ class Scenario_one(arcade.Window):
         self.light_sound = arcade.load_sound(Light_sound)
 
         self.lista = []
-        self.sol_puzzle1 = [1,1,0]
-        self.sol_puzzle2 = [0,1,1,0]
+        self.sol_puzzle1 = [1,1,0, 1,0]
+        self.sol_puzzle2 = [1,0,1,1,0,1]
 
         self.valor_vida = 100
 
@@ -123,7 +123,7 @@ class Scenario_one(arcade.Window):
             self.wall_list.append(wall)
 
         # Create the Wall
-        for posy in [(0, "wall"), (3550, "Sema"), (8000, "wall")]:
+        for posy in [(0, "wall"), (3550, "Sema"), (8050, "wall")]:
             for i in range(10):
                 wall = arcade.Sprite(":resources:images/tiles/stone.png", SPRITE_SCALE)
                 wall.bottom = 0
@@ -155,12 +155,13 @@ class Scenario_one(arcade.Window):
 
 
                 self.player.is_falling = self.player.change_y < 0
+                self.player.is_jumping = self.player.change_y > 0
                 self.player_list.update_animation()
 
                 self.physics_engine.update()
 
                 if self.End_level:
-                    if self.player.center_x >7900 :
+                    if self.player.center_x >7950 :
                         self.Game_won = True
                         self.close()
                 elif self.Summon_Boss:
@@ -356,7 +357,7 @@ class Scenario_one(arcade.Window):
 
     def Summon_Enemie(self):
         if self.Summon_Enemies and self.player.center_x > 600:
-            if random.randint(0, 175) == 0:
+            if random.randint(0, 125) == 0:
                 range = random.randint(-500, 500)
                 if range >= 0:
                     minim = 600
@@ -369,7 +370,7 @@ class Scenario_one(arcade.Window):
 
 
 
-            elif random.randint(0, 175) == 0:
+            elif random.randint(0, 125) == 0:
                 range = random.randint(-500, 500)
                 if range >= 0:
                     minim = 600
@@ -381,7 +382,7 @@ class Scenario_one(arcade.Window):
                     self.Generate_Enemie(1, self.player.center_x + minim + range, 200)
 
         if self.Summon_Boss and self.player.center_x > 600:
-            if random.randint(0, 155) == 0:
+            if random.randint(0, 115) == 0:
                 range = random.randint(-500, 500)
                 if range >= 0:
                     minim = 600
