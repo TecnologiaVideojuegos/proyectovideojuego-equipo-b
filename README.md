@@ -1,4 +1,4 @@
-#FDA
+# FDA
 
 ![alt text](https://github.com/TecnologiaVideojuegos/proyectovideojuego-equipo-b/blob/master/GAME/GAME%20WALLPAPER/FDA.jpg "Game_Wallpaper")
 
