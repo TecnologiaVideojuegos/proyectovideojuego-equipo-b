@@ -36,13 +36,4 @@ def main():
         elif Scene_one.Game_won:
             print("Congrats, you won")
 
-
-        quit = True
-
-def All_to_None():
-        window=None
-        Scene_one=None
-        Game_over=None
-
-
 main()
