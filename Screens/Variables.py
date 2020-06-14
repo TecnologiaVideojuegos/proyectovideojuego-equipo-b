@@ -22,6 +22,9 @@ Tip_sprite_2 = "Screens" + os.path.sep + "Menu" + os.path.sep + "Sprites" + os.p
 Tip_sprite_3 = "Screens" + os.path.sep + "Menu" + os.path.sep + "Sprites" + os.path.sep + "Tip3.png"
 Tip_sprite_4 = "Screens" + os.path.sep + "Menu" + os.path.sep + "Sprites" + os.path.sep + "Tip4.png"
 
+#Next level Screen
+Next_level_Sprite="Screens" + os.path.sep + "Next_level_screen" + os.path.sep + "Sprites" + os.path.sep + "INTERMEDIA.png"
+
 #Gameover
 Game_over_sprite1="Screens" + os.path.sep + "GameOver" + os.path.sep + "Gameover1.png"
 Game_over_sprite2="Screens" + os.path.sep + "GameOver" + os.path.sep + "Gameover2.png"
