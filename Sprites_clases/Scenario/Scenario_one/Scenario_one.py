@@ -75,8 +75,8 @@ class Scenario_one(arcade.Window):
         self.light_sound = arcade.load_sound(Light_sound)
 
         self.lista = []
-        self.sol_puzzle1 = [1, 0, 0, 1]
-        self.sol_puzzle2 = [0, 1, 0, 1]
+        self.sol_puzzle1 = [1,1,0]
+        self.sol_puzzle2 = [0,1,1,0]
 
         self.valor_vida = 100
 
@@ -317,7 +317,7 @@ class Scenario_one(arcade.Window):
 
     def puzzle(self, id):
         if self.Summon_Enemies:
-            if len(self.lista) == 3:
+            if len(self.lista) == len(self.sol_puzzle1)-1:
                 self.lista.append(id)
                 if self.lista == self.sol_puzzle1:
                     self.Cross_Semaphore = True
@@ -334,7 +334,7 @@ class Scenario_one(arcade.Window):
                     self.lista=[]
                     
         elif self.Summon_Boss :
-            if len(self.lista) == 3:
+            if len(self.lista) == len(self.sol_puzzle2)-1:
                 self.lista.append(id)
                 if self.lista == self.sol_puzzle2:
                     self.Cross_Semaphore = True
