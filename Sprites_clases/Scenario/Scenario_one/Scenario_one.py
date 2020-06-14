@@ -60,6 +60,8 @@ class Scenario_one(arcade.Window):
         self.Summon_Boss = False
         self.End_level = False
 
+        self.contador = 2100
+
 
 
     def setup(self):
@@ -67,12 +69,13 @@ class Scenario_one(arcade.Window):
         self.walking_sound = arcade.load_sound(Walk_sound)
         self.jump_sound = arcade.load_sound(Jump_sound)
         self.attack_sound = arcade.load_sound(Attack_sound)
-        self.attack1_sound = arcade.load_sound(attack1_sound)
-        self.attack2_sound = arcade.load_sound(attack2_sound)
         # self.falling_sound = arcade.load_sound("CaidaC.wav")
         self.light_sound = arcade.load_sound(light_sound)
         self.enemieGenerate_sound = arcade.load_sound(EnemieGenertes_sound)
         self.light_sound = arcade.load_sound(Light_sound)
+        self.ambient_sound = arcade.load_sound(Ambiente_sound)
+        self.tension_sound = arcade.load_sound(Tension_sound)
+        self.puzzle_sound = arcade.load_sound(Puzzle_sound)
 
         self.lista = []
         self.sol_puzzle1 = [1, 0, 0, 1]
@@ -143,6 +146,12 @@ class Scenario_one(arcade.Window):
         self.foreground2 = arcade.load_texture(Scenario_1_foreground2_sprite)
 
     def on_update(self, delta_time):
+
+        self.contador -= 1
+        self.contador/60
+        arcade.play_sound(self.ambient_sound)
+
+
         try:
             print(self.player.center_x)
             if self.boss1.is_attacking:
@@ -316,11 +325,13 @@ class Scenario_one(arcade.Window):
         for enemie in self.enemy_list:
             enemie.interact(self.player.center_x, self.player.center_y)
 
+
     def puzzle(self, id):
         if self.Summon_Enemies:
             if len(self.lista) == 3:
                 self.lista.append(id)
                 if self.lista == self.sol_puzzle1:
+                    arcade.play_sound(self.puzzle_sound)
                     self.Cross_Semaphore = True
                     self.delete_wall()
                     self.lista=[]
@@ -338,6 +349,7 @@ class Scenario_one(arcade.Window):
             if len(self.lista) == 3:
                 self.lista.append(id)
                 if self.lista == self.sol_puzzle2:
+                    arcade.play_sound(self.puzzle_sound)
                     self.Cross_Semaphore = True
                     self.delete_wall()
                     self.lista=[]
