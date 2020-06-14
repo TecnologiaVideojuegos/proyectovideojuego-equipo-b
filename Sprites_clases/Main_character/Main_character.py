@@ -42,14 +42,7 @@ class Main_Character(arcade.Sprite):
     def setup(self):
         "El archivo WalkingX.png lo metí directamente en la carpeta del proyecto de PyCharm"
 
-        #Load character sounds
-        #self.walking_sound = arcade.load_sound(Walk_sound)
-        #self.jump_sound = arcade.load_sound(Jump_sound)
-        #self.attack_sound = arcade.load_sound(Attack_sound)
-        #self.attack1_sound = arcade.load_sound(attack1_sound)
-        #self.attack2_sound = arcade.load_sound(attack2_sound)
-        # self.falling_sound = arcade.load_sound("CaidaC.wav")
-        #self.light_sound = arcade.load_sound(light_sound)
+
 
         self.player_list = arcade.SpriteList()
         self.player_sprite = arcade.AnimatedWalkingSprite()
@@ -229,6 +222,7 @@ class Main_Character(arcade.Sprite):
             self.is_jumping = True
             self.change_y = PLAYER_JUMP_SPEED
             self.jump_needs_reset = True
+            arcade.play_sound(self.jump_sound)
 
 
 
