@@ -38,7 +38,7 @@ class Boss_1(arcade.Sprite):
         self.is_walking = False
         self.is_attacking = False
         self.dead = True
-        self.avaible=False
+        self.avaible = False
 
 
 
@@ -127,20 +127,20 @@ class Boss_1(arcade.Sprite):
             self.texture = self.boss_1_sprite.attack_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME]
 
-    def interact(self,x,y):
+    def interact(self, x, y):
         if(random.randint(0,120)==0):
 
-            self.is_attacking=True
+            self.is_attacking = True
             arcade.play_sound(self.boss1attack_sound)
 
         if(random.randint(0,30)==0):
             where_x = self.center_x-x
-            MOVE = random.randint(100,500)
-            if where_x<0:
+            MOVE = random.randint(100, 500)
+            if where_x < 0:
                 self.is_walking = True
                 self.center_x += MOVE
 
-            elif where_x>0:
+            elif where_x > 0:
                 self.is_walking = True
                 self.center_x -= MOVE
 

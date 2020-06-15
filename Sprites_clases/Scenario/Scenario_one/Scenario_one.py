@@ -73,8 +73,8 @@ class Scenario_one(arcade.Window):
         self.light_sound = arcade.load_sound(Light_sound)
 
         self.lista = []
-        self.sol_puzzle1 = [1,1,0]
-        self.sol_puzzle2 = [0,1,1,0]
+        self.sol_puzzle1 = [1, 1, 0]
+        self.sol_puzzle2 = [0, 1, 1, 0]
 
         self.valor_vida = 100
 
@@ -293,7 +293,7 @@ class Scenario_one(arcade.Window):
 
         hit_list = arcade.check_for_collision_with_list(self.player, self.enemy_list)
         for enemie in hit_list:
-            if self.player.is_attacking and  not enemie.dead:
+            if self.player.is_attacking and not enemie.dead:
                 self.puzzle(enemie.id)
                 enemie.dead = True
             if enemie.dead_light and ( self.player.center_x>=enemie.center_x-10 and self.player.center_x<=enemie.center_x+10):
@@ -301,7 +301,7 @@ class Scenario_one(arcade.Window):
                 enemie.collected = True
                 arcade.play_sound(self.light_sound)
                 if(self.valor_vida<80):
-                    self.valor_vida+=10
+                    self.valor_vida += 10
             elif not enemie.dead:
                 # decrease the character's life
                 self.valor_vida -= 0.5
@@ -327,16 +327,16 @@ class Scenario_one(arcade.Window):
             else:
                 self.lista.append(id)
                 i=len(self.lista)-1
-                if not self.lista[i]==self.sol_puzzle1[i] :
-                    self.lista=[]
+                if not self.lista[i] == self.sol_puzzle1[i]:
+                    self.lista = []
                     
-        elif self.Summon_Boss :
+        elif self.Summon_Boss:
             if len(self.lista) == len(self.sol_puzzle2)-1:
                 self.lista.append(id)
                 if self.lista == self.sol_puzzle2:
                     self.Cross_Semaphore = True
                     self.delete_wall()
-                    self.lista=[]
+                    self.lista = []
                     self.Summon_Boss = False
                     self.End_level = True
                     self.Level_Pased()
@@ -345,9 +345,9 @@ class Scenario_one(arcade.Window):
                     self.lista = []
             else:
                 self.lista.append(id)
-                i=len(self.lista)-1
-                if not self.lista[i]==self.sol_puzzle2[i] :
-                    self.lista=[]
+                i = len(self.lista)-1
+                if not self.lista[i] == self.sol_puzzle2[i]:
+                    self.lista = []
 
 
 
@@ -384,7 +384,7 @@ class Scenario_one(arcade.Window):
                     minim = 600
                 else:
                     minim = -600
-                if self.player.center_x + minim + range> 7500:
+                if self.player.center_x + minim + range > 7500:
                     self.Generate_Enemie(0, 6750, 200)
                 else:
                     self.Generate_Enemie(0, self.player.center_x + minim + range, 200)

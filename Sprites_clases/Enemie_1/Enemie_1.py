@@ -147,7 +147,7 @@ class Enemie_1(arcade.Sprite):
 
         # Light stand
         elif self.dead_light:
-            if random.randint(0,100)==0:
+            if random.randint(0, 100) == 0:
                 self.kill()
             self.texture = self.enemy1_sprite.light_textures[self.character_face_direction]
 
@@ -173,14 +173,13 @@ class Enemie_1(arcade.Sprite):
             self.texture = self.enemy1_sprite.light_textures[self.character_face_direction][
                 self.cur_texture // UPDATES_PER_FRAME_Enemies]
 
-
     def interact(self, x, y):
         if self.dead_light or self.dead:
             self.change_x = 0
         else:
             where_x = self.center_x-x
             where_y = self.center_y-y
-            if -20 < where_x and where_x< 20 and -5<where_y and where_y<5:
+            if -20 < where_x and where_x < 20 and -5 < where_y and where_y < 5:
                 self.is_walking = False
                 self.is_attacking = True
             elif where_x < 0:

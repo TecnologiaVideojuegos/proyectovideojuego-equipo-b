@@ -41,7 +41,7 @@ class Boss_2(arcade.Sprite):
         self.is_walking = False
         self.is_attacking = False
         self.dead = True
-        self.avaible=False
+        self.avaible = False
 
 
 

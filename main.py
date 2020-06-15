@@ -9,7 +9,7 @@ from Screens.Next_level_screen.Next_level_screen import *
 
 def main():
     """ Main method """
-    quit=False
+    quit = False
     window = None
     Scene_one = None
     Scene_two = None

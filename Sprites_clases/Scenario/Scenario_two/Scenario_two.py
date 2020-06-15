@@ -78,8 +78,8 @@ class Scenario_two(arcade.Window):
 
 
         self.lista = []
-        self.sol_puzzle1 = [1,1,0,1,0]
-        self.sol_puzzle2 = [1,0,1,1,0,1]
+        self.sol_puzzle1 = [1, 1, 0, 1, 0]
+        self.sol_puzzle2 = [1, 0, 1, 1, 0, 1]
 
         self.valor_vida = 100
 
@@ -204,8 +204,8 @@ class Scenario_two(arcade.Window):
                     self.collisions()
                     if self.boss2.valor_vida <= 0:
                         self.Level_Pased()
-                        self.Summon_Boss=False
-                        self.Easter_egg =True
+                        self.Summon_Boss = False
+                        self.Easter_egg = True
                 # print(self.player.center_x)
 
                 # --- Manage Scrolling ---

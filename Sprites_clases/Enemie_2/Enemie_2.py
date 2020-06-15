@@ -136,12 +136,12 @@ class Enemie_2(arcade.Sprite):
         self.texture = self.enemy2_sprite.stand_textures[self.character_face_direction]
 
         #Die
-        if self.collected :
+        if self.collected:
             self.kill()
 
         # Light stand
         elif self.dead_light:
-            if random.randint(0,100)==0:
+            if random.randint(0, 100) == 0:
                 self.kill()
             self.texture = self.enemy2_sprite.light_textures[self.character_face_direction]
 
@@ -176,12 +176,12 @@ class Enemie_2(arcade.Sprite):
         else:
 
             self.is_jumping = not (self.center_y < 200)
-            if not self.is_attacking and not self.is_jumping and random.randint(0, 55)==0:
+            if not self.is_attacking and not self.is_jumping and random.randint(0, 55) == 0:
 
                 self.change_y = PLAYER_JUMP_SPEED
             where_x = self.center_x-x
             where_y = self.center_y-y
-            if -20 < where_x and where_x< 20 and -5<where_y and where_y<5 :
+            if -20 < where_x and where_x < 20 and -5 < where_y and where_y < 5 :
                 self.is_walking = False
                 self.is_attacking = True
             elif where_x < 0:
