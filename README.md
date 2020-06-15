@@ -12,11 +12,13 @@ This Nightmare will take place in two levels. Both of them contain a close comba
 
 [Download Pycharm](https://www.jetbrains.com/pycharm-edu/download/index.html#section=windows)
 
-[Look up for arcade API](https://github.com/TecnologiaVideojuegos/proyectovideojuego-equipo-b)
+[Look up for arcade API](https://arcade.academy/)
 
 [Game Link](https://github.com/TecnologiaVideojuegos/proyectovideojuego-equipo-b)
 
 [Software proyect documentation](https://github.com/TecnologiaVideojuegos/proyectovideojuego-equipo-b/blob/master/GAME/Memoria.pdf)
+
+
 
 ### Used Tools
 
