@@ -11,8 +11,15 @@ This Nightmare will take place in two levels. Both of them contain a close comba
 ### Links of interest
 
 [Download Pycharm](https://www.jetbrains.com/pycharm-edu/download/index.html#section=windows)
-[Look up for arcade API](https://github.com/TecnologiaVideojuegos/proyectovideojuego-equipo-b)
+
+[Look up for arcade API](https://arcade.academy/)
+
 [Game Link](https://github.com/TecnologiaVideojuegos/proyectovideojuego-equipo-b)
+
+[Software proyect documentation](https://github.com/TecnologiaVideojuegos/proyectovideojuego-equipo-b/blob/master/GAME/Memoria.pdf)
+
+[Game web page](https://jesusignacuoalonso.wixsite.com/smartstudios)
+
 
 ### Used Tools
 
@@ -43,6 +50,3 @@ Miembros:
   Álvaro Barragán Codesal, 1º GII, programación, testeador y sonido
 
   Ángel Luis Jiménez Coronado, 4º FAU, Diseño Web / Desarrollo Web
-
-##Special Mention to:
-  Ángel Luis Jiménez Coronado, who was the only Art designer and spent with the Game chief hundreds of ours to materialize the game idea
