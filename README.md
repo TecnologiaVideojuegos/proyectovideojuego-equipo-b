@@ -49,6 +49,3 @@ Miembros:
   Álvaro Barragán Codesal, 1º GII, programación, testeador y sonido
 
   Ángel Luis Jiménez Coronado, 4º FAU, Diseño Web / Desarrollo Web
-
-##Special Mention to:
-  Ángel Luis Jiménez Coronado, who was the only Art designer and spent with the Game chief hundreds of ours to materialize the game idea
