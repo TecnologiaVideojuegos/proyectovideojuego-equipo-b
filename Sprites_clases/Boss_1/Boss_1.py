@@ -128,12 +128,12 @@ class Boss_1(arcade.Sprite):
                 self.cur_texture // UPDATES_PER_FRAME]
 
     def interact(self,x,y):
-        if(random.randint(0,200)==0):
+        if(random.randint(0,120)==0):
 
             self.is_attacking=True
             arcade.play_sound(self.boss1attack_sound)
 
-        if(random.randint(0,40)==0):
+        if(random.randint(0,30)==0):
             where_x = self.center_x-x
             MOVE = random.randint(100,500)
             if where_x<0:

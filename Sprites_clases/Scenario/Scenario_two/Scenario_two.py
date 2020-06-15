@@ -75,7 +75,7 @@ class Scenario_two(arcade.Window):
         self.ambient_sound = arcade.load_sound(Ambiente_sound)
         self.tension_sound = arcade.load_sound(Tension_sound)
         self.puzzle_sound = arcade.load_sound(Puzzle_sound)
-        self.boss2_sound = arcade.load_sound(Boss2_sound)
+
 
         self.lista = []
         self.sol_puzzle1 = [1,1,0,1,0]
@@ -513,7 +513,6 @@ class Scenario_two(arcade.Window):
                                                                              gravity_constant=GRAVITY)
         elif numero_de_Portal == 2:
             # Set up the enemy1 position
-            arcade.play_sound(self.boss2_sound)
             self.boss2.center_x = 7400
             self.boss2.center_y = 200
             self.boss2.scale = BOSS_SCALE_2
@@ -539,8 +538,8 @@ class Scenario_two(arcade.Window):
     def GUI(self):
         arcade.draw_lrtb_rectangle_filled(self.view_left + 1195, self.view_left + 1206,
                                           self.view_bottom + self.valor_vida * 1.8 + 480, self.view_bottom + 475,
-                                          (250, 18, 201))
-        arcade.draw_circle_filled(self.view_left + 1200, self.view_bottom + 475, radius=6, color=(250, 18, 201))
+                                          arcade.color.WHITE)
+        arcade.draw_circle_filled(self.view_left + 1200, self.view_bottom + 475, radius=6, color=arcade.color.WHITE)
         self.life_bar.bottom = self.view_bottom + 450
         self.life_bar.center_x = self.view_left + 1200
         self.life_bar_list.draw()

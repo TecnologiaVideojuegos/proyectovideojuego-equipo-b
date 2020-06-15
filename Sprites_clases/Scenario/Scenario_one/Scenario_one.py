@@ -71,7 +71,6 @@ class Scenario_one(arcade.Window):
         self.light_sound = arcade.load_sound(light_sound)
         self.enemieGenerate_sound = arcade.load_sound(EnemieGenertes_sound)
         self.light_sound = arcade.load_sound(Light_sound)
-        self.boss2_sound = arcade.load_sound(Boss2_sound)
 
         self.lista = []
         self.sol_puzzle1 = [1,1,0]
@@ -114,7 +113,7 @@ class Scenario_one(arcade.Window):
         # -- Set up the walls
 
         # Create the ground
-        for i in range(125):
+        for i in range(126):
             wall = arcade.Sprite(":resources:images/tiles/stone.png", SPRITE_SCALE)
             wall.bottom = 60
             wall.type = "ground"
@@ -144,14 +143,13 @@ class Scenario_one(arcade.Window):
     def on_update(self, delta_time):
         try:
             if self.boss1.is_attacking:
-                self.player.change_x=0
+                self.player.change_x = 0
                 self.player.set_to_false()
 
             if self.valor_vida <= 0:
                 self.Game_over = True
                 self.close()
             else:
-
 
                 self.player.is_falling = self.player.change_y < 0
                 self.player.is_jumping = self.player.change_y > 0
@@ -160,9 +158,10 @@ class Scenario_one(arcade.Window):
                 self.physics_engine.update()
 
                 if self.End_level:
-                    if self.player.center_x >7950 :
+                    if self.player.center_x > 7950:
                         self.Game_won = True
                         self.close()
+                        return
                 elif self.Summon_Boss:
                     self.Cross_Semaphore = False
                     self.Summon_Enemie()
@@ -176,7 +175,7 @@ class Scenario_one(arcade.Window):
                     self.Summon_Enemies = self.player.center_x < 2900
                 elif self.player.center_x > 3400:
                     self.Reached_wall = True
-                #print(self.player.center_x)
+                # print(self.player.center_x)
 
                 if (len(self.enemy_list) > 0):
                     self.enemy_list.update_animation()
@@ -186,7 +185,7 @@ class Scenario_one(arcade.Window):
                         self.physics_engine_enemy2.update()
                     self.Trigger_IA()
                     self.collisions()
-                #print(self.player.center_x)
+                # print(self.player.center_x)
 
                 # --- Manage Scrolling ---
 
@@ -224,36 +223,32 @@ class Scenario_one(arcade.Window):
                                         SCREEN_WIDTH + self.view_left,
                                         self.view_bottom,
                                         SCREEN_HEIGHT + self.view_bottom)
-        except:
-            print()
+        except: None
+
     def on_draw(self):
-        try:
-            arcade.start_render()
-            # Draw the background texture
-            arcade.draw_lrwh_rectangle_textured(-700, 20, 9200, SCREEN_HEIGHT,
-                                                self.background)  # At wall ground length 20 the width is 1280
+        arcade.start_render()
+        # Draw the background texture
+        arcade.draw_lrwh_rectangle_textured(-700, 20, 9200, SCREEN_HEIGHT,
+                                            self.background)  # At wall ground length 20 the width is 1280
 
+        # self.wall_list.draw()                                                                   #At wall ground lenght 100 the image witdh is 6450
+        self.background_items_list.draw()
+        self.player_list.draw()
+        self.enemy_list.draw()
 
-            # self.wall_list.draw()                                                                   #At wall ground lenght 100 the image witdh is 6450
-            self.background_items_list.draw()
-            self.player_list.draw()
-            self.enemy_list.draw()
-
-            if self.Second_foreground:
-                arcade.draw_lrwh_rectangle_textured(-700, 10, 9200, SCREEN_HEIGHT,
+        if self.Second_foreground:
+            arcade.draw_lrwh_rectangle_textured(-700, 10, 9200, SCREEN_HEIGHT,
                                                 self.foreground)
-            else:
-                arcade.draw_lrwh_rectangle_textured(-700, 10, 9200, SCREEN_HEIGHT,
-                                                    self.foreground2)
-            self.GUI()
-            if len(self.lista)>0 :
-                score_text=""
-                for i in self.lista:
-                    score_text += "%d " % (i)
-                arcade.draw_text(score_text, self.view_left + 50, self.view_bottom + 650,
-                                 arcade.csscolor.BLACK, 18)
-        except:
-            print()
+        else:
+            arcade.draw_lrwh_rectangle_textured(-700, 10, 9200, SCREEN_HEIGHT,
+                                                self.foreground2)
+        self.GUI()
+        if len(self.lista) > 0:
+            score_text = ""
+            for i in self.lista:
+                score_text += "%d " % (i)
+            arcade.draw_text(score_text, self.view_left + 50, self.view_bottom + 650,
+                             arcade.csscolor.BLACK, 18)
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
@@ -390,7 +385,7 @@ class Scenario_one(arcade.Window):
                 else:
                     minim = -600
                 if self.player.center_x + minim + range> 7500:
-                    self.Generate_Enemie(0, 2950, 200)
+                    self.Generate_Enemie(0, 6750, 200)
                 else:
                     self.Generate_Enemie(0, self.player.center_x + minim + range, 200)
 
@@ -479,8 +474,8 @@ class Scenario_one(arcade.Window):
     def GUI(self):
         arcade.draw_lrtb_rectangle_filled(self.view_left + 1195, self.view_left + 1206,
                                           self.view_bottom + self.valor_vida * 1.8 + 480, self.view_bottom + 475,
-                                          (250, 18, 201))
-        arcade.draw_circle_filled(self.view_left + 1200, self.view_bottom + 475, radius=6, color=(250, 18, 201))
+                                          arcade.color.WHITE)
+        arcade.draw_circle_filled(self.view_left + 1200, self.view_bottom + 475, radius=6, color=arcade.color.WHITE)
         self.life_bar.bottom = self.view_bottom + 450
         self.life_bar.center_x = self.view_left + 1200
         self.life_bar_list.draw()
