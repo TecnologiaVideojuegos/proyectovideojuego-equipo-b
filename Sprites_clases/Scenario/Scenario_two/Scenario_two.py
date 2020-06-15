@@ -149,8 +149,6 @@ class Scenario_two(arcade.Window):
         self.foreground = arcade.load_texture(Scenario_2_foreground_sprite)
 
     def on_update(self, delta_time):
-        self.contador -= 1
-        self.contador/60
         arcade.play_sound(self.ambient_sound)
 
 
@@ -168,13 +166,13 @@ class Scenario_two(arcade.Window):
                 self.physics_engine.update()
 
                 if self.End_level:
-                    if self.player.center_x > 7980:
+                    if self.player.center_x > 7950:
                         self.Game_won = True
                         self.close()
                 elif self.Easter_egg:
                     self.Game_won = True
                     self.delete_boss_wall()
-                    if self.player.center_x > 7980:
+                    if self.player.center_x > 7950:
                         self.close()
                 elif self.Summon_Boss:
                     self.Cross_Semaphore = False

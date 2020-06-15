@@ -38,8 +38,8 @@ def main():
             if Next_level_screen.select:
                 if Scene_two == None:
                     Scene_two = Scenario_two(SCREEN_WIDTH, SCREEN_HEIGHT, "Level 2")
-                Scene_two.setup()
-                arcade.run()
+                    Scene_two.setup()
+                    arcade.run()
                 if Scene_two.Game_over:
                     if Game_over == None:
                         Game_over = GameOver(SCREEN_WIDTH, SCREEN_HEIGHT, "Game over")
