@@ -150,7 +150,7 @@ class Scenario_two(arcade.Window):
         self.foreground = arcade.load_texture(Scenario_2_foreground_sprite)
 
     def on_update(self, delta_time):
-        if self.Summon_Boss or self.Cross_Semaphore or self.Easter_egg or self.End_level:
+        if self.Summon_Boss:
             arcade.play_sound(self.mountain_dew_music)
         else:
             arcade.play_sound(self.ambient_sound)
