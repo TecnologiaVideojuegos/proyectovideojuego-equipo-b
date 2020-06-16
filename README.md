@@ -4,7 +4,7 @@
 
 ## ¿FDA?
 
-FDA is a game developed by _Smart Studios_ using Arcade, Python Library. Game in which the player will face a Informatic Nightmare. 
+FDA is a game developed by _Smart Studios_ using Arcade, Python Library. Game in which the player will face an Informatic Nightmare. 
 
 This Nightmare will take place in two levels. Both of them contain a close combat against the _Binary Monsters_ . Those "monsters" will chase our player, trying to drain his energy!! . To move forward, the player will have to look up for the key clues that will help him solve the sequence.
 
