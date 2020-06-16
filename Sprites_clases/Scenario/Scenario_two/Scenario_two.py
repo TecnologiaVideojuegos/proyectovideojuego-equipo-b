@@ -75,6 +75,7 @@ class Scenario_two(arcade.Window):
         self.ambient_sound = arcade.load_sound(Ambiente_sound)
         self.tension_sound = arcade.load_sound(Tension_sound)
         self.puzzle_sound = arcade.load_sound(Puzzle_sound)
+        self.mountain_dew_music = arcade.load_sound(Mountain_Dew)
 
 
         self.lista = []
@@ -149,9 +150,10 @@ class Scenario_two(arcade.Window):
         self.foreground = arcade.load_texture(Scenario_2_foreground_sprite)
 
     def on_update(self, delta_time):
-        arcade.play_sound(self.ambient_sound)
-
-
+        if self.Summon_Boss or self.Cross_Semaphore or self.Easter_egg or self.End_level:
+            arcade.play_sound(self.mountain_dew_music)
+        else:
+            arcade.play_sound(self.ambient_sound)
         try:
             if self.valor_vida <= 0:
                 self.Game_over = True
